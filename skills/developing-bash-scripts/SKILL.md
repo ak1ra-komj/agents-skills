@@ -1,78 +1,55 @@
 ---
 name: developing-bash-scripts
-description: Guidelines for generating, modifying, or reviewing Bash shell scripts. Distinguishes between simple scripts and complex production-ready tools.
+description: Entry point for all Bash script tasks. Classifies the script as simple or complex, then delegates to the appropriate sub-skill. When refactoring existing scripts, first re-evaluates actual complexity to avoid over-engineering simple scripts.
 ---
 
 # developing-bash-scripts skill
 
-This skill defines mandatory guidelines for generating, modifying, or reviewing Bash shell scripts to ensure consistency, robustness, and compliance with project standards.
+This skill is the entry point for any task that involves **writing, modifying, or reviewing** a Bash script.
 
-It MUST be applied whenever Bash scripts are involved.
+Its sole responsibility is **classification**: determine which sub-skill applies, then follow that sub-skill's guidelines exclusively.
 
-## Script Classification
+---
 
-To balance robustness with conciseness, first determine the script's category:
+## Step 1 — Classify the Script
 
-### 1. Simple Scripts
+Read the script (or the request) and answer these questions:
 
-- Use Case: Ad-hoc tasks, simple wrappers, linear logic, internal use, or short (< 50 lines) scripts.
-- Requirements: Must follow Core Guidelines.
-- Exemptions: May omit `template.sh` boilerplate, complex argument parsing, and structured logging.
+| Question                            | Simple     | Complex    |
+| ----------------------------------- | ---------- | ---------- |
+| Expected line count (logic only)    | < 50 lines | ≥ 50 lines |
+| Named flags / options needed        | 0–2        | 3 or more  |
+| Structured logging required?        | No         | Yes        |
+| `--help` output required?           | No         | Yes        |
+| Cleanup / resource management?      | No         | Yes        |
+| Reused across teams / environments? | No         | Yes        |
 
-### 2. Complex Scripts
+**If all answers fall in the Simple column → use `developing-simple-bash-scripts`.**  
+**If any answer falls in the Complex column → use `developing-complex-bash-scripts`.**
 
-- Use Case: Production tools, reusable CLI utilities, scripts with multiple options/flags, or complex control flow.
-- Requirements: Must follow Core Guidelines AND Template & Structure.
-- Goal: Ensure maintainability, standard interface (help, logging), and robust error handling.
+When in doubt, prefer **Simple**. It is always easier to promote a simple script to complex than to untangle unnecessary boilerplate.
 
-## Core Guidelines (Mandatory for ALL Scripts)
+---
 
-### Bash Version & Safety
+## Step 2 — Delegate
 
-- Shebang: `#!/usr/bin/env bash` (Bash 4.0+ assumed).
-- Safety Modes:
-  ```bash
-  set -o errexit   # Exit on error
-  set -o nounset   # Exit on unset variables
-  set -o errtrace  # Recommended for error trapping
-  ```
-  DO NOT `set -o pipefail` globally unless handling critical pipe chains
+Follow the chosen sub-skill entirely:
 
-### Tooling
+- **[developing-simple-bash-scripts]**: concise scripts, no boilerplate, brevity over structure.
+- **[developing-complex-bash-scripts]**: production CLI tools, compose only the reference blocks the script actually needs.
 
-- Validation: All scripts must pass `shellcheck` and be formatted with `shfmt`.
+---
 
-### Logic & Control Flow
+## Special Case: Refactoring an Existing Script
 
-- Conditionals: Always use `[[ ... ]]` (not `[ ... ]`).
-- Branching: Use `case` statements for pattern matching or multiple branches.
-- Guard Clauses: Check failure conditions early to avoid deep nesting.
-  - _Bad_: `if [[ success ]]; then ... else exit 1; fi`
-  - _Good_: `if [[ ! success ]]; then exit 1; fi; ...`
-- Features:
-  - Use Arrays (`declare -a`) and Associative Arrays (`declare -A`).
-  - Use Process Substitution (`<(cmd)`) instead of temp files where possible.
-  - Use Here Strings (`<<<"str"`) for short inputs.
+When the task is to **refactor or rewrite** an existing script, perform an additional review before classifying:
 
-### Variables & Style
+1. **Read the existing script in full.**
+2. **Identify what the script actually does** — list its responsibilities in plain language (one line each).
+3. **Re-classify from scratch** using the table above, ignoring the current implementation's size or structure.
+4. If the existing script is over-engineered for its actual functionality (e.g., a 300-line script that only copies a file), **simplify it** to match the correct classification.
+   - Remove unused boilerplate, logging subsystems, and argument parsers that serve no real purpose.
+   - A script that does one simple thing should look like it does one simple thing.
+5. Only preserve complexity that the script's **actual functionality** justifies.
 
-- Expansion: Always use `${var}` (braces) and ALWAYS quote expansions (`"${var}"`) to prevent globbing/splitting.
-- Naming: Descriptive names. No magic numbers. Well-named functions (`main`, `parse_args`, etc.).
-
-## Template & Structure (Complex Scripts ONLY)
-
-Complex Scripts MUST be based on the provided [template.sh](template.sh).
-
-- Structure: Organize code into functions (`main`, `parse_args`, etc.).
-- Argument Parsing: Use `getopt` (not `getopts`) to support long options (`--help`, `--log-level`).
-- Logging: Use the template's logging subsystem (`log_info`, `log_error`) rather than raw `echo`.
-- Validation: Must be checked with `shellcheck` and formatted with `shfmt`.
-
-## Simple Script Guidelines
-
-For Simple Scripts, prioritize brevity:
-
-- Standard template boilerplate is optional.
-- Direct positional argument usage (`"${1}"`) is allowed for simple inputs.
-- Standard Output/Error (`echo`, `printf`) is allowed.
-- Constraint: If a simple script grows beyond ~50 lines or needs 3+ flags, refactor it into a Complex Script using the template.
+> **Rule**: The implementation complexity must match the functional complexity, not the other way around.
