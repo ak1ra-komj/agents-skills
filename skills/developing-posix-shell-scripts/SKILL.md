@@ -1,78 +1,57 @@
 ---
 name: developing-posix-shell-scripts
-description: Guidelines for POSIX-compliant shell scripts (/bin/sh). Distinguishes between simple scripts and complex production-ready tools.
+description: Entry point for all POSIX shell script tasks. Classifies the script as simple or complex, then delegates to the appropriate sub-skill. When refactoring existing scripts, first re-evaluates actual complexity to avoid over-engineering simple scripts.
 ---
 
 # developing-posix-shell-scripts skill
 
-This skill defines mandatory guidelines for generating, modifying, or reviewing POSIX-compliant shell scripts (`/bin/sh`) to ensure portability across UNIX-like systems.
+This skill is the entry point for any task that involves **writing, modifying, or reviewing** a POSIX-compliant shell script (`/bin/sh`).
 
-It MUST be applied whenever strict POSIX compliance is required (e.g., targeting `/bin/sh`, Alpine, embedded systems).
+Apply this skill whenever strict POSIX compliance is required (e.g., targeting `/bin/sh`, Alpine, BusyBox, embedded systems).
 
-## Script Classification
+Its sole responsibility is **classification**: determine which sub-skill applies, then follow that sub-skill's guidelines exclusively.
 
-To balance portability with conciseness, first determine the script's category:
+---
 
-### 1. Simple Scripts
+## Step 1 — Classify the Script
 
-- Use Case: Basic init scripts, simple file operations, minimal wrappers, or short (< 50 lines) scripts.
-- Requirements: Must follow Core Guidelines.
-- Exemptions: May omit `template.sh` boilerplate and structured logging.
+Read the script (or the request) and answer these questions:
 
-### 2. Complex Scripts
+| Question                              | Simple     | Complex    |
+| ------------------------------------- | ---------- | ---------- |
+| Expected line count (logic only)      | < 50 lines | ≥ 50 lines |
+| Named flags / options needed          | 0–2        | 3 or more  |
+| Structured logging required?          | No         | Yes        |
+| `-h` / help output required?          | No         | Yes        |
+| Cleanup / resource management?        | No         | Yes        |
+| Reused across systems / environments? | No         | Yes        |
 
-- Use Case: Reusable system utilities, scripts requiring user flags (`-v`, `-f`), or complex logic.
-- Requirements: Must follow Core Guidelines AND Template & Structure.
-- Goal: Ensure standardized behaviors and robust execution across platforms.
+**If all answers fall in the Simple column → use `developing-simple-posix-shell-scripts`.**  
+**If any answer falls in the Complex column → use `developing-complex-posix-shell-scripts`.**
 
-## Core Guidelines (Mandatory for ALL Scripts)
+When in doubt, prefer **Simple**. It is always easier to promote a simple script to complex than to untangle unnecessary boilerplate.
 
-### Shell Standards
+---
 
-- Standard: IEEE Std 1003.1 (POSIX sh).
-- Shebang: `#!/bin/sh` (or `#!/usr/bin/env sh`).
+## Step 2 — Delegate
 
-### Safety & Environment
+Follow the chosen sub-skill entirely:
 
-- Safety Modes:
-  ```sh
-  set -e  # Exit on error (ensure compatibility with target shell)
-  set -u  # Exit on unset variables
-  ```
-- Validation: All scripts must pass `shellcheck` (targeting `sh`) and be formatted.
+- **[developing-simple-posix-shell-scripts]**: concise scripts, no boilerplate, brevity and portability over structure.
+- **[developing-complex-posix-shell-scripts]**: production system utilities, compose only the reference blocks the script actually needs.
 
-### Compliance (Do NOT Use Bash-isms)
+---
 
-- No `[[ ... ]]` (Use `[ ... ]`).
-- No Arrays (`arr[0]`).
-- No `function name { ... }` (Use `name() { ... }`).
-- No `local` (Variables are global; prefix them like `_func_var`).
-- No `source` (Use `.` operator).
-- No `pipefail` (Not POSIX standard).
-- No `<<<` or process substitution `<(...)`.
-- No `bash` arithmetic `(( ... ))` (Use `$(( ... ))`).
+## Special Case: Refactoring an Existing Script
 
-### Logic & Style
+When the task is to **refactor or rewrite** an existing script, perform an additional review before classifying:
 
-- Conditionals: Quote variables in tests: `[ "${var}" = "val" ]`.
-- Quoting: ALWAYS quote variable expansions: `"${var}"`.
-- Expansion: Always use `${var}` syntax.
-- Command Substitution: Use `$(...)` instead of backticks.
-- Output: Prefer `printf` over `echo` for reliable formatting.
+1. **Read the existing script in full.**
+2. **Identify what the script actually does** — list its responsibilities in plain language (one line each).
+3. **Re-classify from scratch** using the table above, ignoring the current implementation's size or structure.
+4. If the existing script is over-engineered for its actual functionality (e.g., a 300-line script that only copies a file), **simplify it** to match the correct classification.
+   - Remove unused boilerplate, logging subsystems, and option parsers that serve no real purpose.
+   - A script that does one simple thing should look like it does one simple thing.
+5. Only preserve complexity that the script's **actual functionality** justifies.
 
-## Template & Structure (Complex Scripts ONLY)
-
-Complex Scripts MUST be based on the provided [template.sh](template.sh).
-
-- Argument Parsing: Use `getopts` (standard built-in) for parsing short options.
-- Logging: Use the template's logging functions.
-- Structure: Group logic into functions.
-
-## Simple Script Guidelines
-
-For Simple Scripts:
-
-- Keep it minimal and portable.
-- Template boilerplate is optional.
-- Direct implementation in main scope is acceptable.
-- If arguments or logic become complex, refactor into a Complex Script.
+> **Rule**: The implementation complexity must match the functional complexity, not the other way around.
