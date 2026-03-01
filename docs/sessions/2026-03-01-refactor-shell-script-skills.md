@@ -8,7 +8,9 @@ Both `developing-bash-scripts` and `developing-posix-shell-scripts` previously c
 
 The fix mirrors a pattern used in the bash skill refactoring: each skill family now has three components — an **entry-point** skill that classifies the request, a **simple** sub-skill focused on brevity, and a **complex** sub-skill that provides composable reference code blocks instead of a monolithic template. The entry-point also includes an explicit **refactoring workflow** that requires the agent to re-evaluate a script's actual functional complexity before choosing a classification, preventing existing over-engineered scripts from being preserved or made worse.
 
-In addition, argument ordering conventions were added to the complex sub-skills to keep `usage`, `longoptions`/ optstring, and `case` statement in sync (template flags first, script-specific flags after).
+In addition, argument ordering conventions were added to the complex sub-skills to keep `usage`, `longoptions`/optstring, and `case` statement in sync (template flags first, script-specific flags after).
+
+A further refinement was made to the classification criteria: simply counting named flags is insufficient. Each flag must first be audited for whether its value genuinely varies across invocations. Flags with invariant values should be converted to top-level constants (`readonly` or plain assignment) rather than exposed as CLI flags, and should not count toward complexity.
 
 ## Changed files
 
@@ -22,10 +24,16 @@ In addition, argument ordering conventions were added to the complex sub-skills 
 - `skills/developing-complex-posix-shell-scripts/SKILL.md` — new: 8 composable reference code blocks adapted for POSIX (no `local`, no associative arrays, `_funcname_var` scoping convention)
 - `README.md` — updated skill table to list all six skills
 
+Additional changes after initial refactor:
+
+- `skills/developing-bash-scripts/SKILL.md` — added "Counting flags correctly" section before classification table; refactoring workflow extended with flag audit step (step 3)
+- `skills/developing-posix-shell-scripts/SKILL.md` — same additions as above
+
 ## Git commits
 
 - `0ab8110` refactor(bash-scripts): split into simple/complex sub-skills with entry point
 - `b360f45` refactor(posix-shell-scripts): split into simple/complex sub-skills with entry point
+- `edf1daa` feat(classification): add flag utility audit before complexity classification
 
 ## Notes
 
@@ -34,4 +42,5 @@ In addition, argument ordering conventions were added to the complex sub-skills 
 - **Refactoring workflow is critical**: without an explicit instruction to re-read and re-classify an existing script from scratch, agents default to preserving the current structure. The "re-classify ignoring current size" rule directly addresses this.
 - **Argument ordering convention**: requiring template flags first in `usage`, `longoptions`/ optstring, and `case` keeps three related locations in sync and makes the pattern easier for both agents and humans to follow.
 - **POSIX `local` workaround**: POSIX `sh` has no `local` keyword. The `_funcname_var` prefix convention (with explicit `unset` at function end) was adopted as the idiomatic substitute and documented in the complex sub-skill.
+- **Flag audit before classification**: counting named flags naively over-counts complexity. Prior LLM refactoring introduced flags that were never varied in practice. The "Counting flags correctly" rule (audit → constant vs. real flag → count only real flags) should be applied before any classification decision, including when writing new scripts.
 - **File viewer wrapping**: the VS Code tool wraps SKILL.md content in a ` ```skill ``` ` code fence for display, but the actual files start directly with `---` frontmatter. Do not mistake the display wrapper for real file content when constructing `replace_string_in_file` calls.
