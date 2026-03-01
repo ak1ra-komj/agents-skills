@@ -13,7 +13,19 @@ Its sole responsibility is **classification**: determine which sub-skill applies
 
 ## Step 1 — Classify the Script
 
-Read the script (or the request) and answer these questions:
+Read the script (or the request) and answer these questions.
+
+### Counting flags correctly
+
+Before filling in the "Named flags" row, audit every proposed flag:
+
+> **A flag only counts if a caller would genuinely pass different values in different invocations.**
+
+- If a flag's value never varies in practice, it is a **constant** — define it with `readonly` or a plain assignment at the top of the script, not as a CLI flag.
+- If a flag exists only to appear flexible, or was added because a template included it, it does not count.
+- Test: _if converting this flag to a top-level constant would not change how anyone actually calls the script, it should not be a flag._
+
+Only flags that pass this test are counted in the table below.
 
 | Question                            | Simple     | Complex    |
 | ----------------------------------- | ---------- | ---------- |
@@ -46,10 +58,11 @@ When the task is to **refactor or rewrite** an existing script, perform an addit
 
 1. **Read the existing script in full.**
 2. **Identify what the script actually does** — list its responsibilities in plain language (one line each).
-3. **Re-classify from scratch** using the table above, ignoring the current implementation's size or structure.
-4. If the existing script is over-engineered for its actual functionality (e.g., a 300-line script that only copies a file), **simplify it** to match the correct classification.
+3. **Audit every flag** using the "Counting flags correctly" criteria above. Flags whose values never vary in practice should be converted to top-level constants (`readonly` or plain assignment). Do not count them as flags.
+4. **Re-classify from scratch** using the table above, counting only the flags that survived step 3, ignoring the current implementation's size or structure.
+5. If the existing script is over-engineered for its actual functionality, **simplify it** to match the correct classification.
    - Remove unused boilerplate, logging subsystems, and argument parsers that serve no real purpose.
    - A script that does one simple thing should look like it does one simple thing.
-5. Only preserve complexity that the script's **actual functionality** justifies.
+6. Only preserve complexity that the script's **actual functionality** justifies.
 
 > **Rule**: The implementation complexity must match the functional complexity, not the other way around.
