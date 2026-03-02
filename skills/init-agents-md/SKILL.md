@@ -1,9 +1,9 @@
 ---
-name: generate-agents-md-for-repository
+name: init-agents-md
 description: Generate or overwrite AGENTS.md in the project root. Use when the user asks to "create AGENTS.md", "write an agent guide", "document the project for AI agents", or wants to orient AI coding tools to a new repository.
 ---
 
-# generate-agents-md-for-repository
+# init-agents-md
 
 Analyze the repository and write (or overwrite) an `AGENTS.md` file in the project
 root. The file is a concise, prescriptive orientation guide for AI coding agents.

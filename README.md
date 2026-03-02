@@ -18,11 +18,11 @@ npx skills add -g ak1ra-komj/agents-skills
 
 ## Available Skills
 
-| Skill                                    | Description                                                                                                      |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `developing-ansible`                     | Guidelines for Ansible playbooks, roles, tasks, and project structure                                            |
-| `developing-bash-scripts`                | Write, review, or refactor any Bash script; classifies as simple or complex and references the appropriate guide |
-| `developing-posix-shell-scripts`         | Write, review, or refactor strictly POSIX `/bin/sh` scripts (no Bash features); classifies as simple or complex and references the appropriate guide |
-| `generate-agents-md-for-repository`      | Generate or overwrite `AGENTS.md` in a project root                                                              |
-| `summarize-current-session`              | Summarize the current conversation and write a session log                                                       |
-| `update-changelog-md`                    | Maintain `CHANGELOG.md` following Keep a Changelog and Semantic Versioning                                       |
+| Skill                            | Description                                                                                                                                          |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `developing-ansible`             | Guidelines for Ansible playbooks, roles, tasks, and project structure                                                                                |
+| `developing-bash-scripts`        | Write, review, or refactor any Bash script; classifies as simple or complex and references the appropriate guide                                     |
+| `developing-posix-shell-scripts` | Write, review, or refactor strictly POSIX `/bin/sh` scripts (no Bash features); classifies as simple or complex and references the appropriate guide |
+| `init-agents-md`                 | Generate or overwrite `AGENTS.md` in a project root                                                                                                  |
+| `keep-a-changelog`               | Maintain `CHANGELOG.md` following Keep a Changelog and Semantic Versioning                                                                           |
+| `summarize-current-session`      | Summarize the current conversation and write a session log                                                                                           |

@@ -1,9 +1,9 @@
 ---
-name: update-changelog-md
-description: Maintains CHANGELOG.md following Keep a Changelog format and Semantic Versioning. Covers adding new version entries from git history and restructuring existing content.
+name: keep-a-changelog
+description: Maintains CHANGELOG.md following Keep a Changelog format and Semantic Versioning. Use when the user mentions preparing or publishing a new release, or asks to review or refactor CHANGELOG.md.
 ---
 
-# update-changelog-md
+# keep-a-changelog
 
 Add a new version entry to `CHANGELOG.md`, or restructure the entire file, following
 the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format and
