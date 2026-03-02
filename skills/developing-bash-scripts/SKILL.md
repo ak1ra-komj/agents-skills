@@ -1,19 +1,17 @@
 ---
 name: developing-bash-scripts
-description: Entry point for all Bash script tasks. Classifies the script as simple or complex, then delegates to the appropriate sub-skill. When refactoring existing scripts, first re-evaluates actual complexity to avoid over-engineering simple scripts.
+description: Guidelines for writing, reviewing, and refactoring Bash scripts of any complexity. Classifies the script as simple or complex, then delegates to the appropriate reference document. Use when a user mentions writing a new script, reviewing existing code, or requests a refactor.
 ---
 
 # developing-bash-scripts skill
 
-This skill is the entry point for any task that involves **writing, modifying, or reviewing** a Bash script.
+This skill covers any task involving **writing, reviewing, or refactoring** a Bash script.
 
-Its sole responsibility is **classification**: determine which sub-skill applies, then follow that sub-skill's guidelines exclusively.
-
----
+Its primary responsibility is **classification**: determine whether the script is simple or complex, then follow the matching reference document exclusively.
 
 ## Step 1 — Classify the Script
 
-Read the script (or the request) and answer these questions.
+Read the script or request and evaluate the table below.
 
 ### Counting flags correctly
 
@@ -25,7 +23,7 @@ Before filling in the "Named flags" row, audit every proposed flag:
 - If a flag exists only to appear flexible, or was added because a template included it, it does not count.
 - Test: _if converting this flag to a top-level constant would not change how anyone actually calls the script, it should not be a flag._
 
-Only flags that pass this test are counted in the table below.
+When reviewing or refactoring an existing script, re-evaluate actual flag usage — do not assume the current implementation reflects the true complexity. Re-classify from scratch using only flags that survive this audit. If the existing script is over-engineered, simplify it to match the correct classification; only preserve complexity that the script's actual functionality justifies.
 
 | Question                            | Simple     | Complex    |
 | ----------------------------------- | ---------- | ---------- |
@@ -36,33 +34,18 @@ Only flags that pass this test are counted in the table below.
 | Cleanup / resource management?      | No         | Yes        |
 | Reused across teams / environments? | No         | Yes        |
 
-**If all answers fall in the Simple column → use `developing-simple-bash-scripts`.**  
-**If any answer falls in the Complex column → use `developing-complex-bash-scripts`.**
+**If all answers fall in the Simple column → use [developing-simple-bash-scripts.md](developing-simple-bash-scripts.md).**
+**If any answer falls in the Complex column → use [developing-complex-bash-scripts.md](developing-complex-bash-scripts.md).**
+
+If the result is **Simple**, additionally ask: does the script actually rely on any Bash-specific features — `[[ ]]`, arrays, process substitution, here-strings, etc.? If the answer is no, the shebang can be changed to `#!/bin/sh` and the script should instead follow the **developing-posix-shell-scripts** skill.
 
 When in doubt, prefer **Simple**. It is always easier to promote a simple script to complex than to untangle unnecessary boilerplate.
 
----
+## Step 2 — Follow the Reference Document
 
-## Step 2 — Delegate
+Follow the chosen reference document entirely:
 
-Follow the chosen sub-skill entirely:
+- **[developing-simple-bash-scripts.md](developing-simple-bash-scripts.md)**: concise scripts, no boilerplate, brevity over structure.
+- **[developing-complex-bash-scripts.md](developing-complex-bash-scripts.md)**: production CLI tools, compose only the reference blocks the script actually needs (see [reference-code-blocks.md](reference-code-blocks.md)).
 
-- **[developing-simple-bash-scripts]**: concise scripts, no boilerplate, brevity over structure.
-- **[developing-complex-bash-scripts]**: production CLI tools, compose only the reference blocks the script actually needs.
-
----
-
-## Special Case: Refactoring an Existing Script
-
-When the task is to **refactor or rewrite** an existing script, perform an additional review before classifying:
-
-1. **Read the existing script in full.**
-2. **Identify what the script actually does** — list its responsibilities in plain language (one line each).
-3. **Audit every flag** using the "Counting flags correctly" criteria above. Flags whose values never vary in practice should be converted to top-level constants (`readonly` or plain assignment). Do not count them as flags.
-4. **Re-classify from scratch** using the table above, counting only the flags that survived step 3, ignoring the current implementation's size or structure.
-5. If the existing script is over-engineered for its actual functionality, **simplify it** to match the correct classification.
-   - Remove unused boilerplate, logging subsystems, and argument parsers that serve no real purpose.
-   - A script that does one simple thing should look like it does one simple thing.
-6. Only preserve complexity that the script's **actual functionality** justifies.
-
-> **Rule**: The implementation complexity must match the functional complexity, not the other way around.
+Both documents share a common baseline defined in **[common.md](common.md)**.

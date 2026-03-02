@@ -1,74 +1,19 @@
----
-name: developing-complex-bash-scripts
-description: Guidelines for writing production-ready, complex Bash scripts with structured logging, argument parsing, and robust error handling. Provides reusable code snippets for each component instead of a monolithic template.
----
+# Reference Code Blocks
 
-# developing-complex-bash-scripts skill
+Reusable code blocks for complex Bash scripts. Pick and compose only the sections a script actually needs — do not copy everything blindly.
 
-This skill defines guidelines for writing **complex** Bash scripts: production CLI tools, reusable utilities, or scripts that require multiple options/flags, structured logging, or robust error handling.
+See [developing-complex-bash-scripts.md](developing-complex-bash-scripts.md) for the composition guide.
 
-Use **developing-simple-bash-scripts** for ad-hoc tasks or scripts under ~50 lines without CLI scaffolding.
-
-## When to Use This Skill
-
-- Reusable CLI tools or production automation scripts
-- Scripts with multiple named flags / options (`--foo`, `--bar`, ...)
-- Requires structured logging with severity levels
-- Needs `--help` output
-- Has cleanup logic, dependency checks, or complex control flow
-- Will be shared across teams or environments
-
-## Core Requirements
-
-### Shebang & Safety Modes
-
-```bash
-#!/usr/bin/env bash
-
-set -o errexit -o nounset -o errtrace
-```
-
-- `errexit`: exit immediately on error.
-- `nounset`: exit on reference to an unset variable.
-- `errtrace`: ensures ERR traps are inherited by functions and subshells.
-- Do NOT add `set -o pipefail` globally unless the script has critical pipe chains.
-
-### Tooling
-
-- All scripts MUST pass `shellcheck` without warnings.
-- Format with `shfmt` before considering the script done.
-
-### Logic & Control Flow
-
-- Conditionals: always use `[[ ... ]]`, never `[ ... ]`.
-- Use `case` for pattern matching or multiple-branch decisions.
-- Use guard clauses to keep functions shallow; fail fast.
-- Use `declare -a` for arrays and `declare -A` for associative arrays.
-- Use process substitution `<(cmd)` instead of temp files where possible.
-- Use here-strings `<<<"str"` for short single-line inputs.
-
-### Variables & Quoting
-
-- Always use `${var}` (braces) for variable expansion.
-- Always quote expansions: `"${var}"`.
-- Use descriptive names. No magic numbers. Group related variables at the top of the function that owns them.
-
----
-
-## Reference Code Blocks
-
-Pick and compose the sections you need. Do NOT copy everything blindly — only include what the script actually uses.
-
-### 1. Script Identity
+## 1. Script Identity
 
 ```bash
 SCRIPT_FILE="$(readlink -f "${0}")"
 SCRIPT_NAME="$(basename "${SCRIPT_FILE}")"
 ```
 
-### 2. Logging Subsystem
+## 2. Logging Subsystem
 
-Use this block when the script needs more than simple `echo` output.
+Use this block when the script needs more than simple `echo` output. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block — omit them only if the script does not expose `--log-level` / `--log-format` flags.
 
 ```bash
 # Logging configuration
@@ -117,13 +62,7 @@ log_info()     { log_message 32 "INFO"     "${@}"; }
 log_warning()  { log_message 33 "WARNING"  "${@}"; }
 log_debug()    { log_message 34 "DEBUG"    "${@}"; }
 log_critical() { log_message 36 "CRITICAL" "${@}"; }
-```
 
-### 3. Log Level & Format Setters
-
-Include these when the script exposes `--log-level` / `--log-format` flags.
-
-```bash
 set_log_level() {
     local level="${1^^}"
     if [[ -z "${LOG_PRIORITY[${level}]:-}" ]]; then
@@ -146,7 +85,7 @@ set_log_format() {
 }
 ```
 
-### 4. Dependency Check
+## 3. Dependency Check
 
 Include this when the script relies on external commands that may not be present.
 
@@ -167,7 +106,7 @@ require_command() {
 }
 ```
 
-### 5. Cleanup Handler
+## 4. Cleanup Handler
 
 Include this when the script creates temporary files or resources that must be cleaned up on exit.
 
@@ -181,11 +120,11 @@ cleanup() {
 trap cleanup EXIT INT TERM
 ```
 
-### 6. Usage / Help
+## 5. Usage / Help
 
 Adapt the OPTIONS and EXAMPLES sections to the actual flags of the script.
 
-**Argument ordering convention**: in the OPTIONS block, list template flags first, then script-specific flags. This mirrors the ordering required in `longoptions` and the `case` statement (see Section 7), keeping all three in sync.
+**Argument ordering convention**: in the OPTIONS block, list template flags first, then script-specific flags. This mirrors the ordering required in `longoptions` and the `case` statement (see Section 6), keeping all three in sync.
 
 ```bash
 usage() {
@@ -216,7 +155,7 @@ EOF
 }
 ```
 
-### 7. Argument Parsing
+## 6. Argument Parsing
 
 Use `getopt` (not `getopts`) to support long options. Adjust `options`/`longoptions` to match the script's flags.
 
@@ -269,7 +208,7 @@ parse_args() {
 }
 ```
 
-### 8. Main Entry Point
+## 7. Main Entry Point
 
 ```bash
 main() {
@@ -284,16 +223,3 @@ main() {
 
 main "${@}"
 ```
-
----
-
-## Composition Guide
-
-1. **Always include**: Script Identity + Shebang/Safety Modes + `main`.
-2. **Include Logging Subsystem** when output needs severity levels or colour.
-3. **Include Log Level/Format Setters** only when exposing `--log-level` / `--log-format` flags.
-4. **Include Dependency Check** when relying on non-standard external commands.
-5. **Include Cleanup Handler** when the script allocates resources (temp files, locks, etc.).
-6. **Include Usage + Argument Parsing** when the script accepts any named flags.
-
-Compose only the sections the script actually needs. A complex script with no temp files does not need a cleanup handler.
