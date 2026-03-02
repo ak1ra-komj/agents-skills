@@ -1,81 +1,18 @@
----
-name: developing-complex-posix-shell-scripts
-description: Guidelines for writing production-ready, complex POSIX shell scripts (/bin/sh) with structured logging, argument parsing, and robust error handling. Provides reusable code snippets for each component instead of a monolithic template.
----
+# Reference Code Blocks
 
-# developing-complex-posix-shell-scripts skill
+Reusable code blocks for complex POSIX shell scripts. Pick and compose only the sections a script actually needs — do not copy everything blindly.
 
-This skill defines guidelines for writing **complex** POSIX shell scripts: production utilities, reusable system tools, or scripts that require multiple flags, structured logging, or robust error handling — while remaining strictly portable.
+See [developing-complex-posix-shell-scripts.md](developing-complex-posix-shell-scripts.md) for the composition guide.
 
-Use **developing-simple-posix-shell-scripts** for ad-hoc tasks or scripts under ~50 lines without CLI scaffolding.
-
-## When to Use This Skill
-
-- Reusable system utilities or production automation scripts targeting `/bin/sh`
-- Scripts with multiple named flags / options
-- Requires structured logging with severity levels
-- Needs `-h` / help output
-- Has cleanup logic, dependency checks, or complex control flow
-- Must run portably on Alpine, BusyBox, embedded, or other minimal systems
-
-## Core Requirements
-
-### Shebang & Safety Modes
-
-```sh
-#!/bin/sh
-
-set -e
-set -u
-```
-
-- `set -e`: exit immediately on error.
-- `set -u`: exit on reference to an unset variable.
-- `set -o pipefail` is **not** POSIX — do not use it.
-
-### Tooling
-
-- All scripts MUST pass `shellcheck --shell=sh` without warnings.
-- Format with `shfmt -ln posix` before considering the script done.
-
-### POSIX Compliance — Do NOT Use These Bash-isms
-
-| Bash feature                  | POSIX replacement                                   |
-| ----------------------------- | --------------------------------------------------- |
-| `[[ ... ]]`                   | `[ ... ]`                                           |
-| `local var`                   | prefix with `_funcname_var` (see Variables section) |
-| `declare -a arr`              | not available — restructure logic                   |
-| `source file`                 | `. file`                                            |
-| `function f { }`              | `f() { }`                                           |
-| `(( expr ))`                  | `$(( expr ))`                                       |
-| `$'...'` strings              | `printf`                                            |
-| `<<<` here-strings            | `printf ... \|` or temp file                        |
-| `<(cmd)` process substitution | temp file or pipe                                   |
-| `echo -e`                     | `printf`                                            |
-
-### Variables & Quoting
-
-- Always use `${var}` (braces) for variable expansion.
-- Always quote expansions: `"${var}"`.
-- POSIX `sh` has no `local` keyword. Simulate function-local variables by prefixing with the function name: `_log_message_color`, `_parse_args_opt`, etc. Unset them at the end of the function if needed.
-- Use `$(...)` for command substitution, never backticks.
-- Prefer `printf` over `echo` for reliable, portable output.
-
----
-
-## Reference Code Blocks
-
-Pick and compose the sections you need. Do NOT copy everything blindly — only include what the script actually uses.
-
-### 1. Script Identity
+## 1. Script Identity
 
 ```sh
 SCRIPT_NAME="$(basename "${0}")"
 ```
 
-### 2. Logging Subsystem
+## 2. Logging Subsystem
 
-Use this block when the script needs more than simple `printf` output. Because POSIX `sh` has no associative arrays, level priorities are resolved via a helper function.
+Use this block when the script needs more than simple `printf` output. Because POSIX `sh` has no associative arrays, level priorities are resolved via a helper function. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block — omit them only if the script does not expose `-l` / `-f` flags.
 
 ```sh
 # Logging configuration
@@ -136,15 +73,8 @@ log_info()     { log_message '32' 'INFO'     "${@}"; }
 log_warning()  { log_message '33' 'WARNING'  "${@}"; }
 log_debug()    { log_message '34' 'DEBUG'    "${@}"; }
 log_critical() { log_message '36' 'CRITICAL' "${@}"; }
-```
 
-### 3. Log Level & Format Setters
-
-Include these when the script exposes `-l` / log-format flags.
-
-```sh
 set_log_level() {
-    # tr to uppercase without bashism
     _set_log_level_val=$(printf '%s' "${1}" | tr '[:lower:]' '[:upper:]')
     case "${_set_log_level_val}" in
         DEBUG | INFO | WARNING | ERROR | CRITICAL)
@@ -171,7 +101,7 @@ set_log_format() {
 }
 ```
 
-### 4. Dependency Check
+## 3. Dependency Check
 
 Include this when the script relies on external commands that may not be present.
 
@@ -193,7 +123,7 @@ require_command() {
 }
 ```
 
-### 5. Cleanup Handler
+## 4. Cleanup Handler
 
 Include this when the script creates temporary files or resources that must be cleaned up on exit.
 
@@ -207,9 +137,11 @@ cleanup() {
 trap cleanup EXIT INT TERM
 ```
 
-### 6. Usage / Help
+## 5. Usage / Help
 
-**Argument ordering convention**: list template flags first (`-h`, `-l`, `-f`), then script-specific flags. This mirrors the ordering required in the `getopts` optstring and `case` statement (see Section 7), keeping all three in sync.
+Adapt the OPTIONS and EXAMPLES sections to the actual flags of the script.
+
+**Argument ordering convention**: list template flags first (`-h`, `-l`, `-f`), then script-specific flags. This mirrors the ordering required in the `getopts` optstring and `case` statement (see Section 6), keeping all three in sync.
 
 ```sh
 usage() {
@@ -240,7 +172,7 @@ EOF
 }
 ```
 
-### 7. Argument Parsing
+## 6. Argument Parsing
 
 Use `getopts` (POSIX built-in, short options only). Adjust the optstring to match the script's flags.
 
@@ -248,12 +180,6 @@ Use `getopts` (POSIX built-in, short options only). Adjust the optstring to matc
 
 ```sh
 parse_args() {
-    # --- template flag defaults ---
-    # LOG_LEVEL and LOG_FORMAT already defaulted at top of script
-
-    # --- script-specific flag defaults ---
-    # MY_FLAG="default"
-
     # template flags first (hl:f:), then script-specific flags
     while getopts ':hl:f:' _parse_args_opt; do
         case "${_parse_args_opt}" in
@@ -278,7 +204,7 @@ parse_args() {
 }
 ```
 
-### 8. Main Entry Point
+## 7. Main Entry Point
 
 ```sh
 main() {
@@ -291,16 +217,3 @@ main() {
 
 main "${@}"
 ```
-
----
-
-## Composition Guide
-
-1. **Always include**: Script Identity + Shebang/Safety Modes + `main`.
-2. **Include Logging Subsystem** when output needs severity levels or colour.
-3. **Include Log Level/Format Setters** only when exposing `-l` / `-f` flags.
-4. **Include Dependency Check** when relying on non-standard external commands.
-5. **Include Cleanup Handler** when the script allocates resources (temp files, locks, etc.).
-6. **Include Usage + Argument Parsing** when the script accepts any named flags.
-
-Compose only the sections the script actually needs. A complex script with no temp files does not need a cleanup handler.
