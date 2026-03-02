@@ -1,81 +1,27 @@
 ---
 name: developing-ansible
-description: Comprehensive guidelines for Ansible development, covering playbooks, roles, tasks, modules, and project management. Focuses on structure, idempotency, and best practices.
+description: Guidelines for writing, reviewing, and refactoring Ansible playbooks, roles, and tasks. Delegates to reference documents by topic. Use when a user mentions writing a new playbook, creating or modifying a role, editing Ansible tasks, managing inventory or variables, or asks to review any Ansible code.
 ---
 
 # developing-ansible skill
 
-This skill defines the guidelines for generating, modifying, or reviewing Ansible code. It consolidates best practices for playbooks, roles, tasks, and project configuration.
+This skill covers any task involving **writing, reviewing, or refactoring** Ansible playbooks, roles, or tasks.
 
 ## Rule of Thumb
 
 If the project already has existing examples, always follow them in terms of structure, naming, and style to maintain consistency.
-If no relevant examples exist, apply the guidelines defined in this skill.
+If no relevant examples exist, apply the guidelines defined in this skill and its reference documents.
 
-## Code Style and Formatting
+## Reference Documents
 
-- Use YAML with consistent 2-space indentation.
-- Use `.yaml` extension (not `.yml`) for all YAML files.
-- Write clear, descriptive, and meaningful task names.
-- Keep formatting consistent across all files.
+Determine which area of Ansible the request involves, then follow the matching reference document. A single request may involve multiple topics — follow all relevant documents.
 
-## Playbook Structure
-
-- Each play must define name, hosts, gather_facts, and become.
-- Prefer import_tasks and import_playbook over dynamic includes when appropriate.
-- Use block, rescue, and always to implement explicit error handling.
-- Ensure all playbooks are idempotent, deterministic, and repeatable.
-
-## Role Architecture
-
-- Follow the standard Ansible Galaxy role directory structure.
-- Place default variables in defaults/main.yaml (easily overridden).
-- Place static variables in vars/main.yaml (not meant to be overridden).
-- Document role dependencies in meta/main.yaml.
-- Restart/reload services only via handlers in handlers/main.yaml.
-- Use handlers to trigger restarts, not direct task execution.
-
-## Task Structure and Modules
-
-- The name key must be present for every task.
-- The when key (if used) must appear immediately after name.
-- If become is used, it should follow when (or name).
-- Always use fully qualified collection names (e.g., ansible.builtin.copy).
-- Reference facts via ansible_facts (e.g., ansible_facts['os_family']).
-- Use true/false for booleans, not strings.
-
-### Iteration
-
-- Use loop instead of `with_*`.
-- Define a custom loop variable via loop_control to avoid variable collisions.
-
-### Module Selection
-
-- Prefer Ansible modules over shell/command.
-- Use creates/removes and changed_when/failed_when for shell/command modules to ensure idempotency and correct error reporting.
-- Use ansible.builtin.template for configs, ansible.builtin.copy for static files.
-
-## Project Management
-
-- Do not hard-code hosts or environment-specific values. Use group_vars/ and host_vars/.
-- Store secrets exclusively in Ansible Vault.
-- Validate playbooks using ansible-lint and ansible-playbook --syntax-check.
-
-## Error Handling Pattern
-
-Use block/rescue/always for robust error handling:
-
-```yaml
-- block:
-    - name: Task that might fail
-      ansible.builtin.command: /bin/risky
-  rescue:
-    - name: Recovery action
-      ansible.builtin.debug:
-        msg: "Recovering..."
-  always:
-    - name: Cleanup
-      ansible.builtin.file:
-        path: /tmp/temp
-        state: absent
-```
+| Reference Document                                       | Topic                                                                                 | Covers                                                                       |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [common.md](common.md)                                   | Code style, file conventions, project layout, secrets                                 | Baseline requirements that apply to all Ansible files                        |
+| [developing-playbooks.md](developing-playbooks.md)       | Playbook structure, plays, error handling                                             | Play definition, import vs include, idempotency                              |
+| [developing-roles.md](developing-roles.md)               | Role directory layout, variables, handlers                                            | Role directory structure, variable placement, handler rules                  |
+| [developing-tasks.md](developing-tasks.md)               | Task ordering, modules, iteration, idempotency                                        | Task key ordering, FQCN, module selection, loop                              |
+| [handling-boolean-values.md](handling-boolean-values.md) | Boolean values: YAML booleans, `\| ansible.builtin.bool`, `is ansible.builtin.truthy` | The three bool mechanisms, when to use each, default value pitfalls          |
+| [jinja2-templates.md](jinja2-templates.md)               | Jinja2 templates: macros, filters, defaults, whitespace                               | Macros, structured config generation, list/dict filters, undefined variables |
+| [reference-code-blocks.md](reference-code-blocks.md)     | Reusable code patterns (block/rescue/always, etc.)                                    | Canonical patterns to compose from                                           |

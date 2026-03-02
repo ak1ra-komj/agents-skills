@@ -20,7 +20,7 @@ npx skills add -g ak1ra-komj/agents-skills
 
 | Skill                            | Description                                                                                                                                          |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `developing-ansible`             | Guidelines for Ansible playbooks, roles, tasks, and project structure                                                                                |
+| `developing-ansible`             | Write, review, or refactor Ansible playbooks, roles, and tasks; delegates to reference documents by topic                                            |
 | `developing-bash-scripts`        | Write, review, or refactor any Bash script; classifies as simple or complex and references the appropriate guide                                     |
 | `developing-posix-shell-scripts` | Write, review, or refactor strictly POSIX `/bin/sh` scripts (no Bash features); classifies as simple or complex and references the appropriate guide |
 | `init-agents-md`                 | Generate or overwrite `AGENTS.md` in a project root                                                                                                  |
