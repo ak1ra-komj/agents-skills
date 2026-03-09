@@ -1,6 +1,6 @@
 ---
 name: developing-ansible
-description: Guidelines for writing, reviewing, and refactoring Ansible playbooks, roles, and tasks. Delegates to reference documents by topic. Use when a user mentions writing a new playbook, creating or modifying a role, editing Ansible tasks, managing inventory or variables, or asks to review any Ansible code.
+description: Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks.
 ---
 
 # developing-ansible skill
@@ -14,14 +14,15 @@ If no relevant examples exist, apply the guidelines defined in this skill and it
 
 ## Reference Documents
 
-Determine which area of Ansible the request involves, then follow the matching reference document. A single request may involve multiple topics — follow all relevant documents.
+Always load:
 
-| Reference Document                                       | Topic                                                                                 | Covers                                                                       |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [common.md](common.md)                                   | Code style, file conventions, project layout, secrets                                 | Baseline requirements that apply to all Ansible files                        |
-| [developing-playbooks.md](developing-playbooks.md)       | Playbook structure, plays, error handling                                             | Play definition, import vs include, idempotency                              |
-| [developing-roles.md](developing-roles.md)               | Role directory layout, variables, handlers                                            | Role directory structure, variable placement, handler rules                  |
-| [developing-tasks.md](developing-tasks.md)               | Task ordering, modules, iteration, idempotency                                        | Task key ordering, FQCN, module selection, loop                              |
-| [handling-boolean-values.md](handling-boolean-values.md) | Boolean values: YAML booleans, `\| ansible.builtin.bool`, `is ansible.builtin.truthy` | The three bool mechanisms, when to use each, default value pitfalls          |
-| [jinja2-templates.md](jinja2-templates.md)               | Jinja2 templates: macros, filters, defaults, whitespace                               | Macros, structured config generation, list/dict filters, undefined variables |
-| [reference-code-blocks.md](reference-code-blocks.md)     | Reusable code patterns (block/rescue/always, etc.)                                    | Canonical patterns to compose from                                           |
+- **[common.md](common.md)** — baseline requirements that apply to all Ansible files.
+- **[developing-tasks.md](developing-tasks.md)** — task key ordering, FQCN, module selection, `loop`; tasks are the fundamental unit present in both playbooks and roles.
+
+Then load only the documents that match the request:
+
+- **[developing-playbooks.md](developing-playbooks.md)** — Load when writing or reviewing playbook files: play definitions, `import_*` vs `include_*`, error handling at play level.
+- **[developing-roles.md](developing-roles.md)** — Load when creating or modifying a role: directory layout, `defaults/`, `vars/`, `handlers/`, `meta/`.
+- **[handling-boolean-values.md](handling-boolean-values.md)** — Load when the code involves boolean variables, `| ansible.builtin.bool`, or `is ansible.builtin.truthy` expressions.
+- **[jinja2-templates.md](jinja2-templates.md)** — Load when working with `.j2` template files or Jinja2 filter/macro expressions.
+- **[reference-code-blocks.md](reference-code-blocks.md)** — Load when composing `block/rescue/always` patterns or other reusable canonical patterns.

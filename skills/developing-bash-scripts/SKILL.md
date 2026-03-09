@@ -1,51 +1,27 @@
 ---
 name: developing-bash-scripts
-description: Guidelines for writing, reviewing, and refactoring Bash scripts of any complexity. Classifies the script as simple or complex, then delegates to the appropriate reference document. Use when a user mentions writing a new script, reviewing existing code, or requests a refactor.
+description: Use when writing, reviewing, or refactoring a Bash script.
 ---
 
 # developing-bash-scripts skill
 
 This skill covers any task involving **writing, reviewing, or refactoring** a Bash script.
 
-Its primary responsibility is **classification**: determine whether the script is simple or complex, then follow the matching reference document exclusively.
-
 ## Step 1 — Classify the Script
 
-Read the script or request and evaluate the table below.
+Audit flags before classifying. Ask for each proposed flag: would a real caller ever pass a different value, or can it be a `readonly` constant? Beyond that, apply common sense — not everything that _could_ vary _should_ be a flag. Internal paths, fixed timeouts, log levels for non-CLI tools, and similar values are typically hardcoded in practice even if they could theoretically differ. When reviewing an existing script, re-classify from scratch; the current number of flags is not evidence of correct classification.
 
-### Counting flags correctly
+**Simple** — all of: < 50 lines of logic, 0–2 genuine flags, no structured logging, no `--help`, no resource cleanup, not shared across systems/environments.
 
-Before filling in the "Named flags" row, audit every proposed flag:
+**Complex** — any of: ≥ 50 lines, 3+ genuine flags, structured logging, `--help`, resource cleanup, shared across systems/environments.
 
-> **A flag only counts if a caller would genuinely pass different values in different invocations.**
+When in doubt, prefer **Simple**.
 
-- If a flag's value never varies in practice, it is a **constant** — define it with `readonly` or a plain assignment at the top of the script, not as a CLI flag.
-- If a flag exists only to appear flexible, or was added because a template included it, it does not count.
-- Test: _if converting this flag to a top-level constant would not change how anyone actually calls the script, it should not be a flag._
-
-When reviewing or refactoring an existing script, re-evaluate actual flag usage — do not assume the current implementation reflects the true complexity. Re-classify from scratch using only flags that survive this audit. If the existing script is over-engineered, simplify it to match the correct classification; only preserve complexity that the script's actual functionality justifies.
-
-| Question                            | Simple     | Complex    |
-| ----------------------------------- | ---------- | ---------- |
-| Expected line count (logic only)    | < 50 lines | ≥ 50 lines |
-| Named flags / options needed        | 0–2        | 3 or more  |
-| Structured logging required?        | No         | Yes        |
-| `--help` output required?           | No         | Yes        |
-| Cleanup / resource management?      | No         | Yes        |
-| Reused across teams / environments? | No         | Yes        |
-
-**If all answers fall in the Simple column → use [developing-simple-bash-scripts.md](developing-simple-bash-scripts.md).**
-**If any answer falls in the Complex column → use [developing-complex-bash-scripts.md](developing-complex-bash-scripts.md).**
-
-If the result is **Simple**, additionally ask: does the script actually rely on any Bash-specific features — `[[ ]]`, arrays, process substitution, here-strings, etc.? If the answer is no, the shebang can be changed to `#!/bin/sh` and the script should instead follow the **developing-posix-shell-scripts** skill.
-
-When in doubt, prefer **Simple**. It is always easier to promote a simple script to complex than to untangle unnecessary boilerplate.
+If the result is **Simple** and the script uses no Bash-specific features (`[[ ]]`, arrays, process substitution, here-strings, etc.), use `#!/bin/sh` and follow the **developing-posix-shell-scripts** skill instead.
 
 ## Step 2 — Follow the Reference Document
 
-Follow the chosen reference document entirely:
+Always load **[common.md](common.md)** first, then load the matching document:
 
-- **[developing-simple-bash-scripts.md](developing-simple-bash-scripts.md)**: concise scripts, no boilerplate, brevity over structure.
-- **[developing-complex-bash-scripts.md](developing-complex-bash-scripts.md)**: production CLI tools, compose only the reference blocks the script actually needs (see [reference-code-blocks.md](reference-code-blocks.md)).
-
-Both documents share a common baseline defined in **[common.md](common.md)**.
+- **[developing-simple-bash-scripts.md](developing-simple-bash-scripts.md)** — Load when classified as Simple.
+- **[developing-complex-bash-scripts.md](developing-complex-bash-scripts.md)** — Load when classified as Complex. Also load **[reference-code-blocks.md](reference-code-blocks.md)** to compose only the blocks the script actually needs.
