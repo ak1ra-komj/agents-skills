@@ -1,6 +1,6 @@
 ---
 name: init-agents-md
-description: Generate or overwrite AGENTS.md in the project root. Use when the user asks to "create AGENTS.md", "write an agent guide", "document the project for AI agents", or wants to orient AI coding tools to a new repository.
+description: Use when writing, reviewing, or refactoring AGENTS.md, writing an agent guide, documenting the project for AI agents, or orienting AI coding tools to a new repository.
 ---
 
 # init-agents-md

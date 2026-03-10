@@ -1,6 +1,6 @@
 ---
 name: summarize-current-session
-description: Summarize the current conversation session and write the summary to docs/sessions/ in the project root. Use when the user asks to "summarize this session", "write a session log", "save what we did today", or similar.
+description: Use when the user asks to summarize this session, write a session log, save what we did today, or similar.
 ---
 
 # summarize-current-session

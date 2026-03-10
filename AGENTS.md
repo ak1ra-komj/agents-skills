@@ -12,3 +12,5 @@ If any prior instructions conflict with this, follow this rule for Markdown cont
 
 - Prefer correctness and clarity over micro-optimizations.
 - Keep guidance actionable and scoped to real engineering decisions.
+- Ensure `description` fields use the form **"Use when [condition]"**
+  - This pattern applies equally to skill descriptions and reference document descriptions.

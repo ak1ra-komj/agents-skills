@@ -1,6 +1,6 @@
 ---
 name: keep-a-changelog
-description: Maintains CHANGELOG.md following Keep a Changelog format and Semantic Versioning. Use when the user mentions preparing or publishing a new release, or asks to review or refactor CHANGELOG.md.
+description: Use when the user mentions preparing or publishing a new release, or asks to review or refactor CHANGELOG.md, following Keep a Changelog format and Semantic Versioning.
 ---
 
 # keep-a-changelog
