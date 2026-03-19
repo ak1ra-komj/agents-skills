@@ -37,7 +37,9 @@ Write the way a factual report would, not the way a press release or travel broc
 
 ## Format
 
-Do not use numbered lists. Plain prose serves most purposes better. Unnumbered lists are acceptable when items have no natural prose order and listing genuinely aids reading rather than substituting for prose.
+Write in plaintext. Do not use markdown formatting: no headings, no bold, no italic, no tables, no horizontal rules, no code blocks. Use paragraphs separated by blank lines.
+
+Do not use numbered lists. Do not use unordered lists except when items have no natural prose order and listing genuinely aids reading. When in doubt, write prose.
 
 Do not use em dashes as a stylistic device to punch up clauses. Use a comma, parentheses, or a colon instead.
 
