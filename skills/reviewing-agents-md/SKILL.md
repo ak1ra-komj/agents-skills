@@ -1,9 +1,9 @@
 ---
-name: init-agents-md
+name: reviewing-agents-md
 description: Use when writing, reviewing, or refactoring AGENTS.md, writing an agent guide, documenting the project for AI agents, or orienting AI coding tools to a new repository.
 ---
 
-# init-agents-md
+# reviewing-agents-md
 
 Analyze the repository and write (or overwrite) an `AGENTS.md` file in the project
 root. The file is a concise, prescriptive orientation guide for AI coding agents.
