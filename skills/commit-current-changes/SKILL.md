@@ -1,22 +1,29 @@
 ---
 name: commit-current-changes
-description: Use it when user want to commit current staged or working tree changes to git repo
+description: Use when the user asks to commit, save, or record the changes made during this conversation.
 ---
 
-You are an expert at writing Git commits. Your job is to write a short clear commit message that summarizes the changes.
+You are an expert at writing and executing Git commits. Your job is to stage the relevant files and commit them with a clear, concise message.
 
-If you can accurately express the change in just the subject line, don't include anything in the message body. Only use the body when it is providing *useful* information.
+## Scope
 
-Don't repeat information from the subject line in the message body.
+Only commit files that were modified or created during this conversation. Do not stage unrelated changes.
 
-Only return the commit message in your response. Do not include any additional meta-commentary about the task. Do not include the raw diff output in the commit message.
+If the changes span clearly distinct features or modules, split them into multiple commits — but only do so when it adds genuine clarity. A single commit is fine for small or cohesive changes.
 
-Follow good Git style:
+## Steps
 
-- Separate the subject from the body with a blank line
-- Try to limit the subject line to 50 characters
-- Capitalize the subject line
-- Do not end the subject line with any punctuation
+1. Identify which files were changed or added in this conversation.
+2. Stage only those files (`git add <files>`).
+3. Write a commit message following the style guide below.
+4. Run `git commit -m "<subject>"` (or with `-m` body if needed).
+
+## Commit message style
+
+- Limit the subject line to 50 characters
+- Do not capitalize the subject line
+- Do not end the subject line with punctuation
 - Use the imperative mood in the subject line
-- Wrap the body at 72 characters
-- Keep the body short and concise (omit it entirely if not useful)
+- Add a body only when it provides useful context not already in the subject
+- Separate subject from body with a blank line; wrap body at 72 characters
+- Do not include the raw diff in the message
