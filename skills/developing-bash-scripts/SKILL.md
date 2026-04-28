@@ -15,13 +15,13 @@ Audit flags before classifying. Ask for each proposed flag: would a real caller 
 
 **Complex** - any of: ≥ 50 lines, 3+ genuine flags, structured logging, `--help`, resource cleanup, shared across systems/environments.
 
-When in doubt, prefer **Simple**.
+When in doubt, you SHOULD prefer **Simple**.
 
-If the result is **Simple** and the script uses no Bash-specific features (`[[ ]]`, arrays, process substitution, here-strings, etc.), use `#!/bin/sh` and follow the **developing-posix-shell-scripts** skill instead.
+If the result is **Simple** and the script uses no Bash-specific features (`[[ ]]`, arrays, process substitution, here-strings, etc.), you MUST use `#!/bin/sh` and follow the **developing-posix-shell-scripts** skill instead.
 
 ## Step 2 - Follow the Reference Document
 
-Always load **[common.md](common.md)** first, then load the matching document:
+You MUST load **[common.md](common.md)** first, then load the matching document:
 
-- **[developing-simple-bash-scripts.md](developing-simple-bash-scripts.md)** - Load when classified as Simple.
-- **[developing-complex-bash-scripts.md](developing-complex-bash-scripts.md)** - Load when classified as Complex. Also load **[reference-code-blocks.md](reference-code-blocks.md)** to compose only the blocks the script actually needs.
+- **[developing-simple-bash-scripts.md](developing-simple-bash-scripts.md)** - You MUST load this when classified as Simple.
+- **[developing-complex-bash-scripts.md](developing-complex-bash-scripts.md)** - You MUST load this when classified as Complex. You SHOULD also load **[reference-code-blocks.md](reference-code-blocks.md)** to compose only the blocks the script actually needs.

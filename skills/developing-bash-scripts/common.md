@@ -17,7 +17,7 @@ set -o errexit -o nounset
 
 Complex scripts additionally add `-o errtrace` (see [developing-complex-bash-scripts.md](developing-complex-bash-scripts.md)).
 
-Do NOT add `set -o pipefail` globally unless the script has critical pipe chains that must be checked.
+You SHOULD NOT add `set -o pipefail` globally unless the script has critical pipe chains that must be checked.
 
 ## Tooling
 
@@ -26,9 +26,9 @@ Do NOT add `set -o pipefail` globally unless the script has critical pipe chains
 
 ## Logic & Control Flow
 
-- Conditionals: always use `[[ ... ]]`, never `[ ... ]`.
-- Use `case` for pattern matching or multiple-branch decisions.
-- Prefer guard clauses to keep nesting shallow:
+- Conditionals MUST use `[[ ... ]]`; you MUST NOT use `[ ... ]`.
+- You SHOULD use `case` for pattern matching or multiple-branch decisions.
+- You SHOULD prefer guard clauses to keep nesting shallow:
 
   ```bash
   # Bad
@@ -47,17 +47,17 @@ Do NOT add `set -o pipefail` globally unless the script has critical pipe chains
   process "${file}"
   ```
 
-- Use `declare -a` for arrays and `declare -A` for associative arrays when working with structured data.
-- Use process substitution `<(cmd)` instead of temp files where possible.
-- Use here-strings `<<<"str"` for short single-line inputs.
+- You SHOULD use `declare -a` for arrays and `declare -A` for associative arrays when working with structured data.
+- You SHOULD use process substitution `<(cmd)` instead of temp files where possible.
+- You SHOULD use here-strings `<<<"str"` for short single-line inputs.
 
 ## Variables & Quoting
 
-- Always use `${var}` (braces) for variable expansion.
-- Always quote expansions: `"${var}"` - prevents word-splitting and glob expansion.
-- Use descriptive variable names; avoid magic numbers.
+- You MUST use `${var}` (braces) for variable expansion.
+- You MUST quote expansions: `"${var}"` - this prevents word-splitting and glob expansion.
+- You SHOULD use descriptive variable names and SHOULD avoid magic numbers.
 
 ## Output
 
-- Use `echo` or `printf` for normal output.
-- Write errors to stderr: `echo "error message" >&2`.
+- You SHOULD use `echo` or `printf` for normal output.
+- You MUST write errors to stderr, e.g. `echo "error message" >&2`.

@@ -2,7 +2,7 @@
 
 Simple Bash scripts cover ad-hoc tasks, short wrappers, and linear logic that does not need full CLI scaffolding.
 
-Prioritise correctness and brevity. Do NOT pad simple scripts with template boilerplate.
+You SHOULD prioritise correctness and brevity. You MUST NOT pad simple scripts with template boilerplate.
 
 See [common.md](common.md) for baseline requirements (shebang, safety modes, tooling, logic, quoting).
 
@@ -16,8 +16,8 @@ See [common.md](common.md) for baseline requirements (shebang, safety modes, too
 ## Notes
 
 - `errtrace` is not required.
-- Positional arguments (`"${1}"`, `"${2}"`) are fine; use `:?` for mandatory arg validation.
-- Bash-specific features such as arrays, process substitution, and here-strings are perfectly appropriate whenever they simplify the logic - see [common.md](common.md).
+- You MAY use positional arguments (`"${1}"`, `"${2}"`); you SHOULD use `:?` for mandatory arg validation.
+- You MAY use Bash-specific features such as arrays, process substitution, and here-strings whenever they simplify the logic - see [common.md](common.md).
 
 ## Minimal Example
 
@@ -40,7 +40,7 @@ echo "Copied ${src} -> ${dst}"
 
 ## Upgrade to Complex
 
-Refactor a simple script into a complex script when **any** of the following apply:
+You SHOULD refactor a simple script into a complex script when **any** of the following apply:
 
 - Script exceeds ~50 lines of logic
 - Needs 3 or more named flags / options

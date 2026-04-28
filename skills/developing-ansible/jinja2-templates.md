@@ -17,10 +17,10 @@ lines in rendered output.
 
 - `{%-` strips whitespace **before** the tag.
 - `-%}` strips whitespace **after** the tag.
-- Use these consistently inside loops and conditionals to keep rendered files
+- You SHOULD use these consistently inside loops and conditionals to keep rendered files
   clean and diff-friendly.
 
-Set `lstrip_blocks: true` and `trim_blocks: true` in the template header to
+You SHOULD set `lstrip_blocks: true` and `trim_blocks: true` in the template header to
 apply stripping globally instead of per-tag:
 
 ```jinja2
@@ -29,7 +29,7 @@ apply stripping globally instead of per-tag:
 
 ## Local Variables with `{% set %}`
 
-Declare intermediate values to avoid repeating complex expressions:
+You SHOULD declare intermediate values to avoid repeating complex expressions:
 
 ```jinja2
 {% set listen_addr = item.bind_address | default('0.0.0.0') %}
@@ -37,12 +37,12 @@ Declare intermediate values to avoid repeating complex expressions:
 bind {{ listen_addr }}:{{ listen_port }};
 ```
 
-Avoid deep-nesting filter chains inline - extract them into named variables for
+You SHOULD avoid deep-nesting filter chains inline - extract them into named variables for
 readability and easier review.
 
 ## Macros for Repeated Config Blocks
 
-Use `{% macro %}` when the same structural block appears more than once or needs
+You SHOULD use `{% macro %}` when the same structural block appears more than once or needs
 to be parameterised:
 
 ```jinja2
@@ -65,7 +65,7 @@ Macros keep templates DRY and make individual blocks independently testable.
 
 ## Generating Structured Config Files with JSON / YAML Filters
 
-When a config file format is JSON or YAML, avoid constructing it with raw string
+When a config file format is JSON or YAML, you SHOULD avoid constructing it with raw string
 interpolation. Instead, build the data structure in Ansible variables and
 serialise it with a filter:
 
@@ -84,17 +84,17 @@ serialise it with a filter:
 | `\| ansible.builtin.to_yaml`                | Compact YAML        |
 | `\| ansible.builtin.to_nice_yaml(indent=2)` | Human-readable YAML |
 
-**Prefer this pattern over `ansible.builtin.template` for config files whose
+**You SHOULD prefer this pattern over `ansible.builtin.template` for config files whose
 entire content is a single data structure.** It keeps the source of truth in
 variables (where it can be validated, merged with `ansible.builtin.combine`, and overridden) rather than
 scattered across a template.
 
-Use `ansible.builtin.template` when the file mixes structured data with prose,
+You SHOULD use `ansible.builtin.template` when the file mixes structured data with prose,
 comments that must be preserved, or requires per-line conditional logic.
 
 ## List and Dict Operations
 
-Use Jinja2 filters instead of tasks to transform data inline:
+You SHOULD use Jinja2 filters instead of tasks to transform data inline:
 
 ```jinja2
 {# Filter a list to only enabled items #}
@@ -130,7 +130,7 @@ When `primary_value` is `0`, Jinja2 evaluates `0 or fallback_value` and returns
 **Any falsy value (`0`, `false`, `""`, `[]`, `{}`) causes `or` to skip to the
 right-hand side**, regardless of whether the left side was intentionally set.
 
-Avoid `var_a or var_b` as a fallback pattern whenever the primary variable can
+You SHOULD avoid `var_a or var_b` as a fallback pattern whenever the primary variable can
 legitimately hold a falsy value.
 
 ### `| default(fallback)` - undefined only
@@ -143,7 +143,7 @@ Substitutes `fallback` only when the variable is **undefined** (raises a Jinja2
 `UndefinedError`). If `primary_value` is defined as `0` or `false`, this
 returns the defined value correctly.
 
-Use this when the variable may not be set at all, but any defined value -
+You SHOULD use this when the variable may not be set at all, but any defined value -
 including falsy ones like `0`, `false`, `""` - should be preserved as-is.
 
 ### `| default(fallback, true)` - undefined or falsy
@@ -159,7 +159,7 @@ condition: fallback is used when the variable is **undefined OR falsy**.
 This behaves identically to `or` for falsy values:
 `0 | default(1, true)` → `1`.
 
-Use this **only** when a falsy value genuinely means "not provided" - for
+You MUST use this **only** when a falsy value genuinely means "not provided" - for
 example, falling back to a non-empty string when a variable is an empty string,
 or to a non-zero value when zero carries no meaningful value in context.
 
@@ -179,13 +179,13 @@ Ansible uses Jinja2's `StrictUndefined` mode by default - referencing an
 undefined variable raises an error immediately rather than silently producing an
 empty string.
 
-- Use `| default(...)` to provide a fallback for variables that may not exist.
-- Use `is defined` / `is undefined` in `when:` conditions to guard task
+- You SHOULD use `| default(...)` to provide a fallback for variables that may not exist.
+- You SHOULD use `is defined` / `is undefined` in `when:` conditions to guard task
   execution:
 
   ```yaml
   when: my_optional_var is defined
   ```
 
-- Do **not** rely on undefined variables silently collapsing to `""` - this
+- You MUST NOT rely on undefined variables silently collapsing to `""` - this
   behaviour is not guaranteed and hides bugs.

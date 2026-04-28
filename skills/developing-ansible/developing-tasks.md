@@ -6,9 +6,9 @@ See [common.md](common.md) for baseline style and project conventions.
 
 ## Task Key Ordering
 
-Every task must follow this key order:
+Every task MUST follow this key order:
 
-1. `name` - required, always first.
+1. `name` - required and MUST appear first.
 2. `when` - if used, immediately after `name`.
 3. `become` - if used, follows `when` (or `name` if no `when`).
 4. Module key - the actual module and its arguments.
@@ -18,23 +18,23 @@ Every task must follow this key order:
 
 ## Module Selection
 
-- Always use fully qualified collection names (FQCN), e.g. `ansible.builtin.copy`, not `copy`.
-- Prefer Ansible modules over `ansible.builtin.shell` / `ansible.builtin.command`.
+- You MUST use fully qualified collection names (FQCN), e.g. `ansible.builtin.copy`, not `copy`.
+- You SHOULD prefer Ansible modules over `ansible.builtin.shell` / `ansible.builtin.command`.
 - When `shell` or `command` is unavoidable:
   - Add `creates` or `removes` to enable idempotency checks.
   - Add `changed_when` and `failed_when` for correct change and error reporting.
-- Use `ansible.builtin.template` for Jinja2-rendered configs.
-- Use `ansible.builtin.copy` for static files.
+- You SHOULD use `ansible.builtin.template` for Jinja2-rendered configs.
+- You SHOULD use `ansible.builtin.copy` for static files.
 
 ## Facts
 
-- Reference facts via `ansible_facts`, e.g. `ansible_facts['os_family']`.
-- Do not use the legacy bare fact names (e.g. `ansible_os_family`).
+- You MUST reference facts via `ansible_facts`, e.g. `ansible_facts['os_family']`.
+- You MUST NOT use the legacy bare fact names (e.g. `ansible_os_family`).
 
 ## Iteration
 
-- Use `loop` instead of any `with_*` construct.
-- Always set a custom loop variable via `loop_control` to avoid variable collisions:
+- You MUST use `loop` instead of any `with_*` construct.
+- You MUST set a custom loop variable via `loop_control` to avoid variable collisions:
 
 ```yaml
 - name: Create user accounts

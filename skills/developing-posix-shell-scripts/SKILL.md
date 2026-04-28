@@ -7,7 +7,7 @@ description: Use when writing, reviewing, or refactoring a POSIX shell script (/
 
 This skill covers any task involving **writing, reviewing, or refactoring** a POSIX-compliant shell script (`/bin/sh`).
 
-**Bash-specific features are forbidden.** See [common.md](common.md) for the full list of bash-isms to avoid.
+**You MUST NOT use Bash-specific features.** See [common.md](common.md) for the full list of bash-isms to avoid.
 
 ## Step 1 - Classify the Script
 
@@ -17,11 +17,11 @@ Audit flags before classifying. Ask for each proposed flag: would a real caller 
 
 **Complex** - any of: ≥ 50 lines, 3+ genuine flags, structured logging, `-h`/help output, resource cleanup, shared across systems/environments.
 
-When in doubt, prefer **Simple**.
+When in doubt, you SHOULD prefer **Simple**.
 
 ## Step 2 - Follow the Reference Document
 
-Always load **[common.md](common.md)** first, then load the matching document:
+You MUST load **[common.md](common.md)** first, then load the matching document:
 
-- **[developing-simple-posix-shell-scripts.md](developing-simple-posix-shell-scripts.md)** - Load when classified as Simple.
-- **[developing-complex-posix-shell-scripts.md](developing-complex-posix-shell-scripts.md)** - Load when classified as Complex. Also load **[reference-code-blocks.md](reference-code-blocks.md)** to compose only the blocks the script actually needs.
+- **[developing-simple-posix-shell-scripts.md](developing-simple-posix-shell-scripts.md)** - You MUST load this when classified as Simple.
+- **[developing-complex-posix-shell-scripts.md](developing-complex-posix-shell-scripts.md)** - You MUST load this when classified as Complex. You SHOULD also load **[reference-code-blocks.md](reference-code-blocks.md)** to compose only the blocks the script actually needs.

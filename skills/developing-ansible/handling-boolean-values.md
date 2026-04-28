@@ -19,8 +19,8 @@ YAML 1.1 (used by Ansible) recognises a fixed set of keywords as native booleans
 These are parsed into Python `True` / `False` **before** Jinja2 ever sees them.
 Any other casing (e.g. `TrUE`, `FaLSe`) is treated as a plain string.
 
-**Rule**: always use `true` / `false` (lowercase) as the canonical form for
-boolean literals in YAML. Never use `yes`/`no` or `on`/`off` - they are valid
+**Rule**: You MUST use lowercase `true` / `false` as the canonical form for
+boolean literals in YAML. You MUST NOT use `yes`/`no` or `on`/`off` - they are valid
 but ambiguous in prose context.
 
 ### 2. `| ansible.builtin.bool` Filter
@@ -65,17 +65,17 @@ first passes the value through `| bool` before evaluating:
 
 ## When to Use Which
 
-| Scenario                                                                  | Recommended                          |
-| ------------------------------------------------------------------------- | ------------------------------------ |
-| Variable declared in vars / defaults as a feature flag                    | YAML native bool: `my_feature: true` |
-| User-supplied string that represents a boolean (`"yes"`, `"true"`, `"1"`) | `\| ansible.builtin.bool` filter                     |
-| `when:` condition on a registered result or a Python object               | `is ansible.builtin.truthy` / `is ansible.builtin.falsy` tests       |
-| Checking whether a list, dict, or arbitrary value is non-empty            | `is ansible.builtin.truthy` test                     |
-| Module parameter that expects a boolean                                   | YAML native bool or `\| ansible.builtin.bool` filter |
+| Scenario                                                                  | Recommended                                                    |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Variable declared in vars / defaults as a feature flag                    | YAML native bool: `my_feature: true`                           |
+| User-supplied string that represents a boolean (`"yes"`, `"true"`, `"1"`) | `\| ansible.builtin.bool` filter                               |
+| `when:` condition on a registered result or a Python object               | `is ansible.builtin.truthy` / `is ansible.builtin.falsy` tests |
+| Checking whether a list, dict, or arbitrary value is non-empty            | `is ansible.builtin.truthy` test                               |
+| Module parameter that expects a boolean                                   | YAML native bool or `\| ansible.builtin.bool` filter           |
 
 ## Concrete Rules
 
-**Declare feature flags with YAML native booleans.**
+**You MUST declare feature flags with YAML native booleans.**
 
 ```yaml
 # defaults/main.yaml
@@ -83,19 +83,19 @@ my_role_enable_tls: true
 my_role_debug_mode: false
 ```
 
-Never use string `"true"` or `"false"` as a default value for a boolean variable.
+You MUST NOT use string `"true"` or `"false"` as a default value for a boolean variable.
 
-**Use `| ansible.builtin.bool` only when the source is a string representation of a boolean.**
+**You MUST use `| ansible.builtin.bool` only when the source is a string representation of a boolean.**
 
 ```yaml
 - name: Enable TLS when the env var says so
   when: lookup('env', 'ENABLE_TLS') | ansible.builtin.bool
 ```
 
-Do not use `| ansible.builtin.bool` on integers other than `0` / `1`, or on lists / dicts - the
+You MUST NOT use `| ansible.builtin.bool` on integers other than `0` / `1`, or on lists / dicts - the
 result will silently be `False`.
 
-**Use `is ansible.builtin.truthy` when the value may be any Python type and you want Python
+**You SHOULD use `is ansible.builtin.truthy` when the value may be any Python type and you want Python
 semantics.**
 
 ```yaml
@@ -103,7 +103,7 @@ semantics.**
   when: command_result.stdout is ansible.builtin.truthy
 ```
 
-**Never compare booleans with `== true` or `== false`.**
+**You MUST NOT compare booleans with `== true` or `== false`.**
 
 ```yaml
 # Bad
@@ -115,7 +115,7 @@ when: my_flag
 when: not my_flag
 ```
 
-**Avoid `yes` / `no` and `on` / `off` as boolean literals in task parameters.**
+**You SHOULD avoid `yes` / `no` and `on` / `off` as boolean literals in task parameters.**
 They work but are visually ambiguous:
 
 ```yaml

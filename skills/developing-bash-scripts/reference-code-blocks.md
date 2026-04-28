@@ -1,6 +1,6 @@
 # Reference Code Blocks
 
-Reusable code blocks for complex Bash scripts. Pick and compose only the sections a script actually needs - do not copy everything blindly.
+Reusable code blocks for complex Bash scripts. You SHOULD pick and compose only the sections a script actually needs, and you MUST NOT copy everything blindly.
 
 See [developing-complex-bash-scripts.md](developing-complex-bash-scripts.md) for the composition guide.
 
@@ -13,7 +13,7 @@ SCRIPT_NAME="$(basename "${SCRIPT_FILE}")"
 
 ## 2. Logging Subsystem
 
-Use this block when the script needs more than simple `echo` output. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block - omit them only if the script does not expose `--log-level` / `--log-format` flags.
+You SHOULD use this block when the script needs more than simple `echo` output. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block - you MAY omit them only if the script does not expose `--log-level` / `--log-format` flags.
 
 ```bash
 # Logging configuration
@@ -87,7 +87,7 @@ set_log_format() {
 
 ## 3. Dependency Check
 
-Include this when the script relies on external commands that may not be present.
+You SHOULD include this when the script relies on external commands that may not be present.
 
 ```bash
 require_command() {
@@ -108,7 +108,7 @@ require_command() {
 
 ## 4. Cleanup Handler
 
-Include this when the script creates temporary files or resources that must be cleaned up on exit.
+You SHOULD include this when the script creates temporary files or resources that must be cleaned up on exit.
 
 ```bash
 cleanup() {
@@ -122,9 +122,9 @@ trap cleanup EXIT INT TERM
 
 ## 5. Usage / Help
 
-Adapt the OPTIONS and EXAMPLES sections to the actual flags of the script.
+You MUST adapt the OPTIONS and EXAMPLES sections to the actual flags of the script.
 
-**Argument ordering convention**: in the OPTIONS block, list template flags first, then script-specific flags. This mirrors the ordering required in `longoptions` and the `case` statement (see Section 6), keeping all three in sync.
+**Argument ordering convention**: in the OPTIONS block, template flags MUST appear first, then script-specific flags. This mirrors the ordering required in `longoptions` and the `case` statement (see Section 6), keeping all three in sync.
 
 ```bash
 usage() {
@@ -157,9 +157,9 @@ EOF
 
 ## 6. Argument Parsing
 
-Use `getopt` (not `getopts`) to support long options. Adjust `options`/`longoptions` to match the script's flags.
+You MUST use `getopt`, not `getopts`, to support long options. You MUST adjust `options`/`longoptions` to match the script's flags.
 
-**Argument ordering convention**: infrastructure/template flags come first, script-specific flags come after - in both the `longoptions` string and the `case` statement. This keeps the interface predictable and the `case` block easy to scan.
+**Argument ordering convention**: infrastructure/template flags MUST come first and script-specific flags MUST come after - in both the `longoptions` string and the `case` statement. This keeps the interface predictable and the `case` block easy to scan.
 
 ```
 longoptions="help,log-level:,log-format:,<script-flag-1>:,<script-flag-2>:"

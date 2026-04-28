@@ -7,7 +7,7 @@ description: Use when writing, reviewing, or refactoring AGENTS.md, writing an a
 
 Analyze the repository and write (or overwrite) an `AGENTS.md` file in the project
 root. The file is a concise, prescriptive orientation guide for AI coding agents.
-It must not duplicate `README.md` - link there for anything already covered.
+It MUST NOT duplicate `README.md` - link there for anything already covered.
 
 ## Workflow
 
@@ -15,7 +15,7 @@ It must not duplicate `README.md` - link there for anything already covered.
    and any existing config files to infer the tech stack and tooling.
 2. Identify the environment manager, test runner, linter, and build tool in use.
 3. Write `AGENTS.md` following the structure below.
-4. Aim for **under 80 lines** total.
+4. You SHOULD keep the file **under 80 lines** total.
 
 ## Required sections
 
@@ -27,14 +27,14 @@ State the project's purpose and technology stack category. Add a pointer to
 ### 2. Environment & Tooling - CRITICAL
 
 Identify the exact tool that manages the environment and write explicit
-**DO / DO NOT** rules covering:
+**MUST / MUST NOT** rules covering:
 
 - The exact command to run the test suite
 - How to install/sync dependencies
 - How to lint and format
 - Which alternatives are explicitly forbidden
 
-Mark this section `- CRITICAL` so agents cannot miss it.
+You MUST mark this section `- CRITICAL` so agents cannot miss it.
 
 ### 3. Conventions (non-obvious only)
 
@@ -54,7 +54,10 @@ One shell code block with one-liner comments for the 4–6 most frequent tasks
 
 ## Style rules
 
-- Write in **English**.
-- Be prescriptive ("ALWAYS", "NEVER", "Do NOT"), not descriptive.
-- Omit content already in `README.md` - link there instead.
-- Prefer bullet lists and short paragraphs over prose.
+- You MUST write in **English**.
+- You MUST be prescriptive and use RFC 2119 keywords such as `MUST`, `SHOULD`, and `MUST NOT` for critical constraints.
+- You MUST omit content already in `README.md` and link there instead.
+- You SHOULD prefer bullet lists and short paragraphs over prose.
+- Output SHOULD NOT use emoji, em dashes, or excess bold/italic text.
+- Output SHOULD be plain Markdown (no HTML) and use only ASCII punctuation.
+- When repository facts cannot be determined from the repo contents or user input, output MUST NOT guess; instead state "Insufficient information".

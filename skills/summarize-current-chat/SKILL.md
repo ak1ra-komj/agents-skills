@@ -14,14 +14,14 @@ is meant to be copied and saved manually by the user.
 1. Review the full conversation to identify all changes made, problems solved,
    and decisions taken.
 2. Use today's date as shown in the conversation context, or state the date as
-   "unknown" if it cannot be determined - never guess or fabricate it.
+   "unknown" if it cannot be determined - you MUST NOT guess or fabricate it.
 3. Derive a short English session title from the session content.
 4. Produce the full Markdown document inline in your response.
 
 ## Output format
 
-Output a single fenced Markdown code block (` ```markdown `) containing the
-complete document, so the user can copy it as-is.
+You MUST output a single fenced Markdown code block (` ```markdown `)
+containing the complete document, so the user can copy it as-is.
 
 ## Document structure
 
@@ -42,7 +42,7 @@ include:
 - The file path (as a relative path from the project root, if known)
 - A one-line description of what changed and why
 
-If no files were changed, write: "No files were changed in this session."
+If no files were changed, you MUST write: "No files were changed in this session."
 
 ### H2 - Notes
 
@@ -55,8 +55,11 @@ Distil the most reusable or noteworthy insights from the session, such as:
 
 ## Style rules
 
-- Write in **English** throughout.
-- Keep each section concise - prefer bullet lists over prose.
-- The "Notes" section is the most valuable part; do not leave it empty.
-- Do not include a "Git commits" section - terminal access is unavailable in
+- You MUST write in **English** throughout.
+- You SHOULD keep each section concise and prefer bullet lists over prose.
+- The "Notes" section is high-value and MUST NOT be empty.
+- You MUST NOT include a "Git commits" section - terminal access is unavailable in
   web chat mode; omit it entirely rather than leaving it empty or guessing.
+- Output SHOULD NOT use emoji, em dashes, or excess bold/italic text.
+- Output SHOULD be plain Markdown (no HTML) and use only ASCII punctuation.
+- When uncertain, output MUST NOT guess; instead state "Insufficient information".

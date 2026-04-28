@@ -3,10 +3,11 @@ This repository uses English for all Markdown document body text.
 If any prior instructions conflict with this, follow this rule for Markdown content.
 </INSTRUCTIONS>
 
-## Navigation Notes
+## RFC 2119 keywords
 
-- The left sidebar mirrors the skill structure and topic references.
-- References are intentionally small and focused to keep context tight.
+- Use RFC 2119 keywords selectively for high-signal constraints in agent-facing instructions.
+- Output SHOULD NOT use emoji, em dashes, or excess bold/italic text.
+- Output SHOULD be plain Markdown (no HTML) and use only ASCII punctuation.
 
 ## Conventions
 
@@ -14,3 +15,4 @@ If any prior instructions conflict with this, follow this rule for Markdown cont
 - Keep guidance actionable and scoped to real engineering decisions.
 - Ensure `description` fields use the form **"Use when [condition]"**
   - This pattern applies equally to skill descriptions and reference document descriptions.
+- When uncertain, output MUST NOT guess; instead state "Insufficient information".

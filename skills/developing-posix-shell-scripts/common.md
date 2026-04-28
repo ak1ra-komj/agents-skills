@@ -2,7 +2,7 @@
 
 Applies to both simple and complex POSIX shell scripts.
 
-**These scripts target `/bin/sh`. Bash-specific features are forbidden.**
+**These scripts target `/bin/sh`. You MUST NOT use Bash-specific features.**
 
 ## Shebang & Safety Modes
 
@@ -17,33 +17,33 @@ set -u
 
 - `set -e`: exit immediately on error.
 - `set -u`: exit on reference to an unset variable.
-- `set -o pipefail` is **not** POSIX - do not use it.
+- `set -o pipefail` is **not** POSIX - you MUST NOT use it.
 
 ## Tooling
 
 - All scripts MUST pass `shellcheck --shell=sh` without warnings.
 - Format with `shfmt -ln posix` before considering the script done.
 
-## POSIX Compliance - Do NOT Use These Bash-isms
+## POSIX Compliance - MUST NOT Use These Bash-isms
 
-| Bash feature                  | POSIX replacement                                  |
-| ----------------------------- | -------------------------------------------------- |
-| `[[ ... ]]`                   | `[ ... ]`                                          |
-| `local var`                   | prefix with `_funcname_var` (see Variables)        |
-| `declare -a arr`              | not available - restructure logic                  |
-| `source file`                 | `. file`                                           |
-| `function f { }`              | `f() { }`                                          |
-| `(( expr ))`                  | `$(( expr ))`                                      |
-| `$'...'` strings              | `printf`                                           |
-| `<<<` here-strings            | `printf ... \|` or temp file                       |
-| `<(cmd)` process substitution | temp file or pipe                                  |
-| `echo -e`                     | `printf`                                           |
+| Bash feature                  | POSIX replacement                           |
+| ----------------------------- | ------------------------------------------- |
+| `[[ ... ]]`                   | `[ ... ]`                                   |
+| `local var`                   | prefix with `_funcname_var` (see Variables) |
+| `declare -a arr`              | not available - restructure logic           |
+| `source file`                 | `. file`                                    |
+| `function f { }`              | `f() { }`                                   |
+| `(( expr ))`                  | `$(( expr ))`                               |
+| `$'...'` strings              | `printf`                                    |
+| `<<<` here-strings            | `printf ... \|` or temp file                |
+| `<(cmd)` process substitution | temp file or pipe                           |
+| `echo -e`                     | `printf`                                    |
 
 ## Logic & Control Flow
 
-- Conditionals: always quote variables in tests: `[ "${var}" = "value" ]`.
-- Use `case` for pattern matching or multiple-branch decisions.
-- Prefer guard clauses to keep nesting shallow:
+- Conditionals MUST quote variables in tests: `[ "${var}" = "value" ]`.
+- You SHOULD use `case` for pattern matching or multiple-branch decisions.
+- You SHOULD prefer guard clauses to keep nesting shallow:
 
   ```sh
   # Bad
@@ -64,8 +64,8 @@ set -u
 
 ## Variables & Quoting
 
-- Always use `${var}` (braces) for variable expansion.
-- Always quote expansions: `"${var}"`.
+- You MUST use `${var}` (braces) for variable expansion.
+- You MUST quote expansions: `"${var}"`.
 - POSIX `sh` has no `local` keyword. Simulate function-local variables by prefixing with the function name: `_log_message_color`, `_parse_args_opt`, etc. Unset them at the end of the function.
-- Use `$(...)` for command substitution, never backticks.
-- Prefer `printf` over `echo` for reliable, portable output.
+- You MUST use `$(...)` for command substitution and MUST NOT use backticks.
+- You SHOULD prefer `printf` over `echo` for reliable, portable output.

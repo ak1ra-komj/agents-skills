@@ -1,6 +1,6 @@
 # Reference Code Blocks
 
-Reusable code blocks for complex POSIX shell scripts. Pick and compose only the sections a script actually needs - do not copy everything blindly.
+Reusable code blocks for complex POSIX shell scripts. You SHOULD pick and compose only the sections a script actually needs, and you MUST NOT copy everything blindly.
 
 See [developing-complex-posix-shell-scripts.md](developing-complex-posix-shell-scripts.md) for the composition guide.
 
@@ -12,7 +12,7 @@ SCRIPT_NAME="$(basename "${0}")"
 
 ## 2. Logging Subsystem
 
-Use this block when the script needs more than simple `printf` output. Because POSIX `sh` has no associative arrays, level priorities are resolved via a helper function. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block - omit them only if the script does not expose `-l` / `-f` flags.
+You SHOULD use this block when the script needs more than simple `printf` output. Because POSIX `sh` has no associative arrays, level priorities are resolved via a helper function. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block - you MAY omit them only if the script does not expose `-l` / `-f` flags.
 
 ```sh
 # Logging configuration
@@ -103,7 +103,7 @@ set_log_format() {
 
 ## 3. Dependency Check
 
-Include this when the script relies on external commands that may not be present.
+You SHOULD include this when the script relies on external commands that may not be present.
 
 ```sh
 require_command() {
@@ -125,7 +125,7 @@ require_command() {
 
 ## 4. Cleanup Handler
 
-Include this when the script creates temporary files or resources that must be cleaned up on exit.
+You SHOULD include this when the script creates temporary files or resources that must be cleaned up on exit.
 
 ```sh
 cleanup() {
@@ -139,9 +139,9 @@ trap cleanup EXIT INT TERM
 
 ## 5. Usage / Help
 
-Adapt the OPTIONS and EXAMPLES sections to the actual flags of the script.
+You MUST adapt the OPTIONS and EXAMPLES sections to the actual flags of the script.
 
-**Argument ordering convention**: list template flags first (`-h`, `-l`, `-f`), then script-specific flags. This mirrors the ordering required in the `getopts` optstring and `case` statement (see Section 6), keeping all three in sync.
+**Argument ordering convention**: template flags MUST appear first (`-h`, `-l`, `-f`), then script-specific flags. This mirrors the ordering required in the `getopts` optstring and `case` statement (see Section 6), keeping all three in sync.
 
 ```sh
 usage() {
@@ -174,9 +174,9 @@ EOF
 
 ## 6. Argument Parsing
 
-Use `getopts` (POSIX built-in, short options only). Adjust the optstring to match the script's flags.
+You MUST use `getopts` (POSIX built-in, short options only). You MUST adjust the optstring to match the script's flags.
 
-**Argument ordering convention**: template flags come first in the optstring and `case` statement, script-specific flags come after. This keeps `usage`, `getopts` optstring, and `case` in sync.
+**Argument ordering convention**: template flags MUST come first in the optstring and `case` statement, and script-specific flags MUST come after. This keeps `usage`, `getopts` optstring, and `case` in sync.
 
 ```sh
 parse_args() {
