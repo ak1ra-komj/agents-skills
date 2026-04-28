@@ -6,7 +6,7 @@ Split monolithic `developing-bash-scripts` and `developing-posix-shell-scripts` 
 
 Both `developing-bash-scripts` and `developing-posix-shell-scripts` previously contained a single `SKILL.md` backed by a `template.sh`. Because the template was always present, agents would apply full boilerplate (logging subsystem, `getopt`/`getopts` parsing, `--help`, cleanup handler) even to trivial scripts, producing hundreds of lines where a dozen would suffice.
 
-The fix mirrors a pattern used in the bash skill refactoring: each skill family now has three components — an **entry-point** skill that classifies the request, a **simple** sub-skill focused on brevity, and a **complex** sub-skill that provides composable reference code blocks instead of a monolithic template. The entry-point also includes an explicit **refactoring workflow** that requires the agent to re-evaluate a script's actual functional complexity before choosing a classification, preventing existing over-engineered scripts from being preserved or made worse.
+The fix mirrors a pattern used in the bash skill refactoring: each skill family now has three components - an **entry-point** skill that classifies the request, a **simple** sub-skill focused on brevity, and a **complex** sub-skill that provides composable reference code blocks instead of a monolithic template. The entry-point also includes an explicit **refactoring workflow** that requires the agent to re-evaluate a script's actual functional complexity before choosing a classification, preventing existing over-engineered scripts from being preserved or made worse.
 
 In addition, argument ordering conventions were added to the complex sub-skills to keep `usage`, `longoptions`/optstring, and `case` statement in sync (template flags first, script-specific flags after).
 
@@ -14,20 +14,20 @@ A further refinement was made to the classification criteria: simply counting na
 
 ## Changed files
 
-- `skills/developing-bash-scripts/SKILL.md` — rewritten as classification entry point with classification table and refactoring workflow
-- `skills/developing-bash-scripts/template.sh` — deleted; content inlined as composable code blocks
-- `skills/developing-simple-bash-scripts/SKILL.md` — new: concise Bash script guidelines, minimal example, upgrade checklist
-- `skills/developing-complex-bash-scripts/SKILL.md` — new: 8 composable reference code blocks, argument ordering convention in `usage` / `longoptions` / `case`
-- `skills/developing-posix-shell-scripts/SKILL.md` — rewritten as classification entry point (mirrors Bash entry point)
-- `skills/developing-posix-shell-scripts/template.sh` — deleted; content inlined as composable code blocks
-- `skills/developing-simple-posix-shell-scripts/SKILL.md` — new: concise POSIX sh guidelines, POSIX compliance table, minimal example, upgrade checklist
-- `skills/developing-complex-posix-shell-scripts/SKILL.md` — new: 8 composable reference code blocks adapted for POSIX (no `local`, no associative arrays, `_funcname_var` scoping convention)
-- `README.md` — updated skill table to list all six skills
+- `skills/developing-bash-scripts/SKILL.md` - rewritten as classification entry point with classification table and refactoring workflow
+- `skills/developing-bash-scripts/template.sh` - deleted; content inlined as composable code blocks
+- `skills/developing-simple-bash-scripts/SKILL.md` - new: concise Bash script guidelines, minimal example, upgrade checklist
+- `skills/developing-complex-bash-scripts/SKILL.md` - new: 8 composable reference code blocks, argument ordering convention in `usage` / `longoptions` / `case`
+- `skills/developing-posix-shell-scripts/SKILL.md` - rewritten as classification entry point (mirrors Bash entry point)
+- `skills/developing-posix-shell-scripts/template.sh` - deleted; content inlined as composable code blocks
+- `skills/developing-simple-posix-shell-scripts/SKILL.md` - new: concise POSIX sh guidelines, POSIX compliance table, minimal example, upgrade checklist
+- `skills/developing-complex-posix-shell-scripts/SKILL.md` - new: 8 composable reference code blocks adapted for POSIX (no `local`, no associative arrays, `_funcname_var` scoping convention)
+- `README.md` - updated skill table to list all six skills
 
 Additional changes after initial refactor:
 
-- `skills/developing-bash-scripts/SKILL.md` — added "Counting flags correctly" section before classification table; refactoring workflow extended with flag audit step (step 3)
-- `skills/developing-posix-shell-scripts/SKILL.md` — same additions as above
+- `skills/developing-bash-scripts/SKILL.md` - added "Counting flags correctly" section before classification table; refactoring workflow extended with flag audit step (step 3)
+- `skills/developing-posix-shell-scripts/SKILL.md` - same additions as above
 
 ## Git commits
 

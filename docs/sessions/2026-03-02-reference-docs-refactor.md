@@ -4,7 +4,7 @@ Replace the entry-point + sub-skill pattern (which caused content duplication) w
 
 ## Summary
 
-The previous refactor (2026-03-01) split each shell skill family into three sub-skills (entry point, simple, complex). While this prevented over-engineering of simple scripts, the three separate `SKILL.md` files duplicated significant content — the POSIX compliance table, shebang/safety modes, logic guidelines, and quoting rules appeared in both the simple and complex sub-skills.
+The previous refactor (2026-03-01) split each shell skill family into three sub-skills (entry point, simple, complex). While this prevented over-engineering of simple scripts, the three separate `SKILL.md` files duplicated significant content - the POSIX compliance table, shebang/safety modes, logic guidelines, and quoting rules appeared in both the simple and complex sub-skills.
 
 This session replaced the sub-skill pattern with **reference documents** inside the same skill directory:
 
@@ -34,27 +34,27 @@ Additional refinements made during the session:
 
 ### developing-bash-scripts
 
-- `SKILL.md` — removed Special Case section; refactoring guidance folded into Step 1 flag audit note; added POSIX downgrade check after Simple classification
-- `common.md` — new: shared baseline; added bash-specific features (arrays, process substitution, here-strings) to Logic section
-- `developing-simple-bash-scripts.md` — new: simple-specific guidance, minimal example, upgrade checklist; note clarifying bash features are appropriate
-- `developing-complex-bash-scripts.md` — new: intro naming the three structural additions; composition guide referencing reference-code-blocks.md
-- `reference-code-blocks.md` — adapted from former complex SKILL.md; removed all `---` dividers; merged Section 3 (Log Level/Format Setters) into Section 2 (Logging Subsystem); renumbered to 7 sections
-- `skills/developing-simple-bash-scripts/SKILL.md` — deleted (directory removed)
-- `skills/developing-complex-bash-scripts/SKILL.md` — deleted (directory removed; content migrated)
+- `SKILL.md` - removed Special Case section; refactoring guidance folded into Step 1 flag audit note; added POSIX downgrade check after Simple classification
+- `common.md` - new: shared baseline; added bash-specific features (arrays, process substitution, here-strings) to Logic section
+- `developing-simple-bash-scripts.md` - new: simple-specific guidance, minimal example, upgrade checklist; note clarifying bash features are appropriate
+- `developing-complex-bash-scripts.md` - new: intro naming the three structural additions; composition guide referencing reference-code-blocks.md
+- `reference-code-blocks.md` - adapted from former complex SKILL.md; removed all `---` dividers; merged Section 3 (Log Level/Format Setters) into Section 2 (Logging Subsystem); renumbered to 7 sections
+- `skills/developing-simple-bash-scripts/SKILL.md` - deleted (directory removed)
+- `skills/developing-complex-bash-scripts/SKILL.md` - deleted (directory removed; content migrated)
 
 ### developing-posix-shell-scripts
 
-- `SKILL.md` — rewritten to match bash entry-point structure; description and opening paragraph explicitly forbid Bash features
-- `common.md` — new: shared baseline including full POSIX compliance table (bash-isms and their replacements)
-- `developing-simple-posix-shell-scripts.md` — new: mirrors bash simple doc, adapted for `/bin/sh`
-- `developing-complex-posix-shell-scripts.md` — new: mirrors bash complex doc, adapted for `/bin/sh`
-- `reference-code-blocks.md` — adapted from former complex SKILL.md; merged Section 3 into Section 2; renumbered to 7 sections; all `---` dividers removed
-- `skills/developing-simple-posix-shell-scripts/SKILL.md` — deleted (directory removed)
-- `skills/developing-complex-posix-shell-scripts/SKILL.md` — deleted (directory removed; content migrated)
+- `SKILL.md` - rewritten to match bash entry-point structure; description and opening paragraph explicitly forbid Bash features
+- `common.md` - new: shared baseline including full POSIX compliance table (bash-isms and their replacements)
+- `developing-simple-posix-shell-scripts.md` - new: mirrors bash simple doc, adapted for `/bin/sh`
+- `developing-complex-posix-shell-scripts.md` - new: mirrors bash complex doc, adapted for `/bin/sh`
+- `reference-code-blocks.md` - adapted from former complex SKILL.md; merged Section 3 into Section 2; renumbered to 7 sections; all `---` dividers removed
+- `skills/developing-simple-posix-shell-scripts/SKILL.md` - deleted (directory removed)
+- `skills/developing-complex-posix-shell-scripts/SKILL.md` - deleted (directory removed; content migrated)
 
 ### Other
 
-- `README.md` — removed sub-skill rows; updated descriptions for `developing-bash-scripts` and `developing-posix-shell-scripts`
+- `README.md` - removed sub-skill rows; updated descriptions for `developing-bash-scripts` and `developing-posix-shell-scripts`
 
 ## Git commits
 

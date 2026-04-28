@@ -9,13 +9,13 @@ Add a new version entry to `CHANGELOG.md`, or restructure the entire file, follo
 the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format and
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Workflow — new version entry
+## Workflow - new version entry
 
 1. Read `CHANGELOG.md` to identify the **last released version** and its date.
 2. Run `git log --oneline <last-tag>..HEAD` to list all commits since that tag.
    If no tag exists for the last version, use `git log --oneline` and filter
    manually.
-3. Run `date +%Y-%m-%d` to get today's release date — never hardcode it.
+3. Run `date +%Y-%m-%d` to get today's release date - never hardcode it.
 4. Determine the new version number (ask the user if not specified):
    - **MAJOR** bump: breaking changes or major redesign.
    - **MINOR** bump: new features, backward-compatible.
@@ -25,7 +25,7 @@ the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format and
    previous latest version).
 7. Do NOT remove or alter any existing version entries.
 
-## Workflow — restructure entire CHANGELOG.md
+## Workflow - restructure entire CHANGELOG.md
 
 1. Read the full `CHANGELOG.md` and note all existing version blocks.
 2. Rewrite the file preserving all versions and dates but enforcing:
@@ -87,7 +87,7 @@ multiple sections are present:
 - `remove:` / `delete` / `drop` → **Removed**
 - `deprecate:` → **Deprecated**
 - `security:` / `cve` / `vuln` → **Security**
-- `docs:` / `chore:` / `ci:` / `test:` — omit unless user-facing.
+- `docs:` / `chore:` / `ci:` / `test:` - omit unless user-facing.
 
 When a commit message is ambiguous, infer intent from the diff or file name.
 
@@ -96,6 +96,6 @@ When a commit message is ambiguous, infer intent from the diff or file name.
 - Write **in English** throughout.
 - Each bullet: capital letter, present tense, no trailing period.
   Example: `Add retry logic for HTTP requests`
-- Keep bullets concise — one line per entry where possible.
+- Keep bullets concise - one line per entry where possible.
 - Wrap code identifiers, file paths, and module names in backticks.
-- Never guess dates — always use `date +%Y-%m-%d`.
+- Never guess dates - always use `date +%Y-%m-%d`.

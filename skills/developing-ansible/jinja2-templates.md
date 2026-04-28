@@ -2,7 +2,7 @@
 
 Ansible uses Jinja2 for both inline expressions in playbooks/tasks and for
 `ansible.builtin.template`-rendered config files. The two contexts are different
-but share the same engine — most of the pitfalls below apply to both.
+but share the same engine - most of the pitfalls below apply to both.
 
 ## Whitespace Control
 
@@ -37,7 +37,7 @@ Declare intermediate values to avoid repeating complex expressions:
 bind {{ listen_addr }}:{{ listen_port }};
 ```
 
-Avoid deep-nesting filter chains inline — extract them into named variables for
+Avoid deep-nesting filter chains inline - extract them into named variables for
 readability and easier review.
 
 ## Macros for Repeated Config Blocks
@@ -126,14 +126,14 @@ list that means "no items"). Using `or` as a fallback:
 ```
 
 When `primary_value` is `0`, Jinja2 evaluates `0 or fallback_value` and returns
-`fallback_value` — silently ignoring the explicitly configured value.
+`fallback_value` - silently ignoring the explicitly configured value.
 **Any falsy value (`0`, `false`, `""`, `[]`, `{}`) causes `or` to skip to the
 right-hand side**, regardless of whether the left side was intentionally set.
 
 Avoid `var_a or var_b` as a fallback pattern whenever the primary variable can
 legitimately hold a falsy value.
 
-### `| default(fallback)` — undefined only
+### `| default(fallback)` - undefined only
 
 ```jinja2
 {{ primary_value | default(fallback_value) }}
@@ -143,10 +143,10 @@ Substitutes `fallback` only when the variable is **undefined** (raises a Jinja2
 `UndefinedError`). If `primary_value` is defined as `0` or `false`, this
 returns the defined value correctly.
 
-Use this when the variable may not be set at all, but any defined value —
-including falsy ones like `0`, `false`, `""` — should be preserved as-is.
+Use this when the variable may not be set at all, but any defined value -
+including falsy ones like `0`, `false`, `""` - should be preserved as-is.
 
-### `| default(fallback, true)` — undefined or falsy
+### `| default(fallback, true)` - undefined or falsy
 
 ```jinja2
 {{ primary_value | default(fallback_value, true) }}
@@ -159,7 +159,7 @@ condition: fallback is used when the variable is **undefined OR falsy**.
 This behaves identically to `or` for falsy values:
 `0 | default(1, true)` → `1`.
 
-Use this **only** when a falsy value genuinely means "not provided" — for
+Use this **only** when a falsy value genuinely means "not provided" - for
 example, falling back to a non-empty string when a variable is an empty string,
 or to a non-zero value when zero carries no meaningful value in context.
 
@@ -175,7 +175,7 @@ or to a non-zero value when zero carries no meaningful value in context.
 
 ## Undefined Variable Behaviour
 
-Ansible uses Jinja2's `StrictUndefined` mode by default — referencing an
+Ansible uses Jinja2's `StrictUndefined` mode by default - referencing an
 undefined variable raises an error immediately rather than silently producing an
 empty string.
 
@@ -187,5 +187,5 @@ empty string.
   when: my_optional_var is defined
   ```
 
-- Do **not** rely on undefined variables silently collapsing to `""` — this
+- Do **not** rely on undefined variables silently collapsing to `""` - this
   behaviour is not guaranteed and hides bugs.

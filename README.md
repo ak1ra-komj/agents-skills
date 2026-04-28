@@ -18,7 +18,7 @@ npx skills add -g ak1ra-komj/agents-skills
 
 ## Authoring Skills
 
-When writing a new skill or reference document, ensure the `description` field uses the form **"Use when [condition]"** — a precise, trigger-oriented phrase that tells the agent exactly when to load the file. Vague descriptions cause skills to be skipped or misapplied.
+When writing a new skill or reference document, ensure the `description` field uses the form **"Use when [condition]"** - a precise, trigger-oriented phrase that tells the agent exactly when to load the file. Vague descriptions cause skills to be skipped or misapplied.
 
 ## Available Skills
 

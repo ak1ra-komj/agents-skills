@@ -17,7 +17,7 @@ See [common.md](common.md) for baseline requirements (shebang, safety modes, too
 
 - `errtrace` is not required.
 - Positional arguments (`"${1}"`, `"${2}"`) are fine; use `:?` for mandatory arg validation.
-- Bash-specific features such as arrays, process substitution, and here-strings are perfectly appropriate whenever they simplify the logic — see [common.md](common.md).
+- Bash-specific features such as arrays, process substitution, and here-strings are perfectly appropriate whenever they simplify the logic - see [common.md](common.md).
 
 ## Minimal Example
 

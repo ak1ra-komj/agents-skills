@@ -3,7 +3,7 @@
 Canonical patterns to compose from when writing Ansible code.
 Only include blocks that the playbook or role actually needs.
 
-## Error Handling — block/rescue/always
+## Error Handling - block/rescue/always
 
 Use this pattern for tasks that may fail and require recovery or guaranteed cleanup:
 

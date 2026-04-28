@@ -15,7 +15,7 @@ Applies to all Ansible files: playbooks, roles, tasks, variable files, and templ
 
 - Do not hard-code hosts or environment-specific values in playbooks or roles.
 - Use `group_vars/` and `host_vars/` for inventory-bound variables.
-- Store secrets exclusively in Ansible Vault — never in plaintext variable files.
+- Store secrets exclusively in Ansible Vault - never in plaintext variable files.
 
 ## Validation
 

@@ -8,13 +8,13 @@ See [common.md](common.md) for baseline style and project conventions.
 
 Every task must follow this key order:
 
-1. `name` — required, always first.
-2. `when` — if used, immediately after `name`.
-3. `become` — if used, follows `when` (or `name` if no `when`).
-4. Module key — the actual module and its arguments.
-5. `loop` / `loop_control` — if used, after the module.
-6. `notify` — if used, near the end.
-7. `changed_when` / `failed_when` — if used, last.
+1. `name` - required, always first.
+2. `when` - if used, immediately after `name`.
+3. `become` - if used, follows `when` (or `name` if no `when`).
+4. Module key - the actual module and its arguments.
+5. `loop` / `loop_control` - if used, after the module.
+6. `notify` - if used, near the end.
+7. `changed_when` / `failed_when` - if used, last.
 
 ## Module Selection
 

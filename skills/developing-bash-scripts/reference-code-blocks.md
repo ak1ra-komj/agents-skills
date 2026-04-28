@@ -1,6 +1,6 @@
 # Reference Code Blocks
 
-Reusable code blocks for complex Bash scripts. Pick and compose only the sections a script actually needs — do not copy everything blindly.
+Reusable code blocks for complex Bash scripts. Pick and compose only the sections a script actually needs - do not copy everything blindly.
 
 See [developing-complex-bash-scripts.md](developing-complex-bash-scripts.md) for the composition guide.
 
@@ -13,7 +13,7 @@ SCRIPT_NAME="$(basename "${SCRIPT_FILE}")"
 
 ## 2. Logging Subsystem
 
-Use this block when the script needs more than simple `echo` output. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block — omit them only if the script does not expose `--log-level` / `--log-format` flags.
+Use this block when the script needs more than simple `echo` output. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block - omit them only if the script does not expose `--log-level` / `--log-format` flags.
 
 ```bash
 # Logging configuration
@@ -159,7 +159,7 @@ EOF
 
 Use `getopt` (not `getopts`) to support long options. Adjust `options`/`longoptions` to match the script's flags.
 
-**Argument ordering convention**: infrastructure/template flags come first, script-specific flags come after — in both the `longoptions` string and the `case` statement. This keeps the interface predictable and the `case` block easy to scan.
+**Argument ordering convention**: infrastructure/template flags come first, script-specific flags come after - in both the `longoptions` string and the `case` statement. This keeps the interface predictable and the `case` block easy to scan.
 
 ```
 longoptions="help,log-level:,log-format:,<script-flag-1>:,<script-flag-2>:"

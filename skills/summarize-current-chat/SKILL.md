@@ -1,6 +1,6 @@
 ---
 name: summarize-current-chat
-description: Use when the user asks to summarize this session or chat — and the conversation is happening in a web chat interface (e.g. ChatGPT Pro) where no file system or terminal access is available.
+description: Use when the user asks to summarize this session or chat - and the conversation is happening in a web chat interface (e.g. ChatGPT Pro) where no file system or terminal access is available.
 ---
 
 # summarize-current-chat
@@ -14,7 +14,7 @@ is meant to be copied and saved manually by the user.
 1. Review the full conversation to identify all changes made, problems solved,
    and decisions taken.
 2. Use today's date as shown in the conversation context, or state the date as
-   "unknown" if it cannot be determined — never guess or fabricate it.
+   "unknown" if it cannot be determined - never guess or fabricate it.
 3. Derive a short English session title from the session content.
 4. Produce the full Markdown document inline in your response.
 
@@ -25,16 +25,16 @@ complete document, so the user can copy it as-is.
 
 ## Document structure
 
-### H1 — Session title
+### H1 - Session title
 
 One sentence describing what the session accomplished.
 
-### H2 — Summary
+### H2 - Summary
 
 One paragraph covering: background / motivation, the problem or request,
 the approach taken, and the outcome.
 
-### H2 — Changed files
+### H2 - Changed files
 
 A list of every file discussed or modified during the session. For each file
 include:
@@ -44,7 +44,7 @@ include:
 
 If no files were changed, write: "No files were changed in this session."
 
-### H2 — Notes
+### H2 - Notes
 
 Distil the most reusable or noteworthy insights from the session, such as:
 
@@ -56,7 +56,7 @@ Distil the most reusable or noteworthy insights from the session, such as:
 ## Style rules
 
 - Write in **English** throughout.
-- Keep each section concise — prefer bullet lists over prose.
+- Keep each section concise - prefer bullet lists over prose.
 - The "Notes" section is the most valuable part; do not leave it empty.
-- Do not include a "Git commits" section — terminal access is unavailable in
+- Do not include a "Git commits" section - terminal access is unavailable in
   web chat mode; omit it entirely rather than leaving it empty or guessing.

@@ -54,7 +54,7 @@ Do NOT add `set -o pipefail` globally unless the script has critical pipe chains
 ## Variables & Quoting
 
 - Always use `${var}` (braces) for variable expansion.
-- Always quote expansions: `"${var}"` — prevents word-splitting and glob expansion.
+- Always quote expansions: `"${var}"` - prevents word-splitting and glob expansion.
 - Use descriptive variable names; avoid magic numbers.
 
 ## Output

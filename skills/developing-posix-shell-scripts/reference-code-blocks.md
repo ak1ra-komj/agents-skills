@@ -1,6 +1,6 @@
 # Reference Code Blocks
 
-Reusable code blocks for complex POSIX shell scripts. Pick and compose only the sections a script actually needs — do not copy everything blindly.
+Reusable code blocks for complex POSIX shell scripts. Pick and compose only the sections a script actually needs - do not copy everything blindly.
 
 See [developing-complex-posix-shell-scripts.md](developing-complex-posix-shell-scripts.md) for the composition guide.
 
@@ -12,7 +12,7 @@ SCRIPT_NAME="$(basename "${0}")"
 
 ## 2. Logging Subsystem
 
-Use this block when the script needs more than simple `printf` output. Because POSIX `sh` has no associative arrays, level priorities are resolved via a helper function. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block — omit them only if the script does not expose `-l` / `-f` flags.
+Use this block when the script needs more than simple `printf` output. Because POSIX `sh` has no associative arrays, level priorities are resolved via a helper function. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block - omit them only if the script does not expose `-l` / `-f` flags.
 
 ```sh
 # Logging configuration

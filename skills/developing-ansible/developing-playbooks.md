@@ -16,7 +16,7 @@ Every play must declare all four top-level keys:
 ```
 
 - `name`: required, must be descriptive.
-- `hosts`: required, must reference an inventory group or pattern — never hard-code IPs.
+- `hosts`: required, must reference an inventory group or pattern - never hard-code IPs.
 - `gather_facts`: required, set explicitly to `true` or `false`.
 - `become`: required, set explicitly even when `false`.
 
@@ -28,7 +28,7 @@ Every play must declare all four top-level keys:
 ## Idempotency
 
 - Ensure all playbooks are idempotent: running them multiple times must produce the same end state.
-- Avoid tasks that always report `changed` — use `changed_when` to suppress false positives.
+- Avoid tasks that always report `changed` - use `changed_when` to suppress false positives.
 
 ## Error Handling
 

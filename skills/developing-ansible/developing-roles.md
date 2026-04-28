@@ -39,7 +39,7 @@ roles/
 ## Handlers
 
 - Define all service restart and reload actions as handlers in `handlers/main.yaml`.
-- Use `notify` in tasks to trigger handlers — never restart services directly in tasks.
+- Use `notify` in tasks to trigger handlers - never restart services directly in tasks.
 - Handler names must be globally unique within a play.
 
 ## Dependencies

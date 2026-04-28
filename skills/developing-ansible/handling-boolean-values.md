@@ -1,7 +1,7 @@
 # Handling Boolean Values in Ansible
 
-Boolean handling in Ansible is a common source of bugs. The three mechanisms —
-YAML booleans, the `| ansible.builtin.bool` filter, and the `is ansible.builtin.truthy` / `is ansible.builtin.falsy` tests —
+Boolean handling in Ansible is a common source of bugs. The three mechanisms -
+YAML booleans, the `| ansible.builtin.bool` filter, and the `is ansible.builtin.truthy` / `is ansible.builtin.falsy` tests -
 each behave differently, and mixing them up produces hard-to-debug surprises.
 
 ## The Three Mechanisms
@@ -20,7 +20,7 @@ These are parsed into Python `True` / `False` **before** Jinja2 ever sees them.
 Any other casing (e.g. `TrUE`, `FaLSe`) is treated as a plain string.
 
 **Rule**: always use `true` / `false` (lowercase) as the canonical form for
-boolean literals in YAML. Never use `yes`/`no` or `on`/`off` — they are valid
+boolean literals in YAML. Never use `yes`/`no` or `on`/`off` - they are valid
 but ambiguous in prose context.
 
 ### 2. `| ansible.builtin.bool` Filter
@@ -45,7 +45,7 @@ This differs sharply from Python's built-in `bool()`.
 ### 3. `is ansible.builtin.truthy` / `is ansible.builtin.falsy` Tests
 
 Delegates directly to Python's `bool()`, so any non-empty / non-zero value is
-truthy — matching standard Python semantics:
+truthy - matching standard Python semantics:
 
 - `42`, `-7` → **truthy**
 - `[1, 2, 3]` → **truthy**
@@ -57,7 +57,7 @@ first passes the value through `| bool` before evaluating:
 
 ```jinja2
 {{ "yes" is ansible.builtin.truthy(convert_bool=True) }}  {# True #}
-{{ "foo" is ansible.builtin.truthy(convert_bool=True) }}  {# False — "foo" fails bool conversion #}
+{{ "foo" is ansible.builtin.truthy(convert_bool=True) }}  {# False - "foo" fails bool conversion #}
 ```
 
 > **Note**: `is ansible.builtin.truthy` / `is ansible.builtin.falsy` are Ansible-specific test plugins.
@@ -92,7 +92,7 @@ Never use string `"true"` or `"false"` as a default value for a boolean variable
   when: lookup('env', 'ENABLE_TLS') | ansible.builtin.bool
 ```
 
-Do not use `| ansible.builtin.bool` on integers other than `0` / `1`, or on lists / dicts — the
+Do not use `| ansible.builtin.bool` on integers other than `0` / `1`, or on lists / dicts - the
 result will silently be `False`.
 
 **Use `is ansible.builtin.truthy` when the value may be any Python type and you want Python
@@ -119,7 +119,7 @@ when: not my_flag
 They work but are visually ambiguous:
 
 ```yaml
-# Bad — "no" reads like an English word, not a boolean
+# Bad - "no" reads like an English word, not a boolean
 ansible.builtin.service:
   enabled: no
 
@@ -151,4 +151,4 @@ false            | bool        | False                 | False
 None / null      | NoneType    | False                 | False
 ```
 
-`*` — emits a deprecation warning in Ansible ≥ 2.19; will become an error in 2.23.
+`*` - emits a deprecation warning in Ansible ≥ 2.19; will become an error in 2.23.

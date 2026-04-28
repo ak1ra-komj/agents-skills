@@ -8,8 +8,8 @@ The user asked for a new agent skill to help avoid common AI writing patterns wh
 
 ## Changed files
 
-- `skills/avoid-ai-writing-patterns/SKILL.md` — new skill file; created from scratch, iterated through four drafts during the session
-- `skills/signs-of-ai-writing/SKILL.md` — initial draft location; content was superseded and the directory was left empty after the user renamed the folder externally
+- `skills/avoid-ai-writing-patterns/SKILL.md` - new skill file; created from scratch, iterated through four drafts during the session
+- `skills/signs-of-ai-writing/SKILL.md` - initial draft location; content was superseded and the directory was left empty after the user renamed the folder externally
 
 ## Git commits
 

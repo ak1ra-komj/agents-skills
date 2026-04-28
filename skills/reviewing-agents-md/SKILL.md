@@ -7,7 +7,7 @@ description: Use when writing, reviewing, or refactoring AGENTS.md, writing an a
 
 Analyze the repository and write (or overwrite) an `AGENTS.md` file in the project
 root. The file is a concise, prescriptive orientation guide for AI coding agents.
-It must not duplicate `README.md` — link there for anything already covered.
+It must not duplicate `README.md` - link there for anything already covered.
 
 ## Workflow
 
@@ -24,7 +24,7 @@ It must not duplicate `README.md` — link there for anything already covered.
 State the project's purpose and technology stack category. Add a pointer to
 `README.md` for full details.
 
-### 2. Environment & Tooling — CRITICAL
+### 2. Environment & Tooling - CRITICAL
 
 Identify the exact tool that manages the environment and write explicit
 **DO / DO NOT** rules covering:
@@ -34,7 +34,7 @@ Identify the exact tool that manages the environment and write explicit
 - How to lint and format
 - Which alternatives are explicitly forbidden
 
-Mark this section `— CRITICAL` so agents cannot miss it.
+Mark this section `- CRITICAL` so agents cannot miss it.
 
 ### 3. Conventions (non-obvious only)
 
@@ -56,5 +56,5 @@ One shell code block with one-liner comments for the 4–6 most frequent tasks
 
 - Write in **English**.
 - Be prescriptive ("ALWAYS", "NEVER", "Do NOT"), not descriptive.
-- Omit content already in `README.md` — link there instead.
+- Omit content already in `README.md` - link there instead.
 - Prefer bullet lists and short paragraphs over prose.

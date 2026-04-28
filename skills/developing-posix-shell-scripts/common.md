@@ -17,20 +17,20 @@ set -u
 
 - `set -e`: exit immediately on error.
 - `set -u`: exit on reference to an unset variable.
-- `set -o pipefail` is **not** POSIX — do not use it.
+- `set -o pipefail` is **not** POSIX - do not use it.
 
 ## Tooling
 
 - All scripts MUST pass `shellcheck --shell=sh` without warnings.
 - Format with `shfmt -ln posix` before considering the script done.
 
-## POSIX Compliance — Do NOT Use These Bash-isms
+## POSIX Compliance - Do NOT Use These Bash-isms
 
 | Bash feature                  | POSIX replacement                                  |
 | ----------------------------- | -------------------------------------------------- |
 | `[[ ... ]]`                   | `[ ... ]`                                          |
 | `local var`                   | prefix with `_funcname_var` (see Variables)        |
-| `declare -a arr`              | not available — restructure logic                  |
+| `declare -a arr`              | not available - restructure logic                  |
 | `source file`                 | `. file`                                           |
 | `function f { }`              | `f() { }`                                          |
 | `(( expr ))`                  | `$(( expr ))`                                      |
