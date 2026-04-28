@@ -120,7 +120,8 @@ Distil the most reusable or noteworthy insights from the session, such as:
 - You MUST retrieve dates with `date +%Y-%m-%d` and MUST NOT hardcode them.
 - Output SHOULD NOT use emoji, em dashes, or excess bold/italic text.
 - Output SHOULD be plain Markdown (no HTML) and use only ASCII punctuation.
-- When session facts cannot be determined from the conversation, git history, or the working tree, output MUST NOT guess; instead state "Insufficient information".
+- When session facts cannot be determined from the conversation, git history,
+  or the working tree, output MUST NOT guess; instead state "Insufficient information".
 
 ---
 
