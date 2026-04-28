@@ -12,7 +12,7 @@ changes — as a single coordinated workflow.
 
 When wrapping up a session, this skill:
 
-1. Summarizes what was done and writes a session log to `docs/sessions/`.
+1. Summarizes what was done and writes a session log to `.agents/state/sessions/`.
 2. Commits work changes with a clean commit message.
 3. Commits the session log file in a **separate** commit — but only when it is
    not excluded by `.gitignore`.
@@ -27,7 +27,7 @@ When wrapping up a session, this skill:
 3. Run `git log --oneline` (or `git log --oneline <range>`) to collect commits
    made during the session.
 4. Derive a short English session title from the session content.
-5. Write the file to `docs/sessions/YYYY-MM-DD-<session-title>.md`.
+5. Write the file to `.agents/state/sessions/YYYY-MM-DD-<session-title>.md`.
 
 ### File naming
 
@@ -120,13 +120,13 @@ commit is fine for small or cohesive changes.
 Before committing the session log, check whether it is tracked by git:
 
 ```sh
-git check-ignore -v docs/sessions/
+git check-ignore -v .agents/state/sessions/
 ```
 
-- **If `docs/sessions/` is excluded by `.gitignore`**: do not stage or commit
+- **If `.agents/state/sessions/` is excluded by `.gitignore`**: do not stage or commit
   the session log. Inform the user that the file was written locally but not
   committed due to the ignore rule.
-- **If `docs/sessions/` is not ignored**: stage **only** the session log file
+- **If `.agents/state/sessions/` is not ignored**: stage **only** the session log file
   and create a separate commit for it. Do not mix it with the work changes from
   Phase 2.
 
