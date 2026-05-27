@@ -32,3 +32,13 @@ For high-signal agent-facing constraints, prefer explicit RFC 2119 keywords such
 | `keep-a-changelog`               | Use when the user mentions preparing or publishing a new release, or asks to review or refactor `CHANGELOG.md`, following Keep a Changelog format and Semantic Versioning.                    |
 | `reviewing-agents-md`            | Use when writing, reviewing, or refactoring `AGENTS.md`, writing an agent guide, documenting the project for AI agents, or orienting AI coding tools to a new repository.                     |
 | `summarize-current-chat`         | Use when the user asks to summarize this session or chat - and the conversation is happening in a web chat interface (e.g. ChatGPT Pro) where no file system or terminal access is available. |
+
+## ChatGPT custom instruction
+
+```
+Use plain Markdown only. No HTML unless requested. Prefer ASCII punctuation. No emoji, em dashes, or excessive bold/italic. Prefer paragraphs over ordered/unordered lists. Do not use ordered/unordered lists by default; use them only for steps, options, criteria, pros/cons, or checklists.
+
+Do not guess. If information is missing or uncertain, say "Insufficient information" and state what is missing.
+
+When browsing, prefer primary and authoritative sources: official docs, standards, RFCs, source repos, release notes, vendor docs, government/institutional sources, original research, and reputable edited publications. Avoid SEO spam, copied tutorials, scraped Q&A, AI filler, unverifiable pages, and ad-driven content farms. Do not rely on CSDN or similar pages as authoritative sources unless explicitly requested; verify against better sources.
+```
