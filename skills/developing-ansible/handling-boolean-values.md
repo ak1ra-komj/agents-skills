@@ -19,8 +19,8 @@ YAML 1.1 (used by Ansible) recognises a fixed set of keywords as native booleans
 These are parsed into Python `True` / `False` **before** Jinja2 ever sees them.
 Any other casing (e.g. `TrUE`, `FaLSe`) is treated as a plain string.
 
-**Rule**: You MUST use lowercase `true` / `false` as the canonical form for
-boolean literals in YAML. You MUST NOT use `yes`/`no` or `on`/`off` - they are valid
+You SHOULD use lowercase `true` / `false` as the canonical form for
+boolean literals in YAML. You SHOULD NOT use `yes`/`no` or `on`/`off` - they are valid
 but ambiguous in prose context.
 
 ### 2. `| ansible.builtin.bool` Filter
@@ -75,7 +75,7 @@ first passes the value through `| bool` before evaluating:
 
 ## Concrete Rules
 
-**You MUST declare feature flags with YAML native booleans.**
+**Declare feature flags with YAML native booleans.**
 
 ```yaml
 # defaults/main.yaml
@@ -83,9 +83,9 @@ my_role_enable_tls: true
 my_role_debug_mode: false
 ```
 
-You MUST NOT use string `"true"` or `"false"` as a default value for a boolean variable.
+You SHOULD NOT use string `"true"` or `"false"` as a default value for a boolean variable.
 
-**You MUST use `| ansible.builtin.bool` only when the source is a string representation of a boolean.**
+**Use `| ansible.builtin.bool` only when the source is a string representation of a boolean.**
 
 ```yaml
 - name: Enable TLS when the env var says so
@@ -95,7 +95,7 @@ You MUST NOT use string `"true"` or `"false"` as a default value for a boolean v
 You MUST NOT use `| ansible.builtin.bool` on integers other than `0` / `1`, or on lists / dicts - the
 result will silently be `False`.
 
-**You SHOULD use `is ansible.builtin.truthy` when the value may be any Python type and you want Python
+**Use `is ansible.builtin.truthy` when the value may be any Python type and you want Python
 semantics.**
 
 ```yaml
@@ -115,7 +115,7 @@ when: my_flag
 when: not my_flag
 ```
 
-**You SHOULD avoid `yes` / `no` and `on` / `off` as boolean literals in task parameters.**
+**You SHOULD NOT use `yes` / `no` and `on` / `off` as boolean literals in task parameters.**
 They work but are visually ambiguous:
 
 ```yaml

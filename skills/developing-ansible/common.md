@@ -4,20 +4,20 @@ Applies to all Ansible files: playbooks, roles, tasks, variable files, and templ
 
 ## Code Style and Formatting
 
-- YAML files MUST use consistent 2-space indentation.
-- YAML files MUST use the `.yaml` extension, not `.yml`.
-- Task names MUST be clear, descriptive, and meaningful.
-- Formatting SHOULD remain consistent across all files.
-- Boolean literals MUST use lowercase `true`/`false`; you MUST NOT use `yes`/`no`, `on`/`off`, or strings.
+- Use 2-space indentation consistently in all YAML files.
+- You SHOULD use the `.yaml` extension, not `.yml`.
+- Write task names that are clear, descriptive, and meaningful.
+- Keep formatting consistent across all files.
+- You SHOULD use lowercase `true` / `false` for boolean literals; you SHOULD NOT use `yes` / `no`, `on` / `off`, or strings.
 - For conditional expressions and module parameters involving booleans, see [handling-boolean-values.md](handling-boolean-values.md).
 
 ## Project Layout
 
 - You MUST NOT hard-code hosts or environment-specific values in playbooks or roles.
-- Inventory-bound variables MUST live in `group_vars/` or `host_vars/`.
-- Secrets MUST be stored exclusively in Ansible Vault and MUST NOT appear in plaintext variable files.
+- Place inventory-bound variables in `group_vars/` or `host_vars/`.
+- You MUST store secrets exclusively in Ansible Vault; you MUST NOT put them in plaintext variable files.
 
 ## Validation
 
-- You MUST validate playbooks with `ansible-lint` before committing.
-- You SHOULD run `ansible-playbook --syntax-check` to catch structural errors early.
+- You SHOULD validate playbooks with `ansible-lint` before committing.
+- Run `ansible-playbook --syntax-check` to catch structural errors early.

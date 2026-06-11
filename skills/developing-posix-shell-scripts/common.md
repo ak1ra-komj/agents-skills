@@ -2,11 +2,11 @@
 
 Applies to both simple and complex POSIX shell scripts.
 
-**These scripts target `/bin/sh`. You MUST NOT use Bash-specific features.**
+**These scripts target `/bin/sh`. MUST NOT use Bash-specific features.**
 
 ## Shebang & Safety Modes
 
-Every script MUST start with:
+Start every script with:
 
 ```sh
 #!/bin/sh
@@ -17,14 +17,14 @@ set -u
 
 - `set -e`: exit immediately on error.
 - `set -u`: exit on reference to an unset variable.
-- `set -o pipefail` is **not** POSIX - you MUST NOT use it.
+- `set -o pipefail` is **not** POSIX; MUST NOT use it.
 
 ## Tooling
 
-- All scripts MUST pass `shellcheck --shell=sh` without warnings.
-- Format with `shfmt -ln posix` before considering the script done.
+- Run `shellcheck --shell=sh` on every script; it MUST pass without warnings.
+- Run `shfmt -ln posix` to format before considering the script done.
 
-## POSIX Compliance - MUST NOT Use These Bash-isms
+## POSIX Compliance - Bash-isms to Avoid
 
 | Bash feature                  | POSIX replacement                           |
 | ----------------------------- | ------------------------------------------- |
@@ -41,9 +41,9 @@ set -u
 
 ## Logic & Control Flow
 
-- Conditionals MUST quote variables in tests: `[ "${var}" = "value" ]`.
-- You SHOULD use `case` for pattern matching or multiple-branch decisions.
-- You SHOULD prefer guard clauses to keep nesting shallow:
+- MUST quote variables in conditional tests: `[ "${var}" = "value" ]`.
+- SHOULD use `case` for pattern matching or multiple-branch decisions.
+- SHOULD prefer guard clauses to keep nesting shallow:
 
   ```sh
   # Bad
@@ -64,8 +64,8 @@ set -u
 
 ## Variables & Quoting
 
-- You MUST use `${var}` (braces) for variable expansion.
-- You MUST quote expansions: `"${var}"`.
+- Use `${var}` (braces) for variable expansion.
+- MUST quote expansions: `"${var}"`.
 - POSIX `sh` has no `local` keyword. Simulate function-local variables by prefixing with the function name: `_log_message_color`, `_parse_args_opt`, etc. Unset them at the end of the function.
-- You MUST use `$(...)` for command substitution and MUST NOT use backticks.
-- You SHOULD prefer `printf` over `echo` for reliable, portable output.
+- MUST use `$(...)` for command substitution; MUST NOT use backticks.
+- SHOULD prefer `printf` over `echo` for reliable, portable output.

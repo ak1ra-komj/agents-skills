@@ -6,9 +6,9 @@ See [common.md](common.md) for baseline style and project conventions.
 
 ## Task Key Ordering
 
-Every task MUST follow this key order:
+Every task follows this key order:
 
-1. `name` - required and MUST appear first.
+1. `name` - required; place it first.
 2. `when` - if used, immediately after `name`.
 3. `become` - if used, follows `when` (or `name` if no `when`).
 4. Module key - the actual module and its arguments.
@@ -24,7 +24,7 @@ Every task MUST follow this key order:
   - Add `creates` or `removes` to enable idempotency checks.
   - Add `changed_when` and `failed_when` for correct change and error reporting.
 - You SHOULD use `ansible.builtin.template` for Jinja2-rendered configs.
-- You SHOULD use `ansible.builtin.copy` for static files.
+- Use `ansible.builtin.copy` for static files.
 
 ## Facts
 
@@ -34,7 +34,7 @@ Every task MUST follow this key order:
 ## Iteration
 
 - You MUST use `loop` instead of any `with_*` construct.
-- You MUST set a custom loop variable via `loop_control` to avoid variable collisions:
+- You SHOULD set a custom loop variable via `loop_control` to avoid variable collisions:
 
 ```yaml
 - name: Create user accounts

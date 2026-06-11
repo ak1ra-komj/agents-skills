@@ -1,11 +1,11 @@
 # Ansible Reference Code Blocks
 
 Canonical patterns to compose from when writing Ansible code.
-You SHOULD include only the blocks that the playbook or role actually needs.
+Include only the blocks that the playbook or role actually needs.
 
 ## Error Handling - block/rescue/always
 
-You SHOULD use this pattern for tasks that may fail and require recovery or guaranteed cleanup:
+Use this pattern for tasks that may fail and require recovery or guaranteed cleanup:
 
 ```yaml
 - name: Risky operation with recovery
@@ -26,8 +26,8 @@ You SHOULD use this pattern for tasks that may fail and require recovery or guar
 ```
 
 - `block`: the primary task sequence.
-- `rescue`: runs only when a task in `block` fails; you SHOULD use it for recovery logic.
-- `always`: runs unconditionally after `block` or `rescue`; you SHOULD use it for cleanup.
+- `rescue`: runs only when a task in `block` fails; use it for recovery logic.
+- `always`: runs unconditionally after `block` or `rescue`; use it for cleanup.
 
 ## Play Definition
 

@@ -22,11 +22,11 @@ When wrapping up a session, this skill:
 
 ## Phase 1 - Commit work changes
 
-You MUST commit only files that were modified or created during this conversation.
+Commit only files that were modified or created during this conversation.
 You MUST NOT stage unrelated changes.
 
 If the changes span clearly distinct features or modules, split them into
-multiple commits - but only do so when it adds genuine clarity. You MAY use a
+multiple commits - but only do so when it adds genuine clarity. Use a
 single commit for small or cohesive changes.
 
 ### Steps
@@ -40,14 +40,14 @@ single commit for small or cohesive changes.
 
 ### Commit message style
 
-- The subject line SHOULD follow Conventional Commits style
-- The subject line MUST be 50 characters or fewer
-- The subject line MUST NOT start with a capital letter
-- The subject line MUST NOT end with punctuation
-- The subject line MUST use the imperative mood
-- You MAY add a body only when it provides useful context not already in the subject
-- The body MUST be separated from the subject by a blank line and wrapped at 72 characters
-- The commit message MUST NOT include the raw diff
+- The subject line SHOULD follow Conventional Commits style.
+- The subject line MUST be 50 characters or fewer.
+- The subject line MUST NOT start with a capital letter.
+- The subject line MUST NOT end with punctuation.
+- The subject line MUST use the imperative mood.
+- Add a body only when it provides useful context not already in the subject.
+- The body MUST be separated from the subject by a blank line and MUST be wrapped at 72 characters.
+- The commit message MUST NOT include the raw diff.
 
 ---
 
@@ -64,7 +64,7 @@ single commit for small or cohesive changes.
 ### File naming
 
 ```
-YYYY-MM-DD-<session-title>.md
+YYY-MM-DD-<session-title>.md
 ```
 
 - Date: obtained from `date +%Y-%m-%d` - you MUST NOT guess or hardcode it.
@@ -97,9 +97,9 @@ List every commit made during the session in the format:
 - `a1b2c3d` <commit message>
 ```
 
-Use the short hash (`git log --oneline`). You MUST include the work commits
+Use the short hash (`git log --oneline`). Include the work commits
 created before the session log was written. If the session log itself is later
-committed in Phase 3, you MUST NOT include that log-only commit in this
+committed in Phase 3, do not include that log-only commit in this
 section. If no commits were made during the session, write: "No commits were
 made in this session."
 
@@ -114,10 +114,10 @@ Distil the most reusable or noteworthy insights from the session, such as:
 
 ### Style rules
 
-- You MUST write in **English** throughout.
-- You SHOULD keep each section concise and prefer bullet lists over prose.
+- Write in **English** throughout.
+- Keep each section concise; prefer bullet lists over prose.
 - The "Notes" section is high-value and MUST NOT be empty.
-- You MUST retrieve dates with `date +%Y-%m-%d` and MUST NOT hardcode them.
+- Retrieve dates with `date +%Y-%m-%d` and MUST NOT hardcode them.
 - Output SHOULD NOT use emoji, em dashes, or excess bold/italic text.
 - Output SHOULD be plain Markdown (no HTML) and use only ASCII punctuation.
 - When session facts cannot be determined from the conversation, git history,
@@ -134,7 +134,7 @@ git check-ignore -v .agents/state/sessions/
 ```
 
 - **If `.agents/state/sessions/` is excluded by `.gitignore`**: you MUST NOT stage or commit
-  the session log. You MUST inform the user that the file was written locally but not
+  the session log. Inform the user that the file was written locally but not
   committed due to the ignore rule.
 - **If `.agents/state/sessions/` is not ignored**: you MUST stage **only** the session
   log file and create a separate commit for it. You MUST NOT mix it with the work

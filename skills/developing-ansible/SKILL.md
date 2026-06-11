@@ -9,17 +9,17 @@ This skill covers any task involving **writing, reviewing, or refactoring** Ansi
 
 ## Rule of Thumb
 
-If the project already has existing examples, you MUST follow them in terms of structure, naming, and style to maintain consistency.
-If no relevant examples exist, you MUST apply the guidelines defined in this skill and its reference documents.
+If the project already has existing examples, follow them in terms of structure, naming, and style to maintain consistency.
+If no relevant examples exist, apply the guidelines defined in this skill and its reference documents.
 
 ## Reference Documents
 
-You MUST load:
+Load:
 
 - **[common.md](common.md)** - baseline requirements that apply to all Ansible files.
 - **[developing-tasks.md](developing-tasks.md)** - task key ordering, FQCN, module selection, `loop`; tasks are the fundamental unit present in both playbooks and roles.
 
-Then you MUST load only the documents that match the request:
+Then load only the documents that match the request:
 
 - **[developing-playbooks.md](developing-playbooks.md)** - Load when writing or reviewing playbook files: play definitions, `import_*` vs `include_*`, error handling at play level.
 - **[developing-roles.md](developing-roles.md)** - Load when creating or modifying a role: directory layout, `defaults/`, `vars/`, `handlers/`, `meta/`.

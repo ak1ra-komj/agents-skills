@@ -1,6 +1,6 @@
 # Reference Code Blocks
 
-Reusable code blocks for complex Bash scripts. You SHOULD pick and compose only the sections a script actually needs, and you MUST NOT copy everything blindly.
+Reusable code blocks for complex Bash scripts. Pick and compose only the sections a script actually needs, and do not copy everything blindly.
 
 See [developing-complex-bash-scripts.md](developing-complex-bash-scripts.md) for the composition guide.
 
@@ -13,7 +13,7 @@ SCRIPT_NAME="$(basename "${SCRIPT_FILE}")"
 
 ## 2. Logging Subsystem
 
-You SHOULD use this block when the script needs more than simple `echo` output. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block - you MAY omit them only if the script does not expose `--log-level` / `--log-format` flags.
+Use this block when the script needs more than simple `echo` output. The setter functions (`set_log_level`, `set_log_format`) are included as part of this block - omit them only if the script does not expose `--log-level` / `--log-format` flags.
 
 ```bash
 # Logging configuration
@@ -87,7 +87,7 @@ set_log_format() {
 
 ## 3. Dependency Check
 
-You SHOULD include this when the script relies on external commands that may not be present.
+Include this when the script relies on external commands that may not be present.
 
 ```bash
 require_command() {
@@ -108,7 +108,7 @@ require_command() {
 
 ## 4. Cleanup Handler
 
-You SHOULD include this when the script creates temporary files or resources that must be cleaned up on exit.
+Include this when the script creates temporary files or resources that must be cleaned up on exit.
 
 ```bash
 cleanup() {
@@ -122,9 +122,9 @@ trap cleanup EXIT INT TERM
 
 ## 5. Usage / Help
 
-You MUST adapt the OPTIONS and EXAMPLES sections to the actual flags of the script.
+Adapt the OPTIONS and EXAMPLES sections to the actual flags of the script.
 
-**Argument ordering convention**: in the OPTIONS block, template flags MUST appear first, then script-specific flags. This mirrors the ordering required in `longoptions` and the `case` statement (see Section 6), keeping all three in sync.
+**Argument ordering convention**: in the OPTIONS block, place template flags first, then script-specific flags. This mirrors the ordering required in `longoptions` and the `case` statement (see Section 6), keeping all three in sync.
 
 ```bash
 usage() {
@@ -138,12 +138,12 @@ USAGE:
 OPTIONS:
     -h, --help                Show this help message
     --log-level LEVEL         Set log level (ERROR, WARNING, INFO, DEBUG)
-                              Default: INFO
+                               Default: INFO
     --log-format FORMAT       Set log output format (simple, level, full)
-                              simple: message only
-                              level:  [LEVEL] message
-                              full:   [timestamp][LEVEL] message
-                              Default: simple
+                               simple: message only
+                               level:  [LEVEL] message
+                               full:   [timestamp][LEVEL] message
+                               Default: simple
     <script-specific flags go here>
 
 EXAMPLES:
@@ -157,9 +157,9 @@ EOF
 
 ## 6. Argument Parsing
 
-You MUST use `getopt`, not `getopts`, to support long options. You MUST adjust `options`/`longoptions` to match the script's flags.
+**MUST** use `getopt`, not `getopts`, to support long options. Adjust `options`/`longoptions` to match the script's flags.
 
-**Argument ordering convention**: infrastructure/template flags MUST come first and script-specific flags MUST come after - in both the `longoptions` string and the `case` statement. This keeps the interface predictable and the `case` block easy to scan.
+**Argument ordering convention**: place infrastructure/template flags first and script-specific flags after - in both the `longoptions` string and the `case` statement. This keeps the interface predictable and the `case` block easy to scan.
 
 ```
 longoptions="help,log-level:,log-format:,<script-flag-1>:,<script-flag-2>:"

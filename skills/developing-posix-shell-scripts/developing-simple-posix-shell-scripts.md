@@ -2,7 +2,7 @@
 
 Simple POSIX shell scripts cover ad-hoc tasks, short wrappers, and linear logic that does not need full CLI scaffolding.
 
-You SHOULD prioritise correctness, brevity, and portability. You MUST NOT pad simple scripts with template boilerplate.
+Prioritise correctness, brevity, and portability. SHOULD NOT pad simple scripts with template boilerplate.
 
 See [common.md](common.md) for baseline requirements (shebang, safety modes, tooling, POSIX compliance, logic, quoting).
 
@@ -16,7 +16,7 @@ See [common.md](common.md) for baseline requirements (shebang, safety modes, too
 
 ## Notes
 
-- You MAY use positional arguments (`"${1}"`, `"${2}"`); you SHOULD use `:?` for mandatory arg validation.
+- Use positional arguments (`"${1}"`, `"${2}"`); use `:?` for mandatory arg validation.
 
 ## Minimal Example
 
@@ -40,7 +40,7 @@ printf 'Copied %s -> %s\n' "${src}" "${dst}"
 
 ## Upgrade to Complex
 
-You SHOULD refactor a simple script into a complex script when **any** of the following apply:
+Refactor a simple script into a complex script when **any** of the following apply:
 
 - Script exceeds ~50 lines of logic
 - Needs 3 or more named flags / options

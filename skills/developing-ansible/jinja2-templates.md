@@ -29,7 +29,7 @@ apply stripping globally instead of per-tag:
 
 ## Local Variables with `{% set %}`
 
-You SHOULD declare intermediate values to avoid repeating complex expressions:
+Declare intermediate values to avoid repeating complex expressions:
 
 ```jinja2
 {% set listen_addr = item.bind_address | default('0.0.0.0') %}
@@ -37,7 +37,7 @@ You SHOULD declare intermediate values to avoid repeating complex expressions:
 bind {{ listen_addr }}:{{ listen_port }};
 ```
 
-You SHOULD avoid deep-nesting filter chains inline - extract them into named variables for
+Avoid deep-nesting filter chains inline - extract them into named variables for
 readability and easier review.
 
 ## Macros for Repeated Config Blocks
@@ -65,7 +65,7 @@ Macros keep templates DRY and make individual blocks independently testable.
 
 ## Generating Structured Config Files with JSON / YAML Filters
 
-When a config file format is JSON or YAML, you SHOULD avoid constructing it with raw string
+When a config file format is JSON or YAML, avoid constructing it with raw string
 interpolation. Instead, build the data structure in Ansible variables and
 serialise it with a filter:
 
@@ -89,12 +89,12 @@ entire content is a single data structure.** It keeps the source of truth in
 variables (where it can be validated, merged with `ansible.builtin.combine`, and overridden) rather than
 scattered across a template.
 
-You SHOULD use `ansible.builtin.template` when the file mixes structured data with prose,
+Use `ansible.builtin.template` when the file mixes structured data with prose,
 comments that must be preserved, or requires per-line conditional logic.
 
 ## List and Dict Operations
 
-You SHOULD use Jinja2 filters instead of tasks to transform data inline:
+Use Jinja2 filters instead of tasks to transform data inline:
 
 ```jinja2
 {# Filter a list to only enabled items #}
@@ -130,7 +130,7 @@ When `primary_value` is `0`, Jinja2 evaluates `0 or fallback_value` and returns
 **Any falsy value (`0`, `false`, `""`, `[]`, `{}`) causes `or` to skip to the
 right-hand side**, regardless of whether the left side was intentionally set.
 
-You SHOULD avoid `var_a or var_b` as a fallback pattern whenever the primary variable can
+You SHOULD NOT use `var_a or var_b` as a fallback pattern whenever the primary variable can
 legitimately hold a falsy value.
 
 ### `| default(fallback)` - undefined only
@@ -159,7 +159,7 @@ condition: fallback is used when the variable is **undefined OR falsy**.
 This behaves identically to `or` for falsy values:
 `0 | default(1, true)` → `1`.
 
-You MUST use this **only** when a falsy value genuinely means "not provided" - for
+You SHOULD use this **only** when a falsy value genuinely means "not provided" - for
 example, falling back to a non-empty string when a variable is an empty string,
 or to a non-zero value when zero carries no meaningful value in context.
 
@@ -179,8 +179,8 @@ Ansible uses Jinja2's `StrictUndefined` mode by default - referencing an
 undefined variable raises an error immediately rather than silently producing an
 empty string.
 
-- You SHOULD use `| default(...)` to provide a fallback for variables that may not exist.
-- You SHOULD use `is defined` / `is undefined` in `when:` conditions to guard task
+- Use `| default(...)` to provide a fallback for variables that may not exist.
+- Use `is defined` / `is undefined` in `when:` conditions to guard task
   execution:
 
   ```yaml

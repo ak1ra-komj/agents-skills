@@ -6,7 +6,7 @@ See [common.md](common.md) for baseline style and project conventions.
 
 ## Directory Structure
 
-You SHOULD follow the standard Ansible Galaxy role layout:
+Follow the standard Ansible Galaxy role layout:
 
 ```
 roles/
@@ -38,11 +38,11 @@ roles/
 
 ## Handlers
 
-- Service restart and reload actions MUST be defined as handlers in `handlers/main.yaml`.
-- Tasks MUST use `notify` to trigger handlers and MUST NOT restart services directly.
+- Define service restart and reload actions as handlers in `handlers/main.yaml`.
+- You MUST use `notify` to trigger handlers; you MUST NOT restart services directly from tasks.
 - Handler names MUST be globally unique within a play.
 
 ## Dependencies
 
-- Role dependencies MUST be declared in `meta/main.yaml`.
-- Inter-role dependencies SHOULD remain minimal; you SHOULD prefer composing roles in the playbook instead.
+- Declare role dependencies in `meta/main.yaml`.
+- You SHOULD keep inter-role dependencies minimal; prefer composing roles in the playbook instead.

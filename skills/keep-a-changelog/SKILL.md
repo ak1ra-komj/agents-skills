@@ -15,8 +15,8 @@ the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format and
 2. Run `git log --oneline <last-tag>..HEAD` to list all commits since that tag.
    If no tag exists for the last version, use `git log --oneline` and filter
    manually.
-3. Run `date +%Y-%m-%d` to get today's release date - you MUST NOT hardcode it.
-4. Determine the new version number. If the version is not specified, you MUST ask the user:
+3. Run `date +%Y-%m-%d` to get today's release date - do not hardcode it.
+4. Determine the new version number. If the version is not specified, ask the user:
    - **MAJOR** bump: breaking changes or major redesign.
    - **MINOR** bump: new features, backward-compatible.
    - **PATCH** bump: bug fixes only.
@@ -63,7 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ...
 ```
 
-You MUST omit any section that has no entries. You MUST NOT add empty sections.
+Omit any section that has no entries. Do not add empty sections.
 
 ## Section rules
 
@@ -79,26 +79,27 @@ multiple sections are present:
 | `Fixed`      | Bug fixes                              |
 | `Security`   | Security-related fixes or improvements |
 
-## Commit → section mapping heuristics
+## Commit to section mapping heuristics
 
-- `feat:` / `add` / `new` → **Added**
-- `refactor:` / `change` / `rename` / `move` / `update` / `improve` → **Changed**
-- `fix:` / `bug` / `patch` → **Fixed**
-- `remove:` / `delete` / `drop` → **Removed**
-- `deprecate:` → **Deprecated**
-- `security:` / `cve` / `vuln` → **Security**
+- `feat:` / `add` / `new` -> **Added**
+- `refactor:` / `change` / `rename` / `move` / `update` / `improve` -> **Changed**
+- `fix:` / `bug` / `patch` -> **Fixed**
+- `remove:` / `delete` / `drop` -> **Removed**
+- `deprecate:` -> **Deprecated**
+- `security:` / `cve` / `vuln` -> **Security**
 - `docs:` / `chore:` / `ci:` / `test:` - omit unless user-facing.
 
-When a commit message is ambiguous, you SHOULD infer intent from the diff or file name.
+When a commit message is ambiguous, infer intent from the diff or file name.
 
 ## Style rules
 
-- You MUST write **in English** throughout.
-- Each bullet MUST start with a capital letter, use the present tense, and omit a trailing period.
+- Write in **English** throughout.
+- Start each bullet with a capital letter; use the present tense; omit a trailing period.
   Example: `Add retry logic for HTTP requests`
-- You SHOULD keep bullets concise - one line per entry where possible.
-- You MUST wrap code identifiers, file paths, and module names in backticks.
-- You MUST use `date +%Y-%m-%d` for dates and MUST NOT guess them.
+- Keep bullets concise - one line per entry where possible.
+- Wrap code identifiers, file paths, and module names in backticks.
+- Use `date +%Y-%m-%d` for dates; do not guess them.
 - Output SHOULD NOT use emoji, em dashes, or excess bold/italic text.
 - Output SHOULD be plain Markdown (no HTML) and use only ASCII punctuation.
-- When release facts cannot be determined from `CHANGELOG.md`, git history, or user input, output MUST NOT guess; instead state "Insufficient information".
+- When release facts cannot be determined from `CHANGELOG.md`, git history, or user input,
+  output MUST NOT guess; instead state "Insufficient information".
