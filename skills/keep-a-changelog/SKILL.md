@@ -9,31 +9,6 @@ Add a new version entry to `CHANGELOG.md`, or restructure the entire file, follo
 the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format and
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Workflow - new version entry
-
-1. Read `CHANGELOG.md` to identify the **last released version** and its date.
-2. Run `git log --oneline <last-tag>..HEAD` to list all commits since that tag.
-   If no tag exists for the last version, use `git log --oneline` and filter
-   manually.
-3. Run `date +%Y-%m-%d` to get today's release date - do not hardcode it.
-4. Determine the new version number. If the version is not specified, ask the user:
-   - **MAJOR** bump: breaking changes or major redesign.
-   - **MINOR** bump: new features, backward-compatible.
-   - **PATCH** bump: bug fixes only.
-5. Group commits into Keep a Changelog sections (see **Section rules** below).
-6. Prepend the new version block immediately after the file header (before the
-   previous latest version).
-7. You MUST NOT remove or alter any existing version entries.
-
-## Workflow - restructure entire CHANGELOG.md
-
-1. Read the full `CHANGELOG.md` and note all existing version blocks.
-2. Rewrite the file preserving all versions and dates but enforcing:
-   - Correct header and intro paragraph (see **File header** below).
-   - Consistent section names and ordering.
-   - Bullet style: start each item with a capital letter, no trailing period.
-3. Run `date +%Y-%m-%d` and confirm the latest version date is still accurate.
-
 ## File header
 
 ```markdown
@@ -90,6 +65,51 @@ multiple sections are present:
 - `docs:` / `chore:` / `ci:` / `test:` - omit unless user-facing.
 
 When a commit message is ambiguous, infer intent from the diff or file name.
+
+## Net change principle
+
+A changelog describes what changed for users between releases, not the
+internal development history. You SHOULD review the overall diff from the
+last release tag to `HEAD` and consolidate commits that do not represent
+independent user-facing changes:
+
+- A feature added in one commit and later re-implemented in another produces
+  a single changelog entry describing the final result, not two entries for
+  each attempt.
+- A change that was introduced and then reverted within the same version
+  range SHOULD be omitted -- it had no net user-facing effect.
+- Multiple commits that together implement one feature or fix SHOULD be
+  consolidated into one changelog bullet.
+
+The commit heuristics above remain the starting point for mapping individual
+commits to sections; this principle filters the results down to the net set
+of user-facing changes.
+
+## Workflow - new version entry
+
+1. Read `CHANGELOG.md` to identify the **last released version** and its date.
+2. Run `git log --oneline <last-tag>..HEAD` to list all commits since that tag.
+   If no tag exists for the last version, use `git log --oneline` and filter
+   manually.
+3. Run `date +%Y-%m-%d` to get today's release date. Do not hardcode it.
+4. Determine the new version number. If the version is not specified, ask the user:
+   - **MAJOR** bump: breaking changes or major redesign.
+   - **MINOR** bump: new features, backward-compatible.
+   - **PATCH** bump: bug fixes only.
+5. Map commits to sections using the heuristics above, then apply the net change
+   principle to consolidate.
+6. Prepend the new version block immediately after the file header (before the
+   previous latest version).
+7. You MUST NOT remove or alter any existing version entries.
+
+## Workflow - restructure entire CHANGELOG.md
+
+1. Read the full `CHANGELOG.md` and note all existing version blocks.
+2. Rewrite the file preserving all versions and dates but enforcing:
+   - Correct header and intro paragraph.
+   - Consistent section names and ordering.
+   - Bullet style: start each item with a capital letter, no trailing period.
+3. Run `date +%Y-%m-%d` and confirm the latest version date is still accurate.
 
 ## Style rules
 
