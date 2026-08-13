@@ -54,7 +54,7 @@ Complex scripts additionally add `-o errtrace` (see [developing-complex-bash-scr
 ## Variables & Quoting
 
 - **MUST** use `${var}` braces for variable expansion.
-- **MUST** quote expansions: `"${var}"` — this prevents word-splitting and glob expansion.
+- **MUST** quote expansions: `"${var}"` - this prevents word-splitting and glob expansion.
 - **SHOULD** use descriptive variable names; avoid magic numbers.
 
 ## Output

@@ -63,7 +63,7 @@ single commit for small or cohesive changes.
 ### File naming
 
 ```
-YYY-MM-DD-<session-title>.md
+YYYY-MM-DD-<session-title>.md
 ```
 
 - Date: obtained from `date +%Y-%m-%d` - you MUST NOT guess or hardcode it.

@@ -157,7 +157,7 @@ condition: fallback is used when the variable is **undefined OR falsy**.
 `0`, `false`, `""`, `[]`, `{}`, and `None` all trigger the fallback.
 
 This behaves identically to `or` for falsy values:
-`0 | default(1, true)` → `1`.
+`0 | default(1, true)` -> `1`.
 
 You SHOULD use this **only** when a falsy value genuinely means "not provided" - for
 example, falling back to a non-empty string when a variable is an empty string,

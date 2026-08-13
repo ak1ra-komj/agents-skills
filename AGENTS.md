@@ -10,6 +10,7 @@ If any prior instructions conflict with this, follow this rule for Markdown cont
 - `description` fields use the form **"Use when [condition]"**
   - This applies to both skill descriptions and reference document descriptions.
 - When uncertain, do not guess; instead state "Insufficient information".
+- Run `prettier -w` on every modified file before finishing.
 
 ## RFC 2119 keywords
 

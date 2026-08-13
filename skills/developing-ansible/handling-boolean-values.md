@@ -35,10 +35,10 @@ Converts a value to a Python bool using a **strict allowlist**:
 **Values outside the allowlist emit a deprecation warning and fall back to
 `False`** (scheduled for removal in Ansible 2.23). This means:
 
-- Integer `42`, `-7` → **`False`** (not in allowlist)
-- Non-empty list `[1, 2, 3]` → **`False`**
-- Non-empty dict `{"key": "val"}` → **`False`**
-- Arbitrary non-empty string `"foo"` → **`False`**
+- Integer `42`, `-7` -> **`False`** (not in allowlist)
+- Non-empty list `[1, 2, 3]` -> **`False`**
+- Non-empty dict `{"key": "val"}` -> **`False`**
+- Arbitrary non-empty string `"foo"` -> **`False`**
 
 This differs sharply from Python's built-in `bool()`.
 
@@ -47,10 +47,10 @@ This differs sharply from Python's built-in `bool()`.
 Delegates directly to Python's `bool()`, so any non-empty / non-zero value is
 truthy - matching standard Python semantics:
 
-- `42`, `-7` → **truthy**
-- `[1, 2, 3]` → **truthy**
-- `{"key": "val"}` → **truthy**
-- `""`, `[]`, `{}`, `0`, `None` → **falsy**
+- `42`, `-7` -> **truthy**
+- `[1, 2, 3]` -> **truthy**
+- `{"key": "val"}` -> **truthy**
+- `""`, `[]`, `{}`, `0`, `None` -> **falsy**
 
 `is truthy` / `is falsy` accept an optional `convert_bool=True` argument that
 first passes the value through `| bool` before evaluating:
@@ -151,4 +151,4 @@ false            | bool        | False                 | False
 None / null      | NoneType    | False                 | False
 ```
 
-`*` - emits a deprecation warning in Ansible ≥ 2.19; will become an error in 2.23.
+`*` - emits a deprecation warning in Ansible >= 2.19; will become an error in 2.23.
