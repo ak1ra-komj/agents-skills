@@ -5,25 +5,24 @@ description: Use when the user asks to commit changes and/or summarize the curre
 
 # commit-and-summarize
 
-Commit all relevant changes, write a session log, and optionally commit that
-log - as a single coordinated workflow.
+Commit all relevant changes and write a session log as a single coordinated workflow.
 
 ## Overview
 
 When wrapping up a session, this skill:
 
 1. Commits work changes with clean commit messages.
-2. Summarizes what was done and writes a session log to `.agents/state/sessions/`
-   using the resulting commit IDs.
-3. Commits the session log file in a **separate** commit - but only when it is
-   not excluded by `.gitignore`.
+2. Summarizes what was done and writes a session log to `.agents/sessions/`
+   using the resulting commit IDs. The session log is written locally only and
+   is not committed to git.
 
 ---
 
 ## Phase 1 - Commit work changes
 
 Commit only files that were modified or created during this conversation.
-You MUST NOT stage unrelated changes.
+You MUST NOT stage unrelated changes. Do not commit the session log written
+in Phase 2.
 
 If the changes span clearly distinct features or modules, split them into
 multiple commits - but only do so when it adds genuine clarity. Use a
@@ -59,7 +58,7 @@ single commit for small or cohesive changes.
 3. Run `git log --oneline` (or `git log --oneline <range>`) to collect the work
    commits made during the session.
 4. Derive a short English session title from the session content.
-5. Write the file to `.agents/state/sessions/YYYY-MM-DD-<session-title>.md`.
+5. Write the file to `.agents/sessions/YYYY-MM-DD-<session-title>.md`.
 
 ### File naming
 
@@ -98,10 +97,8 @@ List every commit made during the session in the format:
 ```
 
 Use the short hash (`git log --oneline`). Include the work commits
-created before the session log was written. If the session log itself is later
-committed in Phase 3, do not include that log-only commit in this
-section. If no commits were made during the session, write: "No commits were
-made in this session."
+created before the session log was written. If no commits were made during the
+session, write: "No commits were made in this session."
 
 #### H2 - Notes
 
@@ -122,27 +119,3 @@ Distil the most reusable or noteworthy insights from the session, such as:
 - Output SHOULD be plain Markdown (no HTML) and use only ASCII punctuation.
 - When session facts cannot be determined from the conversation, git history,
   or the working tree, output MUST NOT guess; instead state "Insufficient information".
-
----
-
-## Phase 3 - Commit the session log (conditional)
-
-Before committing the session log, check whether that path is ignored by git:
-
-```sh
-git check-ignore -v .agents/state/sessions/
-```
-
-- **If `.agents/state/sessions/` is excluded by `.gitignore`**: you MUST NOT stage or commit
-  the session log. Inform the user that the file was written locally but not
-  committed due to the ignore rule.
-- **If `.agents/state/sessions/` is not ignored**: you MUST stage **only** the session
-  log file and create a separate commit for it. You MUST NOT mix it with the work
-  changes from Phase 1, and you MUST NOT go back and add this log-only commit to the
-  session log.
-
-Suggested commit message for the session log:
-
-```
-docs: add session log YYYY-MM-DD-<session-title>
-```

@@ -52,5 +52,5 @@ nohup.out
 
 ## LLM
 docs/sessions/*
+.agents/sessions/*
 .agents/state/sessions/*
-.antigravitycli/*
