@@ -13,9 +13,9 @@ This skill covers any task involving **writing, reviewing, or refactoring** a PO
 
 Audit flags before classifying. Ask for each proposed flag: would a real caller ever pass a different value, or can it be a `readonly` constant? Beyond that, apply common sense - not everything that _could_ vary _should_ be a flag. Internal paths, fixed timeouts, log levels for non-CLI tools, and similar values are typically hardcoded in practice even if they could theoretically differ. When reviewing an existing script, re-classify from scratch; the current number of flags is not evidence of correct classification.
 
-**Simple** - all of: < 50 lines of logic, 0–2 genuine flags, no structured logging, no `-h`/help output, no resource cleanup, not shared across systems/environments.
+**Simple** - all of: < 50 lines of logic, 0-2 genuine flags, no structured logging, no `-h`/help output, no resource cleanup, not shared across systems/environments.
 
-**Complex** - any of: ≥ 50 lines, 3+ genuine flags, structured logging, `-h`/help output, resource cleanup, shared across systems/environments.
+**Complex** - any of: >= 50 lines, 3+ genuine flags, structured logging, `-h`/help output, resource cleanup, shared across systems/environments.
 
 When in doubt, prefer **Simple**.
 
