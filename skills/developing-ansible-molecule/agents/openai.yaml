@@ -1,0 +1,4 @@
+interface:
+  display_name: "Developing Ansible Molecule"
+  short_description: "Design, implement, review ansible-native Molecule tests"
+  default_prompt: "Use $developing-ansible-molecule to design, implement, and review Molecule tests for Ansible roles, collections, and playbooks using modern ansible-native patterns."
