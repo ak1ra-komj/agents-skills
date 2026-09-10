@@ -55,7 +55,6 @@ One shell code block with one-liner comments for the 4-6 most frequent tasks
 
 - Write in **English**.
 - Use RFC 2119 keywords (`MUST`, `SHOULD`, `MUST NOT`) selectively - reserve them for hard constraints where violation produces broken, incorrect, or insecure output. For routine guidance, use plain imperative language (e.g., "Run tests with `pytest`", "Format with `ruff format`"). Overusing RFC 2119 keywords dilutes their signal.
-- Omit content already in `README.md` and link there instead.
 - Prefer bullet lists and short paragraphs over prose.
 - Do not use emoji, em dashes, or excess bold/italic text.
 - Use plain Markdown (no HTML) and only ASCII punctuation.
