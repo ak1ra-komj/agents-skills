@@ -7,7 +7,7 @@ description: Use when writing, reviewing, or refactoring a POSIX shell script (/
 
 This skill covers any task involving **writing, reviewing, or refactoring** a POSIX-compliant shell script (`/bin/sh`).
 
-**Do not use Bash-specific features.** See [common.md](common.md) for the full list of bash-isms to avoid.
+**Do not use Bash-specific features.** See [references/common.md](references/common.md) for the full list of bash-isms to avoid.
 
 ## Step 1 - Classify the Script
 
@@ -21,7 +21,7 @@ When in doubt, prefer **Simple**.
 
 ## Step 2 - Follow the Reference Document
 
-Load **[common.md](common.md)** first, then load the matching document:
+Load **[references/common.md](references/common.md)** first, then load the matching document:
 
-- **[developing-simple-posix-shell-scripts.md](developing-simple-posix-shell-scripts.md)** - Load this when classified as Simple.
-- **[developing-complex-posix-shell-scripts.md](developing-complex-posix-shell-scripts.md)** - Load this when classified as Complex. Also load **[reference-code-blocks.md](reference-code-blocks.md)** to compose only the blocks the script actually needs.
+- **[references/developing-simple-posix-shell-scripts.md](references/developing-simple-posix-shell-scripts.md)** - Load this when classified as Simple.
+- **[references/developing-complex-posix-shell-scripts.md](references/developing-complex-posix-shell-scripts.md)** - Load this when classified as Complex. Also load **[references/reference-code-blocks.md](references/reference-code-blocks.md)** to compose only the blocks the script actually needs.

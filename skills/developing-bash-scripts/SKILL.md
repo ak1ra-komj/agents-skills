@@ -21,7 +21,7 @@ If the result is **Simple** and the script uses no Bash-specific features (`[[ ]
 
 ## Step 2 - Follow the Reference Document
 
-Load **[common.md](common.md)** first, then load the matching document:
+Load **[references/common.md](references/common.md)** first, then load the matching document:
 
-- **[developing-simple-bash-scripts.md](developing-simple-bash-scripts.md)** - Load this when classified as Simple.
-- **[developing-complex-bash-scripts.md](developing-complex-bash-scripts.md)** - Load this when classified as Complex. Also load **[reference-code-blocks.md](reference-code-blocks.md)** to compose only the blocks the script actually needs.
+- **[references/developing-simple-bash-scripts.md](references/developing-simple-bash-scripts.md)** - Load this when classified as Simple.
+- **[references/developing-complex-bash-scripts.md](references/developing-complex-bash-scripts.md)** - Load this when classified as Complex. Also load **[references/reference-code-blocks.md](references/reference-code-blocks.md)** to compose only the blocks the script actually needs.
