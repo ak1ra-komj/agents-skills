@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Instruction Compressor"
+  short_description: "Compress Agent Skills while preserving behavioral constraints"
+  default_prompt: "Use $agent-instruction-compressor to run a final compression pass on this skill without losing behavioral constraints."
