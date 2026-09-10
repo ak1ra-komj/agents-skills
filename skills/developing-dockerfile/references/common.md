@@ -10,7 +10,7 @@ Applies to every Dockerfile, regardless of language or stage count.
 
 ## Base Images
 
-- You MUST NOT use the `latest` tag or an untagged base image in images that are published or deployed. Pin a specific version tag, e.g. `python:3.13-slim-bookworm`.
+- You MUST NOT use the `latest` tag or an untagged base image in images that are published or deployed. Pin a specific version tag, e.g. `python:3.13-slim-trixie`.
 - Pin by digest (`@sha256:...`) when reproducible builds or supply-chain integrity matter.
 - Prefer official images and images maintained by the upstream project.
 - Choose the smallest base that meets runtime needs, in this order: `scratch`, distroless, `-slim` / Alpine, full distribution image.

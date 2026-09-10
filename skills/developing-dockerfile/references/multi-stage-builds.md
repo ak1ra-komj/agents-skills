@@ -7,14 +7,14 @@ Use multiple stages to keep build toolchains, source code, and intermediate file
 ```dockerfile
 # syntax=docker/dockerfile:1
 
-FROM golang:1.23-bookworm AS build
+FROM golang:1.23-trixie AS build
 WORKDIR /src
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
 RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/app ./cmd/app
 
-FROM gcr.io/distroless/static-debian12:nonroot
+FROM gcr.io/distroless/static-debian13:nonroot
 COPY --from=build /out/app /app
 USER nonroot
 ENTRYPOINT ["/app"]
@@ -28,7 +28,7 @@ ENTRYPOINT ["/app"]
 ## Choosing the Runtime Base
 
 - `scratch` is the smallest option but has no shell, CA certificates, timezone data, or `/etc/passwd`. Use it only for fully static binaries.
-- Distroless (`gcr.io/distroless/static-debian12`, `cc-debian12`, `base-debian12`) adds CA certificates, `/etc/passwd`, and a `nonroot` user without a shell or package manager.
+- Distroless (`gcr.io/distroless/static-debian13`, `cc-debian13`, `base-debian13`) adds CA certificates, `/etc/passwd`, and a `nonroot` user without a shell or package manager.
 - Use `-slim` or Alpine when the application needs a shell, a package manager, or glibc/musl-specific libraries.
 - Static Go and Rust binaries SHOULD be built with `CGO_ENABLED=0` (Go) or a static target (Rust) when targeting `scratch`.
 
