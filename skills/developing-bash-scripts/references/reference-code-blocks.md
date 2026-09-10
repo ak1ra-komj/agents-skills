@@ -87,7 +87,7 @@ set_log_format() {
 
 ## 3. Dependency Check
 
-Include this when the script relies on external commands that may not be present.
+Include this when the script relies on external commands that may not be present. It calls `log_error`, so include the Logging Subsystem first.
 
 ```bash
 require_command() {
