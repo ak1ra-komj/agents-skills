@@ -1,0 +1,4 @@
+interface:
+  display_name: "Developing POSIX Shell Scripts"
+  short_description: "Write and review portable POSIX shell scripts"
+  default_prompt: "Use $developing-posix-shell-scripts to write, review, or refactor a POSIX shell script for /bin/sh environments."

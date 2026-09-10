@@ -1,0 +1,4 @@
+interface:
+  display_name: "Developing Dockerfile"
+  short_description: "Write and review Dockerfiles and Containerfiles"
+  default_prompt: "Use $developing-dockerfile to write, review, or refactor a Dockerfile or Containerfile."

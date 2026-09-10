@@ -1,0 +1,4 @@
+interface:
+  display_name: "Keep a Changelog"
+  short_description: "Maintain changelogs and prepare releases"
+  default_prompt: "Use $keep-a-changelog to prepare a release and review or refactor CHANGELOG.md."

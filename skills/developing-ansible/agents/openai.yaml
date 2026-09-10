@@ -1,0 +1,4 @@
+interface:
+  display_name: "Developing Ansible"
+  short_description: "Write and review Ansible playbooks, roles, tasks"
+  default_prompt: "Use $developing-ansible to write, review, or refactor Ansible playbooks, roles, and tasks."

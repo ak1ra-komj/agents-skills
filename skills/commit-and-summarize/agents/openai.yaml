@@ -1,0 +1,4 @@
+interface:
+  display_name: "Commit and Summarize"
+  short_description: "Commit changes and write session summaries"
+  default_prompt: "Use $commit-and-summarize to commit the current changes and write a session summary."

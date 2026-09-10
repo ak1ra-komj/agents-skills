@@ -1,0 +1,4 @@
+interface:
+  display_name: "Developing Bash Scripts"
+  short_description: "Write and review robust Bash scripts"
+  default_prompt: "Use $developing-bash-scripts to write, review, or refactor a Bash script."
