@@ -81,10 +81,6 @@ independent user-facing changes:
 - Multiple commits that together implement one feature or fix SHOULD be
   consolidated into one changelog bullet.
 
-The commit heuristics above remain the starting point for mapping individual
-commits to sections; this principle filters the results down to the net set
-of user-facing changes.
-
 ## Workflow - new version entry
 
 1. Read `CHANGELOG.md` to identify the **last released version** and its date.
@@ -105,11 +101,9 @@ of user-facing changes.
 ## Workflow - restructure entire CHANGELOG.md
 
 1. Read the full `CHANGELOG.md` and note all existing version blocks.
-2. Rewrite the file preserving all versions and dates but enforcing:
-   - Correct header and intro paragraph.
-   - Consistent section names and ordering.
-   - Bullet style: start each item with a capital letter, no trailing period.
-3. Run `date +%Y-%m-%d` and confirm the latest version date is still accurate.
+2. Rewrite the file preserving all versions and dates but enforcing the correct
+   header and intro paragraph, consistent section names and ordering, and the
+   bullet style in "Style rules" below.
 
 ## Style rules
 
@@ -118,8 +112,7 @@ of user-facing changes.
   Example: `Add retry logic for HTTP requests`
 - Keep bullets concise - one line per entry where possible.
 - Wrap code identifiers, file paths, and module names in backticks.
-- Use `date +%Y-%m-%d` for dates; do not guess them.
-- Output SHOULD NOT use emoji, em dashes, or excess bold/italic text.
-- Output SHOULD be plain Markdown (no HTML) and use only ASCII punctuation.
+- Output SHOULD be plain Markdown (no HTML) using only ASCII punctuation,
+  without emoji, em dashes, or excess bold/italic text.
 - When release facts cannot be determined from `CHANGELOG.md`, git history, or user input,
   output MUST NOT guess; instead state "Insufficient information".
