@@ -5,8 +5,6 @@ description: Use when writing, reviewing, or refactoring a POSIX shell script (/
 
 # developing-posix-shell-scripts skill
 
-This skill covers any task involving **writing, reviewing, or refactoring** a POSIX-compliant shell script (`/bin/sh`).
-
 **Do not use Bash-specific features.** See [references/common.md](references/common.md) for the full list of bash-isms to avoid.
 
 ## Step 1 - Classify the Script
