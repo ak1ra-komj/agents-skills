@@ -2,16 +2,7 @@
 
 ## Run as Non-Root
 
-- Create a dedicated user and switch to it before `ENTRYPOINT`:
-
-```dockerfile
-RUN groupadd --system --gid 10001 app \
-    && useradd --system --uid 10001 --gid app --no-create-home --shell /usr/sbin/nologin app
-COPY --chown=app:app --from=build /out/app /app
-USER 10001:10001
-ENTRYPOINT ["/app"]
-```
-
+- Create a dedicated user and switch to it before `ENTRYPOINT`.
 - Use an explicit numeric UID/GID in `USER`; names may not resolve when the image runs in another environment.
 - Prefer an existing non-root user from distroless (`nonroot`) or the base image when one is available.
 - Copy files with `COPY --chown` so no later `chown` layer is needed.
@@ -20,16 +11,8 @@ ENTRYPOINT ["/app"]
 ## Secrets
 
 - You MUST NOT put secrets in `ARG`, `ENV`, `LABEL`, or `COPY`. Build arguments and environment values are visible in image metadata and history, and copied secrets remain in layers even if deleted later.
-- Use BuildKit secret mounts for build-time credentials:
-
-```dockerfile
-RUN --mount=type=secret,id=netrc,target=/root/.netrc pip install -r requirements.txt
-```
-
-```bash
-docker build --secret id=netrc,src="${HOME}/.netrc" .
-```
-
+- Use BuildKit secret mounts (`--mount=type=secret`) for build-time credentials;
+  the matching flag is `docker build --secret id=<id>,src=<path> .`
 - Use `--mount=type=ssh` for private repositories and `docker build --ssh default`.
 - Exclude secret files from the build context with `.dockerignore`.
 
@@ -38,7 +21,6 @@ docker build --secret id=netrc,src="${HOME}/.netrc" .
 - Verify downloaded artifacts with checksums or signatures. Do not pipe remote scripts directly into a shell (`curl ... | sh`).
 - Prefer images that publish provenance. BuildKit can attach SBOM and provenance attestations with `--sbom=true --provenance=true`.
 - Scan images with `trivy`, `grype`, or `docker scout` as part of CI.
-- Keep base images updated and rebuild on base image security releases.
 
 ## Attack Surface
 

@@ -40,15 +40,7 @@ ENTRYPOINT ["/app"]
 
 ## Cross-Platform Builds
 
-Build on the native platform and cross-compile when the language supports it. This avoids slow emulated builds:
-
-```dockerfile
-FROM --platform=$BUILDPLATFORM golang:1.23 AS build
-ARG TARGETOS
-ARG TARGETARCH
-WORKDIR /src
-COPY . .
-RUN GOOS=$TARGETOS GOARCH=$TARGETARCH CGO_ENABLED=0 go build -trimpath -o /out/app ./cmd/app
-```
-
-`TARGETOS` and `TARGETARCH` are automatic build arguments, but they MUST be redeclared with `ARG` inside a stage before a `RUN` can use them.
+Build on the native platform and cross-compile when the language supports it;
+this avoids slow emulated builds. `TARGETOS` and `TARGETARCH` are automatic
+build arguments, but they MUST be redeclared with `ARG` inside a stage before a
+`RUN` can use them.

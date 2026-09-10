@@ -5,8 +5,6 @@ description: Use when writing, reviewing, or refactoring a Dockerfile or Contain
 
 # developing-dockerfile skill
 
-This skill covers any task involving **writing, reviewing, or refactoring** a Dockerfile (or Containerfile).
-
 ## Rule of Thumb
 
 If the project already has Dockerfiles, follow them in terms of base images, structure, and conventions to maintain consistency. If no relevant examples exist, apply the guidelines in this skill and its reference documents.

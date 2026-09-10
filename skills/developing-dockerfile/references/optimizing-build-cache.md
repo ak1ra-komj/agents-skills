@@ -34,15 +34,7 @@ RUN apt-get update \
 
 ## BuildKit Cache Mounts
 
-Cache mounts persist package manager caches across builds without storing them in the image:
-
-```dockerfile
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
-RUN --mount=type=cache,target=/root/.npm npm ci
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && apt-get install -y --no-install-recommends ...
-```
+Cache mounts persist package manager caches across builds.
 
 - Use `sharing=locked` for package managers that must not run concurrently.
 - Cache mounts do not appear in the final image, so they do not inflate its size. When a cache mount is used, the manual cache cleanup in the same `RUN` becomes unnecessary.
