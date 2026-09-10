@@ -97,8 +97,7 @@ installs them before the first playbook runs.
 - `dependency.name: galaxy` (default) installs `requirements.yml` for roles and
   `collections.yml` for collections. Override with `options.role-file` and
   `options.requirements-file`.
-- Reference scenario-local files with `${MOLECULE_SCENARIO_DIRECTORY}`, for
-  example `requirements-file: ${MOLECULE_SCENARIO_DIRECTORY}/requirements.yml`.
+- Reference scenario-local files with `${MOLECULE_SCENARIO_DIRECTORY}`.
 - `dependency.name: shell` with `command:` covers non-Galaxy setup; set
   `dependency.enabled: false` only when dependencies are already present.
 - Role and collection search paths are configured through `ansible.cfg`, not
@@ -108,7 +107,8 @@ installs them before the first playbook runs.
 
 Legacy configurations use `driver`, `platforms`, and `provisioner`. They still
 run, but do not choose them for new work. A legacy config requires `platforms`; an
-ansible-native config requires none.
+ansible-native config requires none. Legacy material lives in the official docs
+under "Pre Ansible-Native Configuration".
 
 The two models cannot be mixed in one file. The schema rejects combinations such
 as `ansible.executor.args` with `provisioner.ansible_args`, `ansible.cfg` with

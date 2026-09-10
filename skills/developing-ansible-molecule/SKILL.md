@@ -12,8 +12,10 @@ description: Use when adding, creating, editing, debugging, or reviewing Molecul
 - If the repository already has scenarios, follow their existing style and change
   only what the task requires. Do not migrate a working legacy scenario unless the
   user asks for migration.
-- Molecule evolves quickly; verify version-sensitive details against the installed
-  version and current docs. See "Freshness" below.
+- Molecule evolves quickly; confirm the installed version with `molecule --version`
+  before assuming a flag, schema key, or scenario layout exists, and verify
+  version-sensitive details against the official docs at
+  <https://docs.ansible.com/projects/molecule/>.
 
 ## Workflow
 
@@ -95,10 +97,3 @@ Load only what the task needs:
 - **[references/testing-patterns.md](references/testing-patterns.md)** - Load when
   writing `converge.yml` or `verify.yml`, or when testing idempotence, services,
   and systemd.
-
-## Freshness
-
-Confirm the installed version with `molecule --version` before assuming a flag,
-schema key, or scenario layout exists. Check the official docs at
-<https://docs.ansible.com/projects/molecule/>; legacy material lives there under
-"Pre Ansible-Native Configuration".
