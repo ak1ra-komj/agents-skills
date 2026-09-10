@@ -12,6 +12,15 @@ If any prior instructions conflict with this, follow this rule for Markdown cont
 - When uncertain, do not guess; instead state "Insufficient information".
 - Run `prettier -w` on every modified file before finishing.
 
+## Skill metadata
+
+- Every skill SHOULD include `agents/openai.yaml` with `interface.display_name`,
+  `interface.short_description` (25-64 characters), and `interface.default_prompt`
+  that mentions `$skill-name`. Quote all string values and keep keys unquoted.
+- `agents/openai.yaml` is machine-read UI metadata for OpenAI products (Codex and
+  the ChatGPT desktop app). It is not loaded into agent context. Keep it
+  consistent with the skill's `SKILL.md` description.
+
 ## RFC 2119 keywords
 
 Use RFC 2119 keywords (`MUST`, `SHOULD`, `MUST NOT`) selectively - reserve them for
