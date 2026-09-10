@@ -5,8 +5,6 @@ description: Use when writing, reviewing, or refactoring Ansible playbooks, role
 
 # developing-ansible skill
 
-This skill covers any task involving **writing, reviewing, or refactoring** Ansible playbooks, roles, or tasks.
-
 ## Rule of Thumb
 
 If the project already has existing examples, follow them in terms of structure, naming, and style to maintain consistency.

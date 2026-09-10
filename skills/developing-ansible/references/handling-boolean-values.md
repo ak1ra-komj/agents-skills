@@ -1,27 +1,18 @@
 # Handling Boolean Values in Ansible
 
-Boolean handling in Ansible is a common source of bugs. The three mechanisms -
-YAML booleans, the `| ansible.builtin.bool` filter, and the `is ansible.builtin.truthy` / `is ansible.builtin.falsy` tests -
-each behave differently, and mixing them up produces hard-to-debug surprises.
+Boolean handling in Ansible is a common source of bugs. YAML booleans, the
+`| ansible.builtin.bool` filter, and the `is ansible.builtin.truthy` /
+`is ansible.builtin.falsy` tests each behave differently, and mixing them up
+produces hard-to-debug surprises.
 
 ## The Three Mechanisms
 
 ### 1. YAML Native Booleans
 
-YAML 1.1 (used by Ansible) recognises a fixed set of keywords as native booleans:
-
-| True                   | False                     |
-| ---------------------- | ------------------------- |
-| `true`, `True`, `TRUE` | `false`, `False`, `FALSE` |
-| `yes`, `Yes`, `YES`    | `no`, `No`, `NO`          |
-| `on`, `On`, `ON`       | `off`, `Off`, `OFF`       |
-
-These are parsed into Python `True` / `False` **before** Jinja2 ever sees them.
-Any other casing (e.g. `TrUE`, `FaLSe`) is treated as a plain string.
-
-You SHOULD use lowercase `true` / `false` as the canonical form for
-boolean literals in YAML. You SHOULD NOT use `yes`/`no` or `on`/`off` - they are valid
-but ambiguous in prose context.
+YAML 1.1 (used by Ansible) parses `true` / `false`, `yes` / `no`, and
+`on` / `off` (any casing) into Python `True` / `False` before Jinja2 ever sees
+them; any other casing such as `TrUE` stays a plain string. See
+[common.md](common.md) for the canonical literal style.
 
 ### 2. `| ansible.builtin.bool` Filter
 
@@ -33,35 +24,26 @@ Converts a value to a Python bool using a **strict allowlist**:
 | `True` (Python bool), `1` (int)                     | `False` (Python bool), `0` (int), `None`             |
 
 **Values outside the allowlist emit a deprecation warning and fall back to
-`False`** (scheduled for removal in Ansible 2.23). This means:
-
-- Integer `42`, `-7` -> **`False`** (not in allowlist)
-- Non-empty list `[1, 2, 3]` -> **`False`**
-- Non-empty dict `{"key": "val"}` -> **`False`**
-- Arbitrary non-empty string `"foo"` -> **`False`**
-
-This differs sharply from Python's built-in `bool()`.
+`False`.** Integer `42`, non-empty lists and dicts, and arbitrary strings such
+as `"foo"` all become `False`, unlike Python's built-in `bool()`. Check the
+installed Ansible version's docs for when this becomes an error.
 
 ### 3. `is ansible.builtin.truthy` / `is ansible.builtin.falsy` Tests
 
 Delegates directly to Python's `bool()`, so any non-empty / non-zero value is
-truthy - matching standard Python semantics:
-
-- `42`, `-7` -> **truthy**
-- `[1, 2, 3]` -> **truthy**
-- `{"key": "val"}` -> **truthy**
-- `""`, `[]`, `{}`, `0`, `None` -> **falsy**
+truthy: `42`, `[1, 2, 3]`, and `{"key": "val"}` are truthy; `""`, `[]`, `{}`,
+`0`, and `None` are falsy.
 
 `is truthy` / `is falsy` accept an optional `convert_bool=True` argument that
-first passes the value through `| bool` before evaluating:
+first passes the value through `| bool`:
 
 ```jinja2
 {{ "yes" is ansible.builtin.truthy(convert_bool=True) }}  {# True #}
 {{ "foo" is ansible.builtin.truthy(convert_bool=True) }}  {# False - "foo" fails bool conversion #}
 ```
 
-> **Note**: `is ansible.builtin.truthy` / `is ansible.builtin.falsy` are Ansible-specific test plugins.
-> They cannot be used in pure Jinja2 environments (e.g. standalone template rendering).
+These are Ansible-specific test plugins; they cannot be used in pure Jinja2
+environments such as standalone template rendering.
 
 ## When to Use Which
 
@@ -75,58 +57,18 @@ first passes the value through `| bool` before evaluating:
 
 ## Concrete Rules
 
-**Declare feature flags with YAML native booleans.**
-
-```yaml
-# defaults/main.yaml
-my_role_enable_tls: true
-my_role_debug_mode: false
-```
-
-You SHOULD NOT use string `"true"` or `"false"` as a default value for a boolean variable.
-
-**Use `| ansible.builtin.bool` only when the source is a string representation of a boolean.**
-
-```yaml
-- name: Enable TLS when the env var says so
-  when: lookup('env', 'ENABLE_TLS') | ansible.builtin.bool
-```
-
-You MUST NOT use `| ansible.builtin.bool` on integers other than `0` / `1`, or on lists / dicts - the
-result will silently be `False`.
-
-**Use `is ansible.builtin.truthy` when the value may be any Python type and you want Python
-semantics.**
-
-```yaml
-- name: Run only when result has output
-  when: command_result.stdout is ansible.builtin.truthy
-```
-
-**You MUST NOT compare booleans with `== true` or `== false`.**
-
-```yaml
-# Bad
-when: my_flag == true
-when: my_flag == "true"
-
-# Good
-when: my_flag
-when: not my_flag
-```
-
-**You SHOULD NOT use `yes` / `no` and `on` / `off` as boolean literals in task parameters.**
-They work but are visually ambiguous:
-
-```yaml
-# Bad - "no" reads like an English word, not a boolean
-ansible.builtin.service:
-  enabled: no
-
-# Good
-ansible.builtin.service:
-  enabled: false
-```
+- Declare feature flags with YAML native booleans. Do not default a boolean
+  variable to the strings `"true"` / `"false"`.
+- Use `| ansible.builtin.bool` only when the source is a string representation
+  of a boolean, for example
+  `when: lookup('env', 'ENABLE_TLS') | ansible.builtin.bool`. You MUST NOT
+  apply it to integers other than `0` / `1`, or to lists / dicts - the result
+  is silently `False`.
+- Use `is ansible.builtin.truthy` when the value may be any Python type and you
+  want Python semantics, for example
+  `when: command_result.stdout is ansible.builtin.truthy`.
+- You MUST NOT compare booleans with `== true` or `== false`; write
+  `when: my_flag` and `when: not my_flag`.
 
 ## Quick Reference
 
@@ -151,4 +93,5 @@ false            | bool        | False                 | False
 None / null      | NoneType    | False                 | False
 ```
 
-`*` - emits a deprecation warning in Ansible >= 2.19; will become an error in 2.23.
+`*` - emits a deprecation warning; will become an error in a future release.
+Check the installed Ansible version's docs for the removal version.

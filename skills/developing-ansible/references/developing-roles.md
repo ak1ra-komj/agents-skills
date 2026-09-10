@@ -2,8 +2,6 @@
 
 Covers the directory layout, variable placement, and handler rules for Ansible roles.
 
-See [common.md](common.md) for baseline style and project conventions.
-
 ## Directory Structure
 
 Follow the standard Ansible Galaxy role layout:

@@ -29,44 +29,6 @@ Use this pattern for tasks that may fail and require recovery or guaranteed clea
 - `rescue`: runs only when a task in `block` fails; use it for recovery logic.
 - `always`: runs unconditionally after `block` or `rescue`; use it for cleanup.
 
-## Play Definition
-
-Minimal canonical play structure:
-
-```yaml
-- name: Configure web servers
-  hosts: web
-  gather_facts: true
-  become: true
-
-  tasks:
-    - name: Ensure nginx is installed
-      ansible.builtin.package:
-        name: nginx
-        state: present
-      notify: Restart nginx
-
-  handlers:
-    - name: Restart nginx
-      ansible.builtin.service:
-        name: nginx
-        state: restarted
-```
-
-## Loop with Custom Loop Variable
-
-```yaml
-- name: Create directories
-  ansible.builtin.file:
-    path: "{{ dir.path }}"
-    state: directory
-    mode: "{{ dir.mode | default('0755') }}"
-  loop: "{{ directories }}"
-  loop_control:
-    loop_var: dir
-    label: "{{ dir.path }}"
-```
-
 ## Template Task Pair
 
 ```yaml

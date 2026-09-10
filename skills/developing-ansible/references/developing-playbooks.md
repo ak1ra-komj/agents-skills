@@ -2,8 +2,6 @@
 
 Covers the structure and requirements for Ansible playbook files.
 
-See [common.md](common.md) for baseline style and project conventions.
-
 ## Play Definition
 
 Every play requires all four top-level keys:

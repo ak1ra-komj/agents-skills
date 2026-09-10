@@ -2,8 +2,6 @@
 
 Covers task key ordering, module selection, and iteration.
 
-See [common.md](common.md) for baseline style and project conventions.
-
 ## Task Key Ordering
 
 Every task follows this key order:
