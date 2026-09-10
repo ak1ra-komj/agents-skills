@@ -7,17 +7,6 @@ description: Use when the user asks to commit changes and/or summarize the curre
 
 Commit all relevant changes and write a session log as a single coordinated workflow.
 
-## Overview
-
-When wrapping up a session, this skill:
-
-1. Commits work changes with clean commit messages.
-2. Summarizes what was done and writes a session log to `.agents/sessions/`
-   using the resulting commit IDs. The session log is written locally only and
-   is not committed to git.
-
----
-
 ## Phase 1 - Commit work changes
 
 Commit only files that were modified or created during this conversation.
@@ -48,8 +37,6 @@ single commit for small or cohesive changes.
 - The body MUST be separated from the subject by a blank line and MUST be wrapped at 72 characters.
 - The commit message MUST NOT include the raw diff.
 
----
-
 ## Phase 2 - Write the session log
 
 1. Review the full conversation to identify all changes made, problems solved,
@@ -58,7 +45,8 @@ single commit for small or cohesive changes.
 3. Run `git log --oneline` (or `git log --oneline <range>`) to collect the work
    commits made during the session.
 4. Derive a short English session title from the session content.
-5. Write the file to `.agents/sessions/YYYY-MM-DD-<session-title>.md`.
+5. Write the file to `.agents/sessions/YYYY-MM-DD-<session-title>.md`. The
+   session log is written locally only and is not committed to git.
 
 ### File naming
 
@@ -114,8 +102,7 @@ Distil the most reusable or noteworthy insights from the session, such as:
 - Write in **English** throughout.
 - Keep each section concise; prefer bullet lists over prose.
 - The "Notes" section is high-value and MUST NOT be empty.
-- Retrieve dates with `date +%Y-%m-%d` and MUST NOT hardcode them.
-- Output SHOULD NOT use emoji, em dashes, or excess bold/italic text.
-- Output SHOULD be plain Markdown (no HTML) and use only ASCII punctuation.
+- Output SHOULD be plain Markdown (no HTML) using only ASCII punctuation,
+  without emoji, em dashes, or excess bold/italic text.
 - When session facts cannot be determined from the conversation, git history,
   or the working tree, output MUST NOT guess; instead state "Insufficient information".
