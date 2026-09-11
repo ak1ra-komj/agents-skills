@@ -9,6 +9,11 @@ description: Use when adding, creating, editing, debugging, or reviewing Molecul
 
 - Default to the current **ansible-native** configuration. Do not emit new
   `driver:`, `platforms:`, or `provisioner:` blocks; those are legacy constructs.
+- Treat the test instance as an ordinary Ansible managed node, not an Ansible
+  development environment. Keep Ansible, Molecule, collections, and test
+  orchestration on the control side; install only the runtime prerequisites and
+  system facilities the managed node and role under test actually require. On
+  Linux, Python is normally required on the managed node, but Ansible is not.
 - If the repository already has scenarios, follow their existing style and change
   only what the task requires. Do not migrate a working legacy scenario unless the
   user asks for migration.
@@ -48,8 +53,9 @@ Choose the smallest change that tests the requested behavior:
 | One resource set for many scenarios | `shared_state: true` with `default` as lifecycle manager                |
 
 Use a container when the content only touches packages, files, and non-init
-services. Use a systemd-capable container or a VM when the content needs systemd,
-kernel modules, mounts, or a real reboot. For scenario layout, OS matrices,
+services. Use a systemd-capable container or a VM only when the behavior under
+test genuinely depends on a booted systemd environment, kernel modules, mounts,
+or a real reboot. For scenario layout, OS matrices,
 shared state, nested collection scenarios, and upgrade or reboot design, read
 [references/scenarios.md](references/scenarios.md).
 
