@@ -1,0 +1,4 @@
+interface:
+  display_name: "Developing GitHub Actions"
+  short_description: "Write, review, debug GitHub Actions workflows"
+  default_prompt: "Use $developing-github-actions to create, review, debug, or optimize GitHub Actions workflows."

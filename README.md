@@ -46,6 +46,10 @@ Use when writing, reviewing, or refactoring a Bash script.
 
 Use when writing, reviewing, or refactoring a Dockerfile or Containerfile.
 
+### `developing-github-actions`
+
+Use when creating, modifying, reviewing, debugging, or optimizing GitHub Actions workflows in `.github/workflows`, including triggers, expressions, contexts, permissions, secrets, caching, artifacts, matrix, concurrency, reusable workflows, environments, OIDC deployments, security hardening, or diagnosing failures from real workflow runs. Does not cover authoring custom JavaScript, Docker, or composite actions.
+
 ### `developing-posix-shell-scripts`
 
 Use when writing, reviewing, or refactoring a POSIX shell script (`/bin/sh`), or when targeting Alpine, BusyBox, or any environment where Bash cannot be assumed.
