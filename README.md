@@ -22,17 +22,41 @@ When writing a new skill or reference document, ensure the `description` field u
 
 ## Available Skills
 
-| Skill                            | Description                                                                                                                                                                                                                                                                                        |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `agent-instruction-compressor`   | Use when compressing, shortening, or simplifying an existing Agent Skill or its references without losing important behavior, reducing context usage, deduplicating SKILL.md and references, reviewing progressive disclosure, or running a final compression pass before validation or packaging. |
-| `commit-and-summarize`           | Use when the user asks to commit changes and/or summarize the current session - or when wrapping up a conversation that involved code or file edits.                                                                                                                                               |
-| `developing-ansible`             | Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks.                                                                                                                                                                                                                    |
-| `developing-ansible-molecule`    | Use when adding, creating, editing, debugging, or reviewing Molecule tests for Ansible roles, collections, or playbooks.                                                                                                                                                                           |
-| `developing-bash-scripts`        | Use when writing, reviewing, or refactoring a Bash script.                                                                                                                                                                                                                                         |
-| `developing-dockerfile`          | Use when writing, reviewing, or refactoring a Dockerfile or Containerfile.                                                                                                                                                                                                                         |
-| `developing-posix-shell-scripts` | Use when writing, reviewing, or refactoring a POSIX shell script (`/bin/sh`), or when targeting Alpine, BusyBox, or any environment where Bash cannot be assumed.                                                                                                                                  |
-| `keep-a-changelog`               | Use when the user mentions preparing or publishing a new release, or asks to review or refactor `CHANGELOG.md`, following Keep a Changelog format and Semantic Versioning.                                                                                                                         |
-| `reviewing-agents-md`            | Use when writing, reviewing, or refactoring `AGENTS.md`, writing an agent guide, documenting the project for AI agents, or orienting AI coding tools to a new repository.                                                                                                                          |
+### `agent-instruction-compressor`
+
+Use when compressing, shortening, or simplifying an existing Agent Skill or its references without losing important behavior, reducing context usage, deduplicating SKILL.md and references, reviewing progressive disclosure, or running a final compression pass before validation or packaging.
+
+### `commit-and-summarize`
+
+Use when the user asks to commit changes and/or summarize the current session - or when wrapping up a conversation that involved code or file edits.
+
+### `developing-ansible`
+
+Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks.
+
+### `developing-ansible-molecule`
+
+Use when adding, creating, editing, debugging, or reviewing Molecule tests for Ansible roles, collections, or playbooks.
+
+### `developing-bash-scripts`
+
+Use when writing, reviewing, or refactoring a Bash script.
+
+### `developing-dockerfile`
+
+Use when writing, reviewing, or refactoring a Dockerfile or Containerfile.
+
+### `developing-posix-shell-scripts`
+
+Use when writing, reviewing, or refactoring a POSIX shell script (`/bin/sh`), or when targeting Alpine, BusyBox, or any environment where Bash cannot be assumed.
+
+### `keep-a-changelog`
+
+Use when the user mentions preparing or publishing a new release, or asks to review or refactor `CHANGELOG.md`, following Keep a Changelog format and Semantic Versioning.
+
+### `reviewing-agents-md`
+
+Use when writing, reviewing, or refactoring `AGENTS.md`, writing an agent guide, documenting the project for AI agents, or orienting AI coding tools to a new repository.
 
 ## Reference Documents
 
