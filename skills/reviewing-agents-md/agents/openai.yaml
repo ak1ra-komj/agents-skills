@@ -1,4 +1,0 @@
-interface:
-  display_name: "Reviewing AGENTS.md"
-  short_description: "Write and review repository AGENTS.md guides"
-  default_prompt: "Use $reviewing-agents-md to write, review, or refactor an AGENTS.md guide for a repository."

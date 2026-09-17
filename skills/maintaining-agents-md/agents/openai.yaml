@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintaining AGENTS.md"
+  short_description: "Create, review, and maintain agent guides"
+  default_prompt: "Use $maintaining-agents-md to create, review, or update AGENTS.md for this repository."
