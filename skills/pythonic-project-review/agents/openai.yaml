@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pythonic Project Review"
+  short_description: "Review and refactor Python for readability"
+  default_prompt: "Use $pythonic-project-review to review and refactor this Python project for Pythonic design and long-term maintainability."

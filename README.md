@@ -58,6 +58,10 @@ Use when writing, reviewing, or refactoring a POSIX shell script (`/bin/sh`), or
 
 Use when the user mentions preparing or publishing a new release, or asks to review or refactor `CHANGELOG.md`, following Keep a Changelog format and Semantic Versioning.
 
+### `pythonic-project-review`
+
+Use when reviewing, auditing, refactoring, or simplifying a Python project, package, module, or function for Pythonic design, readability, simplicity, or long-term maintainability.
+
 ### `reviewing-agents-md`
 
 Use when writing, reviewing, or refactoring `AGENTS.md`, writing an agent guide, documenting the project for AI agents, or orienting AI coding tools to a new repository.
