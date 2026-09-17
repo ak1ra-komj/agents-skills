@@ -13,6 +13,14 @@ summarization.
 Modify the target skill directly. If the user asks only for a review, output
 recommendations without editing files.
 
+## Fresh context
+
+Prefer running this pass in a sub-agent or other fresh context when one is
+available: it then judges the target skill without the invoking conversation's
+context. Pass the target skill path and the mode (review or write), not a
+retyped copy of the skill; the fresh agent must read the target from disk and
+must not assume context it was not given.
+
 ## Scope
 
 Review `SKILL.md` and all Markdown files in the skill (typically under
