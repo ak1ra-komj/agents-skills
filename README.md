@@ -32,7 +32,7 @@ Use when the user asks to commit changes and/or summarize the current session - 
 
 ### `developing-ansible`
 
-Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks.
+Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks, or when developing custom filter/test plugins or setting up the control-node environment.
 
 ### `developing-ansible-molecule`
 

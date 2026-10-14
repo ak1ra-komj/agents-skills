@@ -1,6 +1,6 @@
 ---
 name: developing-ansible
-description: Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks.
+description: Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks, or when developing custom filter/test plugins or setting up the control-node environment.
 ---
 
 # developing-ansible skill
@@ -23,4 +23,6 @@ Then load only the documents that match the request:
 - **[references/developing-roles.md](references/developing-roles.md)** - Load when creating or modifying a role: directory layout, `defaults/`, `vars/`, `handlers/`, `meta/`.
 - **[references/handling-boolean-values.md](references/handling-boolean-values.md)** - Load when the code involves boolean variables, `| ansible.builtin.bool`, or `is ansible.builtin.truthy` expressions.
 - **[references/jinja2-templates.md](references/jinja2-templates.md)** - Load when working with `.j2` template files or Jinja2 filter/macro expressions.
+- **[references/developing-plugins.md](references/developing-plugins.md)** - Load when writing custom filter or test plugins, or deciding whether a transformation belongs in a plugin.
+- **[references/installing-ansible.md](references/installing-ansible.md)** - Load when installing or upgrading Ansible on the control node, or when controller-side code needs extra Python dependencies.
 - **[references/reference-code-blocks.md](references/reference-code-blocks.md)** - Load when composing `block/rescue/always` patterns or other reusable canonical patterns.
