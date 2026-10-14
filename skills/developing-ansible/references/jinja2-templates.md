@@ -63,6 +63,91 @@ server {
 
 Macros keep templates DRY and make individual blocks independently testable.
 
+## Custom Filter Plugins for Complex Data
+
+Macros emit text; they are not a data-manipulation tool. When a data
+transformation is more than a short filter chain - it needs loops with
+accumulators, builds a lookup index or joins lists, applies custom merge
+semantics, or must validate input and fail with a clear message - implement
+it as a custom filter plugin instead of assembling structures with `{% set %}`
+and nested loops.
+
+Keep a single builtin filter or a one-line `selectattr` / `map` chain inline. A
+filter plugin adds a Python file that must be loaded, documented, and tested,
+so only pay that cost when the template logic would cost more to maintain.
+
+See [developing-plugins.md](developing-plugins.md) for the full criteria and
+for writing and testing custom filter and test plugins.
+
+## Jinja2 Builtins and Ansible Plugins (FQCN Naming)
+
+Ansible templates combine Jinja2 builtins with filter and test plugins from
+`ansible.builtin` and from installed collections. Many names look like Jinja2
+builtins but are not (`to_json`, `bool`, `to_nice_yaml`), so apply this rule:
+
+- A filter or test from the Jinja2 builtin lists below keeps its bare name.
+- Every filter or test that comes from a collection MUST be written with its
+  FQCN: `ansible.builtin.to_json`, `ansible.builtin.combine`,
+  `is ansible.builtin.truthy`, `community.general.json_query`. Names outside
+  the Jinja2 lists are not automatically `ansible.builtin`; the namespace
+  shows where the plugin is defined.
+- Unlike modules, the `collections:` keyword provides no short-name fallback
+  for filters and tests, so a plugin from another collection is reachable
+  only through its FQCN.
+
+The authoritative lists are in the Jinja2
+[Template Designer Documentation](https://jinja.palletsprojects.com/en/stable/templates/).
+Jinja2 3.1 provides the following builtins.
+
+### Jinja2 Builtin Filters
+
+`abs`, `attr`, `batch`, `capitalize`, `center`, `default` (alias `d`),
+`dictsort`, `escape` (alias `e`), `filesizeformat`, `first`, `float`,
+`forceescape`, `format`, `groupby`, `indent`, `int`, `items`, `join`, `last`,
+`length` (alias `count`), `list`, `lower`, `map`, `max`, `min`, `pprint`,
+`random`, `reject`, `rejectattr`, `replace`, `reverse`, `round`, `safe`,
+`select`, `selectattr`, `slice`, `sort`, `string`, `striptags`, `sum`,
+`title`, `tojson`, `trim`, `truncate`, `unique`, `upper`, `urlencode`,
+`urlize`, `wordcount`, `wordwrap`, `xmlattr`.
+
+### Jinja2 Builtin Tests
+
+`boolean`, `callable`, `defined`, `divisibleby`, `eq` (aliases `==`,
+`equalto`), `escaped`, `even`, `false`, `filter`, `float`, `ge` (alias `>=`),
+`gt` (aliases `>`, `greaterthan`), `in`, `integer`, `iterable`, `le` (alias
+`<=`), `lower`, `lt` (aliases `<`, `lessthan`), `mapping`, `ne` (alias `!=`),
+`none`, `number`, `odd`, `sameas`, `sequence`, `string`, `test`, `true`,
+`undefined`, `upper`.
+
+Filters and tests that look builtin but are not:
+
+| Seems builtin                                           | Provided by                    |
+| ------------------------------------------------------- | ------------------------------ |
+| `bool`, `to_json`, `to_nice_json`, `from_json`          | `ansible.builtin`              |
+| `to_yaml`, `to_nice_yaml`, `from_yaml`, `from_yaml_all` | `ansible.builtin`              |
+| `combine`, `dict2items`, `items2dict`, `flatten`        | `ansible.builtin`              |
+| `zip`, `split`, `regex_replace`, `ternary`, `b64encode` | `ansible.builtin`              |
+| `truthy`, `falsy`, `success`, `failed`, `changed`       | `ansible.builtin` tests        |
+| `json_query`                                            | `community.general.json_query` |
+
+`json_query` lives in `community.general`. Bare `json_query` and
+`ansible.builtin.json_query` also resolve because `ansible.builtin` carries a
+legacy redirect to `community.general.json_query`, but the redirect only
+works while that collection is installed and it hides where the plugin comes
+from. Write `community.general.json_query`.
+
+`random` and `unique` are the exception: they exist in both namespaces and
+`ansible.builtin` wins for the bare name. Bare `random` accepts a number or
+`seed=` like `ansible.builtin.random`, not Jinja2's sequence-only version. Use
+the FQCN when the Ansible behaviour matters.
+
+Jinja2's JSON filter is `tojson` and emits an HTML-safe string;
+`ansible.builtin.to_json` emits plain JSON. They are not interchangeable.
+
+Since ansible-core 2.19 each Jinja2 builtin is also addressable as
+`ansible.builtin.<name>` (`ansible.builtin.abs`); earlier cores accept only
+the bare name. Keep Jinja2 builtins bare so templates stay portable.
+
 ## Generating Structured Config Files with JSON / YAML Filters
 
 When a config file format is JSON or YAML, avoid constructing it with raw string
