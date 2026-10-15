@@ -10,8 +10,8 @@ and vars plugins, see the Ansible
 guide.
 
 Reach for a custom plugin only when the builtin toolset runs out: the Jinja2
-builtins (see [jinja2-templates.md](jinja2-templates.md)), `ansible.builtin`
-plugins, and plugins from installed collections cover most needs.
+builtins (see [jinja2.md](jinja2.md)), `ansible.builtin` plugins, and plugins
+from installed collections cover most needs.
 
 ## When to Write a Plugin
 

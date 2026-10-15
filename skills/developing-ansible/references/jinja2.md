@@ -1,4 +1,4 @@
-# Jinja2 Templates in Ansible
+# Jinja2 in Ansible
 
 Ansible uses Jinja2 for both inline expressions in playbooks/tasks and for
 `ansible.builtin.template`-rendered config files. The two contexts are different
@@ -79,21 +79,12 @@ so only pay that cost when the template logic would cost more to maintain.
 See [developing-plugins.md](developing-plugins.md) for the full criteria and
 for writing and testing custom filter and test plugins.
 
-## Jinja2 Builtins and Ansible Plugins (FQCN Naming)
+## Jinja2 Builtin Filters and Tests
 
-Ansible templates combine Jinja2 builtins with filter and test plugins from
-`ansible.builtin` and from installed collections. Many names look like Jinja2
-builtins but are not (`to_json`, `bool`, `to_nice_yaml`), so apply this rule:
-
-- A filter or test from the Jinja2 builtin lists below keeps its bare name.
-- Every filter or test that comes from a collection MUST be written with its
-  FQCN: `ansible.builtin.to_json`, `ansible.builtin.combine`,
-  `is ansible.builtin.truthy`, `community.general.json_query`. Names outside
-  the Jinja2 lists are not automatically `ansible.builtin`; the namespace
-  shows where the plugin is defined.
-- Unlike modules, the `collections:` keyword provides no short-name fallback
-  for filters and tests, so a plugin from another collection is reachable
-  only through its FQCN.
+Jinja2 expressions combine Jinja2 builtins with filter and test plugins from
+`ansible.builtin` and from installed collections. Everything that is not in
+the two lists below comes from a collection plugin and is called by FQCN
+(see [common.md](common.md)).
 
 The authoritative lists are in the Jinja2
 [Template Designer Documentation](https://jinja.palletsprojects.com/en/stable/templates/).
@@ -146,7 +137,8 @@ Jinja2's JSON filter is `tojson` and emits an HTML-safe string;
 
 Since ansible-core 2.19 each Jinja2 builtin is also addressable as
 `ansible.builtin.<name>` (`ansible.builtin.abs`); earlier cores accept only
-the bare name. Keep Jinja2 builtins bare so templates stay portable.
+the bare name. Keep Jinja2 builtins bare so expressions stay portable across
+ansible-core versions.
 
 ## Generating Structured Config Files with JSON / YAML Filters
 

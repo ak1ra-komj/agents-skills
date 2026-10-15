@@ -22,7 +22,7 @@ Then load only the documents that match the request:
 - **[references/developing-playbooks.md](references/developing-playbooks.md)** - Load when writing or reviewing playbook files: play definitions, `import_*` vs `include_*`, error handling at play level.
 - **[references/developing-roles.md](references/developing-roles.md)** - Load when creating or modifying a role: directory layout, `defaults/`, `vars/`, `handlers/`, `meta/`.
 - **[references/handling-boolean-values.md](references/handling-boolean-values.md)** - Load when the code involves boolean variables, `| ansible.builtin.bool`, or `is ansible.builtin.truthy` expressions.
-- **[references/jinja2-templates.md](references/jinja2-templates.md)** - Load when working with `.j2` template files or Jinja2 filter/macro expressions.
+- **[references/jinja2.md](references/jinja2.md)** - Load when working with `.j2` template files or with Jinja2 expressions anywhere (filters, tests, conditions, defaults, undefined handling).
 - **[references/developing-plugins.md](references/developing-plugins.md)** - Load when writing custom filter or test plugins, or deciding whether a transformation belongs in a plugin.
 - **[references/installing-ansible.md](references/installing-ansible.md)** - Load when installing or upgrading Ansible on the control node, or when controller-side code needs extra Python dependencies.
 - **[references/reference-code-blocks.md](references/reference-code-blocks.md)** - Load when composing `block/rescue/always` patterns or other reusable canonical patterns.
