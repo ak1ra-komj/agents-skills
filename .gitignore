@@ -54,3 +54,7 @@ nohup.out
 docs/sessions/*
 .agents/sessions/*
 .agents/state/sessions/*
+
+# https://api-docs.deepseek.com/zh-cn/quick_start/token_usage
+# ./scripts/skill-sizes.py --tokenizer
+deepseek_v4_tokenizer/
