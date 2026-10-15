@@ -51,9 +51,8 @@
 nohup.out
 
 ## LLM
-docs/sessions/*
+.agents/plans/*
 .agents/sessions/*
-.agents/state/sessions/*
 
 # https://api-docs.deepseek.com/zh-cn/quick_start/token_usage
 # ./scripts/skill-sizes.py --tokenizer
