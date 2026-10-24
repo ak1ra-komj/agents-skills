@@ -2,6 +2,10 @@
 
 Covers the structure and requirements for Ansible playbook files.
 
+Molecule lifecycle playbooks are ordinary playbooks covered by these rules.
+When writing or reviewing them, also load the `developing-ansible-molecule` skill
+for scenario layout, `molecule.yml`, and test execution.
+
 ## Play Definition
 
 Every play requires all four top-level keys:

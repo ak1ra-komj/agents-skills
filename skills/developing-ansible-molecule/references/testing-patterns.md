@@ -1,5 +1,9 @@
 # Testing patterns
 
+Playbook examples here are ordinary Ansible playbooks. Follow the
+`developing-ansible` skill for play structure, task conventions, Jinja2, and
+boolean values.
+
 ## Converge
 
 - Call the role the way a real user calls it: `ansible.builtin.include_role` with

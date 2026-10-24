@@ -36,7 +36,7 @@ Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks, 
 
 ### `developing-ansible-molecule`
 
-Use when adding, creating, editing, debugging, or reviewing Molecule tests for Ansible roles, collections, or playbooks.
+Use when adding, creating, editing, debugging, or reviewing Molecule tests for Ansible roles, collections, or playbooks. Lifecycle playbooks follow the `developing-ansible` conventions.
 
 ### `developing-bash-scripts`
 

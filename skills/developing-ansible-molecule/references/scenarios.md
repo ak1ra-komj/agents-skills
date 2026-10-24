@@ -1,5 +1,9 @@
 # Scenario design
 
+Lifecycle playbooks are ordinary Ansible playbooks. Write them under the
+`developing-ansible` conventions; this document covers only how they fit into a
+scenario.
+
 A scenario is a directory with a `molecule.yml` and the lifecycle playbooks it
 needs; its name is the directory name. `molecule init scenario <name>` scaffolds
 one. Prefer the smallest layout that expresses the test: extra inventory hosts

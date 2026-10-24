@@ -10,6 +10,13 @@ description: Use when writing, reviewing, or refactoring Ansible playbooks, role
 If the project already has existing examples, follow them in terms of structure, naming, and style to maintain consistency.
 If no relevant examples exist, apply the guidelines defined in this skill and its reference documents.
 
+## Related Skills
+
+When the task involves Molecule scenarios, lifecycle playbooks, or `molecule.yml`,
+load the **`developing-ansible-molecule`** skill in addition to this one. It
+covers scenario design, ansible-native configuration, inventory, and verifier
+patterns.
+
 ## Reference Documents
 
 Load:

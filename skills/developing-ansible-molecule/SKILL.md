@@ -1,12 +1,19 @@
 ---
 name: developing-ansible-molecule
-description: Use when adding, creating, editing, debugging, or reviewing Molecule tests for Ansible roles, collections, or playbooks. Covers scenarios and lifecycle playbooks (create, prepare, converge, verify, destroy, cleanup, side_effect), inventory, idempotence, verifier design, CI runs, and legacy pre-ansible-native configurations or migration.
+description: Use when adding, creating, editing, debugging, or reviewing Molecule tests for Ansible roles, collections, or playbooks. Covers scenarios and lifecycle playbooks (create, prepare, converge, verify, destroy, cleanup, side_effect), inventory, idempotence, verifier design, CI runs, and legacy pre-ansible-native configurations or migration. Lifecycle playbooks follow the `developing-ansible` conventions.
 ---
 
 # developing-ansible-molecule skill
 
 ## Rule of Thumb
 
+- Every lifecycle playbook (`create.yml`, `prepare.yml`, `converge.yml`,
+  `verify.yml`, `side_effect.yml`, `destroy.yml`, `cleanup.yml`) is an ordinary
+  Ansible playbook. Before writing or editing one, load the **`developing-ansible`**
+  skill and follow its rules for playbooks, tasks, Jinja2, and boolean values.
+  Molecule does not relax the general Ansible requirements. Molecule-specific
+  conventions, such as the default `.yml` lifecycle filenames, take precedence
+  where the two differ.
 - Default to the current **ansible-native** configuration. Do not emit new
   `driver:`, `platforms:`, or `provisioner:` blocks; those are legacy constructs.
 - Treat the test instance as an ordinary Ansible managed node, not an Ansible
@@ -73,6 +80,10 @@ Respect the lifecycle responsibilities:
 - `cleanup.yml` - reset artifacts outside the instance; must tolerate running
   before resources exist, because it runs before every destroy.
 
+Write these playbooks under the `developing-ansible` conventions: descriptive
+play and task names, explicit `hosts`, `gather_facts`, and `become`, FQCN module
+names, consistent task key order, and idempotent modules.
+
 ### 4. Validate
 
 Run the shortest loop that proves the change, then the full lifecycle for each
@@ -89,6 +100,15 @@ Debug with `molecule --debug test`; keep a failed environment with
 Also run the repository's existing `ansible-lint`, YAML lint, and CI checks. Do
 not assume the local host has containers, systemd, or root; read the CI setup
 first. Do not destroy a user's long-lived test environment without asking.
+
+## Related Skills
+
+- **`developing-ansible`** - load before authoring or reviewing any lifecycle
+  playbook, and for the role, collection, or playbook under test. Its `common.md`,
+  `developing-playbooks.md`, `developing-tasks.md`, and `jinja2.md` references
+  apply to Molecule work.
+- If the request concerns only the Ansible content under test and not its Molecule
+  harness, use `developing-ansible` instead of this skill.
 
 ## Reference Documents
 
