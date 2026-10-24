@@ -2,6 +2,8 @@
 
 A curated collection of agent skills for AI coding assistants (GitHub Copilot, Cursor, etc.).
 
+Browse the rendered skills at <https://skills.ak1ra.xyz/>.
+
 ## Installation
 
 Install all skills into the current project:
@@ -22,47 +24,47 @@ When writing a new skill or reference document, ensure the `description` field u
 
 ## Available Skills
 
-### `agent-instruction-compressor`
+### [`agent-instruction-compressor`](skills/agent-instruction-compressor/SKILL.md)
 
 Use when compressing, shortening, or simplifying an existing Agent Skill or its references without losing important behavior, reducing context usage, deduplicating SKILL.md and references, reviewing progressive disclosure, or running a final compression pass before validation or packaging.
 
-### `commit-and-summarize`
+### [`commit-and-summarize`](skills/commit-and-summarize/SKILL.md)
 
 Use when the user asks to commit changes and/or summarize the current session - or when wrapping up a conversation that involved code or file edits.
 
-### `developing-ansible`
+### [`developing-ansible`](skills/developing-ansible/SKILL.md)
 
 Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks, or when developing custom filter/test plugins or setting up the control-node environment.
 
-### `developing-ansible-molecule`
+### [`developing-ansible-molecule`](skills/developing-ansible-molecule/SKILL.md)
 
 Use when adding, creating, editing, debugging, or reviewing Molecule tests for Ansible roles, collections, or playbooks. Lifecycle playbooks follow the `developing-ansible` conventions.
 
-### `developing-bash-scripts`
+### [`developing-bash-scripts`](skills/developing-bash-scripts/SKILL.md)
 
 Use when writing, reviewing, or refactoring a Bash script.
 
-### `developing-dockerfile`
+### [`developing-dockerfile`](skills/developing-dockerfile/SKILL.md)
 
 Use when writing, reviewing, or refactoring a Dockerfile or Containerfile.
 
-### `developing-github-actions`
+### [`developing-github-actions`](skills/developing-github-actions/SKILL.md)
 
 Use when creating, modifying, reviewing, debugging, or optimizing GitHub Actions workflows in `.github/workflows`, including triggers, expressions, contexts, permissions, secrets, caching, artifacts, matrix, concurrency, reusable workflows, environments, OIDC deployments, security hardening, or diagnosing failures from real workflow runs. Does not cover authoring custom JavaScript, Docker, or composite actions.
 
-### `developing-posix-shell-scripts`
+### [`developing-posix-shell-scripts`](skills/developing-posix-shell-scripts/SKILL.md)
 
 Use when writing, reviewing, or refactoring a POSIX shell script (`/bin/sh`), or when targeting Alpine, BusyBox, or any environment where Bash cannot be assumed.
 
-### `keep-a-changelog`
+### [`keep-a-changelog`](skills/keep-a-changelog/SKILL.md)
 
 Use when the user mentions preparing or publishing a new release, or asks to review or refactor `CHANGELOG.md`, following Keep a Changelog format and Semantic Versioning.
 
-### `maintaining-agents-md`
+### [`maintaining-agents-md`](skills/maintaining-agents-md/SKILL.md)
 
 Use when creating, reviewing, updating, or maintaining `AGENTS.md` files and nested agent instructions, documenting a repository for coding agents, or orienting AI coding tools to an unfamiliar repository.
 
-### `pythonic-project-review`
+### [`pythonic-project-review`](skills/pythonic-project-review/SKILL.md)
 
 Use when reviewing, auditing, refactoring, or simplifying a Python project, package, module, or function for Pythonic design, readability, simplicity, or long-term maintainability.
 
@@ -70,3 +72,19 @@ Use when reviewing, auditing, refactoring, or simplifying a Python project, pack
 
 - [ChatGPT custom instruction](docs/chatgpt-custom-instruction.md) - a reusable instruction block for ChatGPT and similar web chatbots.
 - [Summarize current chat](docs/summarize-current-chat.md) - a template for web chatbot session summaries (no filesystem access).
+
+## Documentation
+
+The skills are rendered at <https://skills.ak1ra.xyz/> with MkDocs and deployed
+to GitHub Pages.
+
+Build and preview the site locally:
+
+```bash
+uv sync --group docs
+uv run --group docs mkdocs serve
+```
+
+The docs toolchain is managed by uv and pinned in `uv.lock`. MkDocs uses
+`skills/` directly as its docs directory. The build runs with `--strict`, so add
+every new skill and reference document to the `nav` section of `mkdocs.yml`.

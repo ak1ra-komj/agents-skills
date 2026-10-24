@@ -1,0 +1,104 @@
+# Build the site with:
+#   uv sync --group docs
+#   uv run --group docs mkdocs build --strict
+
+site_name: Agent Skills
+site_description: A curated collection of agent skills for AI coding assistants.
+site_author: ak1ra-komj
+site_url: https://skills.ak1ra.xyz/
+repo_url: https://github.com/ak1ra-komj/agents-skills
+repo_name: ak1ra-komj/agents-skills
+copyright: "(c) 2026 ak1ra-komj"
+
+docs_dir: skills
+site_dir: site
+
+exclude_docs: |
+  **/agents/**
+  developing-github-actions/README.md
+
+theme:
+  name: terminal
+  palette: gruvbox_dark
+  features:
+    - footer.prev_next
+    - navigation.side.indexes
+
+nav:
+  - Home: README.md
+  - Agent Instruction Compressor:
+      - Agent Instruction Compressor: agent-instruction-compressor/SKILL.md
+  - Commit and Summarize:
+      - Commit and Summarize: commit-and-summarize/SKILL.md
+  - Developing Ansible:
+      - Developing Ansible: developing-ansible/SKILL.md
+      - Common Ansible Requirements: developing-ansible/references/common.md
+      - Developing Ansible Playbooks: developing-ansible/references/developing-playbooks.md
+      - Developing Ansible Filter and Test Plugins: developing-ansible/references/developing-plugins.md
+      - Developing Ansible Roles: developing-ansible/references/developing-roles.md
+      - Developing Ansible Tasks: developing-ansible/references/developing-tasks.md
+      - Handling Boolean Values in Ansible: developing-ansible/references/handling-boolean-values.md
+      - Installing Ansible and the Toolchain: developing-ansible/references/installing-ansible.md
+      - Jinja2 in Ansible: developing-ansible/references/jinja2.md
+      - Ansible Reference Code Blocks: developing-ansible/references/reference-code-blocks.md
+  - Developing Ansible Molecule:
+      - Developing Ansible Molecule: developing-ansible-molecule/SKILL.md
+      - Ansible-native configuration: developing-ansible-molecule/references/ansible-native.md
+      - Scenario design: developing-ansible-molecule/references/scenarios.md
+      - Testing patterns: developing-ansible-molecule/references/testing-patterns.md
+  - Developing Bash Scripts:
+      - Developing Bash Scripts: developing-bash-scripts/SKILL.md
+      - Common Bash Script Requirements: developing-bash-scripts/references/common.md
+      - Developing Complex Bash Scripts: developing-bash-scripts/references/developing-complex-bash-scripts.md
+      - Developing Simple Bash Scripts: developing-bash-scripts/references/developing-simple-bash-scripts.md
+      - Reference Code Blocks: developing-bash-scripts/references/reference-code-blocks.md
+  - Developing Dockerfile:
+      - Developing Dockerfile: developing-dockerfile/SKILL.md
+      - Common Dockerfile Requirements: developing-dockerfile/references/common.md
+      - Multi-Stage Builds: developing-dockerfile/references/multi-stage-builds.md
+      - Optimizing Build Cache: developing-dockerfile/references/optimizing-build-cache.md
+      - Dockerfile Reference Code Blocks: developing-dockerfile/references/reference-code-blocks.md
+      - Runtime Configuration: developing-dockerfile/references/runtime-configuration.md
+      - Securing Images: developing-dockerfile/references/securing-images.md
+  - Developing GitHub Actions:
+      - Developing GitHub Actions: developing-github-actions/SKILL.md
+      - Authoring workflows: developing-github-actions/references/authoring.md
+      - Caching and artifacts: developing-github-actions/references/caching-artifacts.md
+      - Debugging failed runs: developing-github-actions/references/debugging.md
+      - Deployments, environments, and OIDC: developing-github-actions/references/deployments-and-oidc.md
+      - Matrix and concurrency: developing-github-actions/references/matrix-concurrency.md
+      - Reusable workflows: developing-github-actions/references/reuse.md
+      - Security: developing-github-actions/references/security.md
+      - Triggers, expressions, and contexts: developing-github-actions/references/triggers-and-expressions.md
+      - Verification: developing-github-actions/references/verification.md
+  - Developing POSIX Shell Scripts:
+      - Developing POSIX Shell Scripts: developing-posix-shell-scripts/SKILL.md
+      - Common POSIX Shell Script Requirements: developing-posix-shell-scripts/references/common.md
+      - Developing Complex POSIX Shell Scripts: developing-posix-shell-scripts/references/developing-complex-posix-shell-scripts.md
+      - Developing Simple POSIX Shell Scripts: developing-posix-shell-scripts/references/developing-simple-posix-shell-scripts.md
+      - Reference Code Blocks: developing-posix-shell-scripts/references/reference-code-blocks.md
+  - Keep a Changelog:
+      - Keep a Changelog: keep-a-changelog/SKILL.md
+  - Maintaining AGENTS.md:
+      - Maintaining AGENTS.md: maintaining-agents-md/SKILL.md
+  - Pythonic Project Review:
+      - Pythonic Project Review: pythonic-project-review/SKILL.md
+      - Pythonic Review Checklist: pythonic-project-review/references/review-checklist.md
+  - GitHub: https://github.com/ak1ra-komj/agents-skills
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true

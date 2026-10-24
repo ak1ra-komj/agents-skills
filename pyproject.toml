@@ -1,0 +1,16 @@
+[project]
+name = "agents-skills"
+version = "0.1.0"
+description = "MkDocs documentation for the agents-skills collection."
+readme = "README.md"
+requires-python = ">=3.11"
+
+[dependency-groups]
+docs = [
+  "mkdocs==1.6.1",
+  "mkdocs-terminal==4.8.0",
+  "pymdown-extensions==12.3",
+]
+
+[tool.uv]
+package = false
