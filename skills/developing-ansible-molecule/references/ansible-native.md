@@ -68,7 +68,7 @@ sources with `--inventory=`, `ANSIBLE_INVENTORY`, or `ansible.cfg`.
   `create.yml` needs to build the resource (`container_image`,
   `container_command`, and similar).
 - Groups are the unit of play targeting and of `create.yml` / `destroy.yml` loops
-  (`loop: "{{ groups['molecule'] }}"`).
+  (`loop: '{{ groups["molecule"] }}'`).
 - Dynamic and constructed inventory plugins work; a constructed plugin can derive
   test groups from host variables.
 - `molecule list` and `molecule login` resolve hosts by running `ansible-inventory`

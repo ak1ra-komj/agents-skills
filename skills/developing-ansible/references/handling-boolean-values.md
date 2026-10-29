@@ -59,11 +59,12 @@ environments such as standalone template rendering.
 
 - Declare feature flags with YAML native booleans. Do not default a boolean
   variable to the strings `"true"` / `"false"`.
-- Use `| ansible.builtin.bool` only when the source is a string representation
-  of a boolean, for example
-  `when: lookup('env', 'ENABLE_TLS') | ansible.builtin.bool`. You MUST NOT
-  apply it to integers other than `0` / `1`, or to lists / dicts - the result
-  is silently `False`.
+- Use `| ansible.builtin.bool` when the source is a string representation of a
+  boolean, including a bare public variable used directly in `when` that may
+  be supplied as a string. Do not apply it to lists, dicts, or integers other
+  than `0` / `1` - the result is silently `False`.
+- Use `float`, `int`, and `bool` filters to cast values at the boundary of the
+  public interface so later expressions operate on the expected type.
 - Use `is ansible.builtin.truthy` when the value may be any Python type and you
   want Python semantics, for example
   `when: command_result.stdout is ansible.builtin.truthy`.

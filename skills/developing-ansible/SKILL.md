@@ -1,6 +1,6 @@
 ---
 name: developing-ansible
-description: Use when writing, reviewing, or refactoring Ansible playbooks, roles, or tasks, or when developing custom filter/test plugins or setting up the control-node environment.
+description: Use when writing, reviewing, or refactoring Ansible playbooks, roles, collections, inventories, or tasks, or when developing custom filter/test plugins or setting up the control-node environment.
 ---
 
 # developing-ansible skill
@@ -9,6 +9,25 @@ description: Use when writing, reviewing, or refactoring Ansible playbooks, role
 
 If the project already has existing examples, follow them in terms of structure, naming, and style to maintain consistency.
 If no relevant examples exist, apply the guidelines defined in this skill and its reference documents.
+
+## Guiding Principles
+
+When a specific rule is unclear, fall back to the Zen of Ansible:
+
+- Ansible is not Python, and playbooks are not for programming. Keep logic in modules and roles, not in YAML.
+- Clear is better than cluttered; concise is better than verbose; simple is better than complex.
+- Prefer declarative modules over imperative commands, convention over configuration, and FQCNs over short names.
+- Use the smallest change that solves the problem. Start simple and add complexity only when justified.
+- Every repeated shell command or manual step is a candidate for automation.
+
+## Project Type
+
+Choose the project shape before writing content:
+
+- A **collection project** packages reusable roles, plugins, and docs for distribution.
+- A **playbook project** orchestrates a landscape and keeps an adjacent in-repo collection until it is mature enough to publish.
+
+Scaffold either with `ansible-creator`; see [references/developing-projects.md](references/developing-projects.md) for layouts, versioning, and CI.
 
 ## Related Skills
 
@@ -21,13 +40,16 @@ patterns.
 
 Load:
 
-- **[references/common.md](references/common.md)** - baseline requirements that apply to all Ansible files.
-- **[references/developing-tasks.md](references/developing-tasks.md)** - task key ordering, FQCN, module selection, `loop`; tasks are the fundamental unit present in both playbooks and roles.
+- **[references/common.md](references/common.md)** - baseline formatting, naming, project, and validation requirements that apply to all Ansible files.
+- **[references/developing-tasks.md](references/developing-tasks.md)** - task key ordering, FQCN, module selection, conditionals, `loop`; tasks are the fundamental unit present in both playbooks and roles.
 
 Then load only the documents that match the request:
 
-- **[references/developing-playbooks.md](references/developing-playbooks.md)** - Load when writing or reviewing playbook files: play definitions, `import_*` vs `include_*`, error handling at play level.
-- **[references/developing-roles.md](references/developing-roles.md)** - Load when creating or modifying a role: directory layout, `defaults/`, `vars/`, `handlers/`, `meta/`.
+- **[references/developing-projects.md](references/developing-projects.md)** - Load when starting a collection or playbook project, choosing a layout, or setting up version control, CI, and releases.
+- **[references/developing-collections.md](references/developing-collections.md)** - Load when creating or modifying a collection: `galaxy.yml`, plugin layout, module organization, docs, and licensing.
+- **[references/developing-playbooks.md](references/developing-playbooks.md)** - Load when writing or reviewing playbook files: play definitions, `import_*` vs `include_*`, tags, output, waiting, and error handling at play level.
+- **[references/developing-roles.md](references/developing-roles.md)** - Load when creating or modifying a role: design, directory layout, `defaults/`, `vars/`, handlers, templates, platform support, `meta/`.
+- **[references/developing-inventories.md](references/developing-inventories.md)** - Load when designing inventory, `group_vars`/`host_vars`, dynamic sources, SSOT, or variable precedence.
 - **[references/handling-boolean-values.md](references/handling-boolean-values.md)** - Load when the code involves boolean variables, `| ansible.builtin.bool`, or `is ansible.builtin.truthy` expressions.
 - **[references/jinja2.md](references/jinja2.md)** - Load when working with `.j2` template files or with Jinja2 expressions anywhere (filters, tests, conditions, defaults, undefined handling).
 - **[references/developing-plugins.md](references/developing-plugins.md)** - Load when writing custom filter or test plugins, or deciding whether a transformation belongs in a plugin.

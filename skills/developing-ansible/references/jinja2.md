@@ -4,6 +4,25 @@ Ansible uses Jinja2 for both inline expressions in playbooks/tasks and for
 `ansible.builtin.template`-rendered config files. The two contexts are different
 but share the same engine - most of the pitfalls below apply to both.
 
+## Template Style
+
+- Use a single space between the template markers and the variable name:
+  `{{ var }}`, not `{{var}}`.
+- Keep spacing consistent around operators and filters.
+- Break lengthy templates into multiple files by logical section.
+- Use Jinja for text and semi-structured data, not for manipulating structured
+  data; build the data structure in Ansible variables and serialize it with a
+  filter instead.
+- Use a custom filter plugin for complex transformations instead of nested
+  loops and `{% set %}`.
+- Wrap long Jinja expressions across multiple lines for readability.
+- If the first line would still be too long, start it with `{{` on a new line.
+- Do not use `~` as a binary operator in formatted expressions.
+- Omit `{{ }}` in implicit templating fields such as `when`, `changed_when`,
+  `failed_when`, and `until`.
+- Do not use the `eq`, `equalto`, or `==` Jinja tests for string matching; use
+  `match`, `search`, or `regex`.
+
 ## Whitespace Control
 
 By default, Jinja2 preserves newlines around block tags, which can produce blank
@@ -147,10 +166,10 @@ interpolation. Instead, build the data structure in Ansible variables and
 serialise it with a filter:
 
 ```yaml
-- name: Write application config
+- name: "Write application config"
   ansible.builtin.copy:
-    content: "{{ app_config | ansible.builtin.to_nice_yaml(indent=2) }}"
-    dest: /etc/myapp/config.yaml
+    content: '{{ app_config | ansible.builtin.to_nice_yaml(indent=2) }}'
+    dest: /etc/myapp/config.yml
     mode: "0644"
 ```
 

@@ -13,6 +13,10 @@ Reach for a custom plugin only when the builtin toolset runs out: the Jinja2
 builtins (see [jinja2.md](jinja2.md)), `ansible.builtin` plugins, and plugins
 from installed collections cover most needs.
 
+Scaffold a new plugin with `ansible-creator add plugin` in an existing
+collection project. Use Python type hints, and give file headers and functions
+intent comments.
+
 ## When to Write a Plugin
 
 Use a custom filter plugin when a data transformation is complex enough that
@@ -113,14 +117,14 @@ class TestModule(object):
 ```
 
 ```yaml
-- name: Report every offline upstream
+- name: "Report every offline upstream"
   ansible.builtin.debug:
-    msg: "{{ item.name }} is offline"
-  loop: "{{ upstreams | reject('myapp_online') | list }}"
+    msg: '{{ item.name }} is offline'
+  loop: '{{ upstreams | reject("myapp_online") | list }}'
 
-- name: Run only when the primary upstream is online
+- name: "Run only when the primary upstream is online"
   ansible.builtin.debug:
-    msg: Primary upstream is online
+    msg: "Primary upstream is online"
   when: primary_upstream is myapp_online
 ```
 
@@ -141,6 +145,15 @@ class TestModule(object):
   `options`, where `_input` describes the value on the left of `|` / `is`;
   `ansible-doc -t filter <fqcn>` and `ansible-doc -t test <fqcn>` then
   render it.
+- Document all classes and functions, private and public, and include intent
+  comments for file headers and functions.
+- Keep plugin entry files minimal; move reusable code to `module_utils/` or
+  `plugin_utils/`.
+- Follow the Ansible Developer Guide testing standards for the plugin type.
+- Use clear, specific error messages. Use `AnsibleModule` helper methods for
+  failures and warnings in modules, and the `Display` class for
+  verbosity-based output.
+- Keep `argument_specs` formatting consistent within a collection.
 
 ## Dependencies and Environments
 
@@ -155,12 +168,12 @@ dependency groups fits a collection or playbook repository well:
 
 ```toml
 [dependency-groups]
-lint = ["ansible-core>=2.19", "ruff", "ty"]
+lint = ["ansible-core>=2.19", "ruff", "mypy", "pydoclint"]
 test = ["ansible-core>=2.19", "pytest"]
 ```
 
 - `ansible-core` belongs in the dev groups because `uv run pytest` and
-  `uv run ty check` execute in the project venv, not in the venv that
+  `uv run mypy .` execute in the project venv, not in the venv that
   provides the `ansible` command: pytest imports `ansible.*`, and a type
   checker needs ansible-core installed to resolve `ansible.*` imports.
 - Keep `[project].dependencies` empty unless the repository is a real Python
@@ -196,6 +209,7 @@ For collections:
 
 ## Testing
 
+- Write unit tests for every plugin, using `pytest`, not `unittest`.
 - In a collection, put unit tests under `tests/unit/plugins/filter/` or
   `tests/unit/plugins/test/` and run them with `ansible-test units`; run
   `ansible-test sanity` to validate plugin documentation before publishing.
@@ -203,6 +217,8 @@ For collections:
   `pytest` test - the filter and test functions are ordinary Python.
 - Exercise the plugin from a scratch playbook: filters in a `debug` task,
   tests in `when:` and in `select` / `reject` expressions.
+- Before considering the plugin done, run `ruff format --check`, `ruff check`,
+  `mypy .`, `pydoclint`, and `pytest` in the project environment.
 
 See also:
 

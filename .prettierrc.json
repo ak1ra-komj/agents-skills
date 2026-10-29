@@ -1,0 +1,10 @@
+{
+  "overrides": [
+    {
+      "files": "skills/developing-ansible/**/*.md",
+      "options": {
+        "embeddedLanguageFormatting": "off"
+      }
+    }
+  ]
+}

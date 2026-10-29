@@ -12,8 +12,7 @@ description: Use when adding, creating, editing, debugging, or reviewing Molecul
   Ansible playbook. Before writing or editing one, load the **`developing-ansible`**
   skill and follow its rules for playbooks, tasks, Jinja2, and boolean values.
   Molecule does not relax the general Ansible requirements. Molecule-specific
-  conventions, such as the default `.yml` lifecycle filenames, take precedence
-  where the two differ.
+  conventions take precedence where the two differ.
 - Default to the current **ansible-native** configuration. Do not emit new
   `driver:`, `platforms:`, or `provisioner:` blocks; those are legacy constructs.
 - Treat the test instance as an ordinary Ansible managed node, not an Ansible

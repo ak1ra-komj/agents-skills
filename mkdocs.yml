@@ -33,13 +33,16 @@ nav:
   - Developing Ansible:
       - Developing Ansible: developing-ansible/SKILL.md
       - Common Ansible Requirements: developing-ansible/references/common.md
+      - Ansible Project Structure: developing-ansible/references/developing-projects.md
+      - Developing Ansible Collections: developing-ansible/references/developing-collections.md
       - Developing Ansible Playbooks: developing-ansible/references/developing-playbooks.md
-      - Developing Ansible Filter and Test Plugins: developing-ansible/references/developing-plugins.md
       - Developing Ansible Roles: developing-ansible/references/developing-roles.md
       - Developing Ansible Tasks: developing-ansible/references/developing-tasks.md
+      - Inventories and Variables: developing-ansible/references/developing-inventories.md
       - Handling Boolean Values in Ansible: developing-ansible/references/handling-boolean-values.md
       - Installing Ansible and the Toolchain: developing-ansible/references/installing-ansible.md
       - Jinja2 in Ansible: developing-ansible/references/jinja2.md
+      - Developing Ansible Filter and Test Plugins: developing-ansible/references/developing-plugins.md
       - Ansible Reference Code Blocks: developing-ansible/references/reference-code-blocks.md
   - Developing Ansible Molecule:
       - Developing Ansible Molecule: developing-ansible-molecule/SKILL.md
