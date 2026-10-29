@@ -7,8 +7,14 @@ description: Use when writing, reviewing, or refactoring Ansible playbooks, role
 
 ## Rule of Thumb
 
-If the project already has existing examples, follow them in terms of structure, naming, and style to maintain consistency.
-If no relevant examples exist, apply the guidelines defined in this skill and its reference documents.
+Apply the guidelines in this skill and its reference documents as the default
+standard. Existing project examples show project-specific conventions and naming,
+but they do not override this skill.
+
+When existing content conflicts with these rules, apply the skill to new and
+modified content, do not copy the non-compliant pattern, and fix the conflicting
+part when it is already in scope. Report legacy deviations that are out of scope;
+do not silently follow them, and do not start broad unrelated refactors.
 
 ## Guiding Principles
 
