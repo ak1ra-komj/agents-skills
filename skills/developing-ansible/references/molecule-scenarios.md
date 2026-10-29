@@ -1,7 +1,7 @@
-# Scenario design
+# Molecule Scenario Design
 
 Lifecycle playbooks are ordinary Ansible playbooks. Write them under the
-`developing-ansible` conventions; this document covers only how they fit into a
+playbook conventions in this skill; this document covers only how they fit into a
 scenario.
 
 A scenario is a directory with a `molecule.yml` and the lifecycle playbooks it
@@ -111,7 +111,7 @@ expects the converged state, the side effect must restore the system or a later
 ## Reboot
 
 - Rebooting requires a real init system: a VM, or a systemd-capable container.
-  See [testing-patterns.md](testing-patterns.md) for the container setup.
+  See [molecule-testing-patterns.md](molecule-testing-patterns.md) for the container setup.
 - Put the reboot in `side_effect.yml` (for example `ansible.builtin.reboot`), then
   `verify after_reboot.yml` to check the service returned and state persisted.
 

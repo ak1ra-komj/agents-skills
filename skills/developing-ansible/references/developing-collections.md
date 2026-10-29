@@ -79,4 +79,4 @@ Covers collection structure, plugin layout, variables, documentation, licensing,
 - Maintain a CHANGELOG for safe upgrades.
 - Run `ansible-test sanity` and `ansible-test units`, `ansible-lint`, and Molecule scenarios under `extensions/molecule/`.
 - Test every supported OS and `ansible-core` version in CI.
-- Keep Molecule scenarios under `extensions/molecule/` in collection mode; see the `developing-ansible-molecule` skill.
+- Keep Molecule scenarios under `extensions/molecule/` in collection mode; see [molecule-scenarios.md](molecule-scenarios.md).

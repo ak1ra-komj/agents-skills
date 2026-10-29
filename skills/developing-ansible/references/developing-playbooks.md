@@ -3,7 +3,7 @@
 Covers play structure, composition, tags, output, waiting, and error handling.
 
 Molecule lifecycle playbooks are ordinary playbooks covered by these rules.
-When writing or reviewing them, also load the `developing-ansible-molecule` skill
+When writing or reviewing them, also load [molecule-workflow.md](molecule-workflow.md)
 for scenario layout, `molecule.yml`, and test execution.
 
 ## Play Definition

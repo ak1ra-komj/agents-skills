@@ -34,11 +34,7 @@ Use when the user asks to commit changes and/or summarize the current session - 
 
 ### [`developing-ansible`](skills/developing-ansible/SKILL.md)
 
-Use when writing, reviewing, or refactoring Ansible playbooks, roles, collections, inventories, or tasks, or when developing custom filter/test plugins or setting up the control-node environment.
-
-### [`developing-ansible-molecule`](skills/developing-ansible-molecule/SKILL.md)
-
-Use when adding, creating, editing, debugging, or reviewing Molecule tests for Ansible roles, collections, or playbooks. Lifecycle playbooks follow the `developing-ansible` conventions.
+Use when writing, reviewing, or refactoring Ansible playbooks, roles, collections, inventories, tasks, or Molecule tests, or when developing custom filter/test plugins or setting up the control-node environment.
 
 ### [`developing-bash-scripts`](skills/developing-bash-scripts/SKILL.md)
 

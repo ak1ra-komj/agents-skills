@@ -1,8 +1,7 @@
-# Testing patterns
+# Molecule Testing Patterns
 
-Playbook examples here are ordinary Ansible playbooks. Follow the
-`developing-ansible` skill for play structure, task conventions, Jinja2, and
-boolean values.
+Playbook examples here are ordinary Ansible playbooks. Follow this skill's
+references for play structure, task conventions, Jinja2, and boolean values.
 
 ## Converge
 

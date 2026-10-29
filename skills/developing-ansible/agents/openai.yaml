@@ -1,4 +1,4 @@
 interface:
   display_name: "Developing Ansible"
-  short_description: "Write and review Ansible content and plugins"
-  default_prompt: "Use $developing-ansible to write, review, or refactor Ansible playbooks, roles, collections, inventories, tasks, and custom filter/test plugins."
+  short_description: "Write and review Ansible content and Molecule tests"
+  default_prompt: "Use $developing-ansible to write, review, or refactor Ansible playbooks, roles, collections, inventories, tasks, Molecule tests, and custom filter/test plugins."

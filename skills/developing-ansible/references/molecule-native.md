@@ -1,4 +1,4 @@
-# Ansible-native configuration
+# Molecule Ansible-native Configuration
 
 The ansible-native model delegates resource management to ordinary Ansible:
 standard inventory plus ordinary playbooks, with no driver, provider, or platform
@@ -42,7 +42,7 @@ dependency:
   `roles_path`, `collections_path`, `interpreter_python`, and similar settings.
   This replaces the legacy `provisioner.config_options`.
 - `scenario.test_sequence` overrides the default action sequence; see
-  [scenarios.md](scenarios.md).
+  [molecule-scenarios.md](molecule-scenarios.md).
 
 ## Where files live
 

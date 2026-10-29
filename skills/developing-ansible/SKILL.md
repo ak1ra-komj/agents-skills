@@ -1,6 +1,6 @@
 ---
 name: developing-ansible
-description: Use when writing, reviewing, or refactoring Ansible playbooks, roles, collections, inventories, or tasks, or when developing custom filter/test plugins or setting up the control-node environment.
+description: Use when writing, reviewing, or refactoring Ansible playbooks, roles, collections, inventories, tasks, or Molecule tests, or when developing custom filter/test plugins or setting up the control-node environment.
 ---
 
 # developing-ansible skill
@@ -29,12 +29,21 @@ Choose the project shape before writing content:
 
 Scaffold either with `ansible-creator`; see [references/developing-projects.md](references/developing-projects.md) for layouts, versioning, and CI.
 
-## Related Skills
+## Testing with Molecule
 
 When the task involves Molecule scenarios, lifecycle playbooks, or `molecule.yml`,
-load the **`developing-ansible-molecule`** skill in addition to this one. It
-covers scenario design, ansible-native configuration, inventory, and verifier
-patterns.
+load [references/molecule-workflow.md](references/molecule-workflow.md) first, then
+the focused reference for the work.
+
+- Lifecycle playbooks are ordinary playbooks; all rules in this skill apply.
+- Default to ansible-native configuration. Do not emit new `driver:`,
+  `platforms:`, or `provisioner:` blocks; those are legacy constructs.
+- Treat the test instance as an ordinary managed node, not an Ansible development
+  environment.
+- Follow existing scenario style; do not migrate a working legacy scenario unless
+  the user asks for migration.
+- Confirm the installed Molecule version with `molecule --version` before relying
+  on a flag, schema key, or scenario layout.
 
 ## Reference Documents
 
@@ -53,5 +62,9 @@ Then load only the documents that match the request:
 - **[references/handling-boolean-values.md](references/handling-boolean-values.md)** - Load when the code involves boolean variables, `| ansible.builtin.bool`, or `is ansible.builtin.truthy` expressions.
 - **[references/jinja2.md](references/jinja2.md)** - Load when working with `.j2` template files or with Jinja2 expressions anywhere (filters, tests, conditions, defaults, undefined handling).
 - **[references/developing-plugins.md](references/developing-plugins.md)** - Load when writing custom filter or test plugins, or deciding whether a transformation belongs in a plugin.
+- **[references/molecule-workflow.md](references/molecule-workflow.md)** - Load when planning, implementing, or validating a Molecule scenario: inspect, decide, implement, validate, and run commands.
+- **[references/molecule-native.md](references/molecule-native.md)** - Load when writing or reviewing `molecule.yml`, inventory, dependencies, executor options, or the ansible-native versus legacy choice.
+- **[references/molecule-scenarios.md](references/molecule-scenarios.md)** - Load when choosing scenario layout: default versus extra scenarios, OS matrix, multi-node, nested collection scenarios, shared state, side effects, upgrade, and reboot.
+- **[references/molecule-testing-patterns.md](references/molecule-testing-patterns.md)** - Load when writing `converge.yml` or `verify.yml`, or when testing idempotence, services, and systemd.
 - **[references/installing-ansible.md](references/installing-ansible.md)** - Load when installing or upgrading Ansible on the control node, or when controller-side code needs extra Python dependencies.
 - **[references/reference-code-blocks.md](references/reference-code-blocks.md)** - Load when composing `block/rescue/always` patterns or other reusable canonical patterns.

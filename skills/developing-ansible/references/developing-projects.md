@@ -87,4 +87,4 @@ project/
 - Test against every supported platform in CI.
 - Run `ansible-lint`, YAML lint, `ansible-playbook --syntax-check`, Molecule, and `ansible-test` as applicable.
 - Automate the whole test sequence so local runs and CI use the same entry point.
-- For Molecule scenarios, load the `developing-ansible-molecule` skill.
+- For Molecule scenarios, load [molecule-workflow.md](molecule-workflow.md).

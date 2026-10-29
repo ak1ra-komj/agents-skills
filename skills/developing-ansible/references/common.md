@@ -85,7 +85,7 @@ exceptions.
 
 - Run `ansible-lint` before committing.
 - Run `ansible-playbook --syntax-check` to catch structural errors early.
-- Run Molecule for roles that have scenarios; see the `developing-ansible-molecule` skill.
+- Run Molecule for roles that have scenarios; see [molecule-workflow.md](molecule-workflow.md).
 - Run `ansible-test sanity` and `ansible-test units` for collections and plugins.
 - Run YAML lint and the Python checks (`ruff format --check`, `ruff check`, `mypy .`, `pydoclint`) when the project provides them.
 - Test in a non-production environment first, and test the supported OS and `ansible-core` matrix in CI.

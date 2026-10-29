@@ -43,12 +43,11 @@ nav:
       - Installing Ansible and the Toolchain: developing-ansible/references/installing-ansible.md
       - Jinja2 in Ansible: developing-ansible/references/jinja2.md
       - Developing Ansible Filter and Test Plugins: developing-ansible/references/developing-plugins.md
+      - Molecule Workflow: developing-ansible/references/molecule-workflow.md
+      - Molecule Ansible-native Configuration: developing-ansible/references/molecule-native.md
+      - Molecule Scenario Design: developing-ansible/references/molecule-scenarios.md
+      - Molecule Testing Patterns: developing-ansible/references/molecule-testing-patterns.md
       - Ansible Reference Code Blocks: developing-ansible/references/reference-code-blocks.md
-  - Developing Ansible Molecule:
-      - Developing Ansible Molecule: developing-ansible-molecule/SKILL.md
-      - Ansible-native configuration: developing-ansible-molecule/references/ansible-native.md
-      - Scenario design: developing-ansible-molecule/references/scenarios.md
-      - Testing patterns: developing-ansible-molecule/references/testing-patterns.md
   - Developing Bash Scripts:
       - Developing Bash Scripts: developing-bash-scripts/SKILL.md
       - Common Bash Script Requirements: developing-bash-scripts/references/common.md
